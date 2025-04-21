@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Edit User{% endblock %}
+
+{% block content %}
+<div class="container-fluid admin-container">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 admin-sidebar">
+            <h3>Admin Panel</h3>
+            <nav id="admin-management-nav">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('admin_users') }}">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_songs') }}">Songs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_subscriptions') }}">Subscriptions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_logs') }}">Logs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_settings') }}">Settings</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-md-10 admin-content">
+            <div class="admin-header">
+                <h2>Edit User</h2>
+                <div class="admin-actions">
+                    <a href="{{ url_for('admin_view_user', user_id=user._id) }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to User Details
+                    </a>
+                </div>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Edit User Information</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('admin_update_user', user_id=user._id) }}" method="POST">
+                        <div class="row">
+                            <!-- Basic Information -->
+                            <div class="col-md-6">
+                                <h6 class="text-muted mb-3">Basic Information</h6>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+                                    <small class="form-text text-muted">Username must be unique and contain only letters, numbers, and underscores.</small>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="name">Full Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ user.name or '' }}">
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="text" class="form-control" id="phone" name="phone" value="{{ user.phone or '' }}">
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="country">Country</label>
+                                    <select class="form-control" id="country" name="country">
+                                        <option value="">Select Country</option>
+                                        {% for code, name in countries %}
+                                            <option value="{{ code }}" {% if user.country == code %}selected{% endif %}>{{ name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Account Settings -->
+                            <div class="col-md-6">
+                                <h6 class="text-muted mb-3">Account Settings</h6>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="role">User Role</label>
+                                    <select class="form-control" id="role" name="role">
+                                        <option value="user" {% if user.role == 'user' %}selected{% endif %}>Regular User</option>
+                                        <option value="premium" {% if user.role == 'premium' %}selected{% endif %}>Premium User</option>
+                                        <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Administrator</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label>Account Status</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="is_active" id="statusActive" value="true" {% if user.is_active %}checked{% endif %}>
+                                        <label class="form-check-label" for="statusActive">
+                                            Active
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="is_active" id="statusInactive" value="false" {% if not user.is_active %}checked{% endif %}>
+                                        <label class="form-check-label" for="statusInactive">
+                                            Inactive
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="password">New Password (leave blank to keep current)</label>
+                                    <input type="password" class="form-control" id="password" name="password">
+                                    <small class="form-text text-muted">Minimum 8 characters with at least one uppercase letter, one lowercase letter, and one number.</small>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="confirm_password">Confirm New Password</label>
+                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                                </div>
+                                
+                                <div class="form-group mb-4">
+                                    <label for="admin_notes">Admin Notes</label>
+                                    <textarea class="form-control" id="admin_notes" name="admin_notes" rows="4">{{ user.admin_notes or '' }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="email_notification" name="email_notification" value="true" checked>
+                                <label class="form-check-label" for="email_notification">
+                                    Send email notification to user about account changes
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="text-right mt-4">
+                            <a href="{{ url_for('admin_view_user', user_id=user._id) }}" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-header text-white bg-danger">
+                    <h5 class="mb-0">Danger Zone</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6>Delete User Account</h6>
+                            <p class="text-muted">Permanently delete this user's account and all associated data. This action cannot be undone.</p>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal">
+                                Delete User
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6>Reset User Password</h6>
+                            <p class="text-muted">Send a password reset link to the user's email address.</p>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <form action="{{ url_for('admin_reset_user_password', user_id=user._id) }}" method="POST">
+                                <button type="submit" class="btn btn-warning">
+                                    Send Reset Link
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete User Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteUserModalLabel">Confirm User Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the user <strong>{{ user.username }}</strong>?</p>
+                <p class="text-danger">This action cannot be undone. All user data, playlists, and history will be permanently deleted.</p>
+                
+                <div class="form-group">
+                    <label for="deleteConfirmation">Type <strong>{{ user.username }}</strong> to confirm deletion:</label>
+                    <input type="text" class="form-control" id="deleteConfirmation" placeholder="Enter username">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form action="{{ url_for('admin_delete_user', user_id=user._id) }}" method="POST">
+                    <button type="submit" class="btn btn-danger" id="confirmDeleteBtn" disabled>Delete User</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Password confirmation validation
+        $('#password, #confirm_password').on('keyup', function() {
+            if ($('#password').val() && $('#password').val() === $('#confirm_password').val()) {
+                $('#confirm_password').removeClass('is-invalid').addClass('is-valid');
+            } else if ($('#password').val()) {
+                $('#confirm_password').removeClass('is-valid').addClass('is-invalid');
+            }
+        });
+        
+        // Delete confirmation validation
+        $('#deleteConfirmation').on('keyup', function() {
+            if ($(this).val() === '{{ user.username }}') {
+                $('#confirmDeleteBtn').prop('disabled', false);
+            } else {
+                $('#confirmDeleteBtn').prop('disabled', true);
+            }
+        });
+    });
+</script>
+{% endblock %} 

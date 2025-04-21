@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Page Not Found - Spotify{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-content">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="11" stroke="#1ED760" stroke-width="2"/>
+            <path d="M8 8L16 16M16 8L8 16" stroke="#1ED760" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h1 class="error-title">404</h1>
+        <p class="error-message">Page not found</p>
+        <p class="error-description">We can't find the page you're looking for.</p>
+        <div class="error-actions">
+            <a href="{{ url_for('home') }}" class="error-button">Home</a>
+            <a href="javascript:history.back()" class="error-button-secondary">Go Back</a>
+        </div>
+    </div>
+</div>
+
+<style>
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 90px);
+    padding: 24px;
+    background-color: var(--spotify-black);
+    color: var(--spotify-text);
+}
+
+.error-content {
+    text-align: center;
+    max-width: 600px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.error-title {
+    font-size: 120px;
+    line-height: 1;
+    margin: 24px 0 16px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    background: linear-gradient(to right, #1DB954, #1ED760);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.error-message {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.error-description {
+    font-size: 16px;
+    color: var(--spotify-text-subdued);
+    margin-bottom: 32px;
+}
+
+.error-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.error-button {
+    display: inline-block;
+    padding: 12px 32px;
+    background-color: var(--spotify-green);
+    color: black;
+    font-weight: 700;
+    border-radius: 500px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.error-button:hover {
+    background-color: var(--spotify-green-hover);
+    transform: scale(1.04);
+}
+
+.error-button-secondary {
+    display: inline-block;
+    padding: 11px 31px;
+    background-color: transparent;
+    color: white;
+    font-weight: 700;
+    border-radius: 500px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+.error-button-secondary:hover {
+    border-color: white;
+    transform: scale(1.04);
+}
+
+@media (max-width: 768px) {
+    .error-title {
+        font-size: 96px;
+    }
+    
+    .error-message {
+        font-size: 24px;
+    }
+    
+    .error-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .error-button, .error-button-secondary {
+        width: 100%;
+    }
+}
+</style>
+{% endblock %} 

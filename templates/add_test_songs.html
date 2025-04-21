@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Test Songs - Spotify Clone</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .card {
+            background: #282828;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+        }
+        .btn-green {
+            background-color: #1DB954;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+        .btn-green:hover {
+            background-color: #1ed760;
+        }
+        .result {
+            margin-top: 2rem;
+            display: none;
+        }
+        .song-list {
+            list-style: none;
+            padding: 0;
+        }
+        .song-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #333;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white">
+    <div class="container">
+        <h1>Add Test Songs</h1>
+        <p>Click the button below to add sample songs to the database for testing purposes.</p>
+        
+        <div class="card">
+            <h2>Test Songs</h2>
+            <p>This will add 6 sample songs with different moods to your database.</p>
+            <p>Note: This is for testing only. The song files referenced don't actually exist.</p>
+            
+            <button id="addSongsBtn" class="btn-green">Add Test Songs</button>
+            
+            <div id="result" class="result">
+                <h3>Songs Added:</h3>
+                <ul id="songList" class="song-list"></ul>
+            </div>
+        </div>
+        
+        <a href="{{ url_for('home') }}" class="btn-green">Back to Home</a>
+    </div>
+
+    <script>
+        document.getElementById('addSongsBtn').addEventListener('click', function() {
+            fetch('/add-test-songs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('result');
+                const songList = document.getElementById('songList');
+                
+                // Clear previous results
+                songList.innerHTML = '';
+                
+                // Display new results
+                if (data.songs && data.songs.length > 0) {
+                    data.songs.forEach(song => {
+                        const li = document.createElement('li');
+                        li.textContent = `${song.title} (ID: ${song.id})`;
+                        songList.appendChild(li);
+                    });
+                    
+                    resultDiv.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while adding test songs.');
+            });
+        });
+    </script>
+</body>
+</html> 

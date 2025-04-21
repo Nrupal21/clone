@@ -1,0 +1,1732 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <div class="admin-actions">
+            <a href="{{ url_for('admin_dashboard', refresh=True) }}" class="refresh-btn">
+                <span class="material-icons-round">refresh</span> Refresh Data
+            </a>
+            <a href="{{ url_for('admin_settings') }}" class="settings-btn">
+                <span class="material-icons-round">settings</span> System Settings
+            </a>
+        </div>
+        
+        <!-- Admin Search Form -->
+        <form action="{{ url_for('admin_dashboard') }}" method="GET" class="admin-search-form">
+            <div class="search-container">
+                <input type="text" name="q" placeholder="Search users or content..." value="{{ search_query or '' }}">
+                <button type="submit" class="search-btn">
+                    <span class="material-icons-round">search</span>
+                </button>
+            </div>
+            <div class="filter-container">
+                <select name="sort" id="sort-select">
+                    <option value="created_at" {% if current_sort == 'created_at' %}selected{% endif %}>Date Created</option>
+                    <option value="username" {% if current_sort == 'username' %}selected{% endif %}>Username</option>
+                    <option value="email" {% if current_sort == 'email' %}selected{% endif %}>Email</option>
+                    <option value="plays" {% if current_sort == 'plays' %}selected{% endif %}>Plays</option>
+                </select>
+                <select name="order" id="order-select">
+                    <option value="desc" {% if current_order == 'desc' %}selected{% endif %}>Descending</option>
+                    <option value="asc" {% if current_order == 'asc' %}selected{% endif %}>Ascending</option>
+                </select>
+                <select name="limit" id="limit-select">
+                    <option value="10" {% if pagination.per_page == 10 %}selected{% endif %}>10 per page</option>
+                    <option value="20" {% if pagination.per_page == 20 %}selected{% endif %}>20 per page</option>
+                    <option value="50" {% if pagination.per_page == 50 %}selected{% endif %}>50 per page</option>
+                </select>
+            </div>
+        </form>
+        
+        <div class="admin-stats">
+            <div class="stat-card">
+                <h3>Total Users</h3>
+                <p>{{ stats.user_count }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Songs</h3>
+                <p>{{ stats.song_count }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Mood Categories</h3>
+                <p>{{ stats.mood_count }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Premium Users</h3>
+                <p>{{ stats.premium_count }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Active Users (7d)</h3>
+                <p>{{ stats.active_count }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error notification if present -->
+    {% if error %}
+    <div class="error-notification">
+        <span class="material-icons-round">error</span>
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
+    <div class="admin-content">
+        <!-- Upload Song Section -->
+        <section class="admin-section">
+            <h2>Upload Song</h2>
+            <form id="uploadSongForm" action="{{ url_for('admin_upload_song') }}" method="POST" class="upload-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">Song Title</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="artist">Artist</label>
+                    <input type="text" id="artist" name="artist" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mood">Mood</label>
+                    <select id="mood" name="mood" required>
+                        <option value="">Select Mood</option>
+                        <option value="Happy">Happy</option>
+                        <option value="Sad">Sad</option>
+                        <option value="Energetic">Energetic</option>
+                        <option value="Calm">Calm</option>
+                        <option value="Chill">Chill</option>
+                        <option value="Focus">Focus</option>
+                        <option value="Dark">Dark</option>
+                        <option value="Bright">Bright</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="audioFile">Audio File (MP3)</label>
+                    <input type="file" id="audioFile" name="audioFile" accept=".mp3" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="coverImage">Cover Image</label>
+                    <input type="file" id="coverImage" name="coverImage" accept="image/*">
+                </div>
+
+                <button type="submit" class="submit-btn">Upload Song</button>
+            </form>
+        </section>
+
+        <!-- Recent Activity Section -->
+        <section class="admin-section">
+            <h2>Recent Activity</h2>
+            <div class="recent-activity">
+                <div class="activity-column">
+                    <h3>Recent Songs</h3>
+                    <ul class="activity-list">
+                        {% for song in stats.recent_songs %}
+                        <li>
+                            <div class="activity-item">
+                                <img src="{{ url_for('static', filename=song.image_path) if song.image_path else url_for('static', filename='img/default-cover.jpg') }}" alt="{{ song.title }}" class="item-thumbnail">
+                                <div class="item-details">
+                                    <span class="item-title">{{ song.title }}</span>
+                                    <span class="item-subtitle">{{ song.artist }}</span>
+                                    <span class="item-date">{{ song.created_at.strftime('%Y-%m-%d') if song.created_at else 'N/A' }}</span>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="activity-column">
+                    <h3>Recent Users</h3>
+                    <ul class="activity-list">
+                        {% for user in stats.recent_users %}
+                        <li>
+                            <div class="activity-item">
+                                <div class="user-avatar">{{ user.name[0] if user.name else 'U' }}</div>
+                                <div class="item-details">
+                                    <span class="item-title">{{ user.name }}</span>
+                                    <span class="item-subtitle">{{ user.email }}</span>
+                                    <span class="item-date">{{ user.created_at.strftime('%Y-%m-%d') if user.created_at else 'N/A' }}</span>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manage Songs Section -->
+        <section class="admin-section">
+            <h2>Manage Songs</h2>
+            <div class="songs-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Song</th>
+                            <th>Artist</th>
+                            <th>Mood</th>
+                            <th>Plays</th>
+                            <th>Added</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for song in songs %}
+                        <tr>
+                            <td>
+                            <div class="song-info">
+                                    <img src="{{ url_for('static', filename=song.image_path) if song.image_path else url_for('static', filename='img/default-cover.jpg') }}" alt="{{ song.title }}" class="song-thumbnail">
+                                    <span>{{ song.title }}</span>
+                                </div>
+                            </td>
+                            <td>{{ song.artist }}</td>
+                            <td>{{ song.mood }}</td>
+                            <td>{{ song.plays|default(0) }}</td>
+                            <td>{{ song.created_at.strftime('%Y-%m-%d') if song.created_at else 'N/A' }}</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="view-btn" title="View Song" onclick="showSongModal('{{ song._id }}', '{{ song.title }}', '{{ song.artist }}', '{{ song.mood }}', '{{ song.plays|default(0) }}', '{{ song.created_at.strftime('%Y-%m-%d') if song.created_at else 'N/A' }}', '{{ song.image_path if song.image_path else 'img/default-cover.jpg' }}', '{{ song.file_path if song.file_path else '' }}')">
+                                        <span class="material-icons-round">visibility</span>
+                                    </a>
+                                    <form action="{{ url_for('admin_delete_song', song_id=song._id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete {{ song.title }}?');">
+                                        <button type="submit" class="delete-btn" title="Delete Song">
+                                            <span class="material-icons-round">delete</span>
+                                        </button>
+                                </form>
+                            </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" class="no-data">No songs found. Upload songs using the form above.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                    </div>
+            
+            <!-- Pagination for Songs -->
+            {% if songs %}
+            <div class="pagination">
+                {% if pagination.has_prev %}
+                <a href="{{ url_for('admin_dashboard', page=pagination.page-1, limit=pagination.per_page, sort=current_sort, order=current_order, q=search_query) }}" class="page-link">&laquo; Previous</a>
+                {% endif %}
+                
+                <span class="page-info">Page {{ pagination.page }} of {{ pagination.total_pages }}</span>
+                
+                {% if pagination.has_next %}
+                <a href="{{ url_for('admin_dashboard', page=pagination.page+1, limit=pagination.per_page, sort=current_sort, order=current_order, q=search_query) }}" class="page-link">Next &raquo;</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </section>
+
+        <!-- Manage Users Section -->
+        <section class="admin-section">
+            <h2>Manage Users</h2>
+            <div class="users-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Joined</th>
+                            <th>Type</th>
+                            <th>Last Active</th>
+                            <th>Playlists</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.username or 'N/A' }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone or 'N/A' }}</td>
+                            <td>{{ user.created_at.strftime('%Y-%m-%d') if user.created_at else 'N/A' }}</td>
+                            <td><span class="user-type {% if user.is_admin %}admin-badge{% endif %}">{{ 'Admin' if user.is_admin else 'User' }}</span></td>
+                            <td>{{ user.last_active.strftime('%Y-%m-%d') if user.last_active else 'N/A' }}</td>
+                            <td>{{ user.playlists|length if user.playlists is defined else 0 }}</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="view-btn" title="View User Details" onclick="showUserModal(
+'{{ user._id }}', 
+'{{ user.name }}', 
+'{{ user.email }}', 
+'{{ user.username or 'N/A' }}', 
+'{{ user.phone or 'N/A' }}', 
+'{{ user.created_at.strftime('%Y-%m-%d') if user.created_at else 'N/A' }}', 
+'{{ user.last_active.strftime('%Y-%m-%d') if user.last_active else 'N/A' }}', 
+'{{ user.playlists|length if user.playlists is defined else 0 }}',
+'{{ user.subscription.type if user.subscription is defined and user.subscription else 'Free' }}',
+{{ user.account_locked|default(False)|tojson }})">
+                                        <span class="material-icons-round">visibility</span>
+                                    </a>
+                                    {% if not user.is_admin %}
+                                    <a href="#" class="edit-btn" title="Edit User">
+                                        <span class="material-icons-round">edit</span>
+                                    </a>
+                                    {% endif %}
+                                    <form action="{{ url_for('admin_delete_user', user_id=user._id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete {{ user.name }}?');">
+                                        <button type="submit" class="delete-btn" {% if session.get('user_id') == user._id|string %}disabled title="Cannot delete yourself"{% endif %}>
+                                            <span class="material-icons-round">delete</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="9" class="no-data">No users found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination for Users -->
+            {% if users %}
+            <div class="pagination">
+                {% if pagination.has_prev %}
+                <a href="{{ url_for('admin_dashboard', page=pagination.page-1, limit=pagination.per_page, sort=current_sort, order=current_order, q=search_query) }}" class="page-link">&laquo; Previous</a>
+                {% endif %}
+                
+                <span class="page-info">Page {{ pagination.page }} of {{ pagination.total_pages }}</span>
+                
+                {% if pagination.has_next %}
+                <a href="{{ url_for('admin_dashboard', page=pagination.page+1, limit=pagination.per_page, sort=current_sort, order=current_order, q=search_query) }}" class="page-link">Next &raquo;</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </section>
+
+        <!-- Subscription Management Section -->
+        <section class="admin-section">
+            <h2>Subscription Management</h2>
+            <div class="subscription-stats">
+                <div class="sub-stat-card">
+                    <div class="sub-stat-title">Active Premium</div>
+                    <div class="sub-stat-value">{{ stats.premium_count }}</div>
+                </div>
+                <div class="sub-stat-card">
+                    <div class="sub-stat-title">Free Tier</div>
+                    <div class="sub-stat-value">{{ stats.free_count }}</div>
+                    </div>
+                <div class="sub-stat-card">
+                    <div class="sub-stat-title">Expired Premium</div>
+                    <div class="sub-stat-value">{{ stats.expired_count }}</div>
+                </div>
+            </div>
+            
+            <div class="subscription-actions">
+                <button class="btn-secondary" onclick="showSubscriptionModal('premium')">Manage Premium Plans</button>
+                <button class="btn-secondary" onclick="showSubscriptionModal('free')">View Free Users</button>
+                <button class="btn-secondary" onclick="showSubscriptionModal('expired')">View Expired Subscriptions</button>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- User Details Modal -->
+<div id="userDetailsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>User Details</h2>
+        <div class="user-details-container">
+            <div class="user-details-header">
+                <div class="user-avatar-large" id="modalUserAvatar"></div>
+                <div class="user-basic-info">
+                    <h3 id="modalUserName"></h3>
+                    <span id="modalUserType" class="user-type"></span>
+                </div>
+            </div>
+            
+            <div class="user-details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Username</span>
+                    <span class="detail-value" id="modalUsername"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value" id="modalEmail"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Phone</span>
+                    <span class="detail-value" id="modalPhone"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Join Date</span>
+                    <span class="detail-value" id="modalJoinDate"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Last Active</span>
+                    <span class="detail-value" id="modalLastActive"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Playlists</span>
+                    <span class="detail-value" id="modalPlaylists"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Subscription</span>
+                    <span class="detail-value" id="modalSubscription"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Account Status</span>
+                    <span class="detail-value">
+                        <span class="status-indicator" id="modalStatusIndicator"></span>
+                        <span id="modalStatus"></span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="user-playlists-container" id="userPlaylistsContainer" style="display: none; margin-top: 24px;">
+                <h3>User Playlists</h3>
+                <div id="userPlaylistsList" class="playlist-grid">
+                    <!-- Playlists will be loaded here dynamically -->
+                </div>
+            </div>
+            
+            <div class="user-details-actions">
+                <button id="modalEditUser" class="btn-secondary">Edit User</button>
+                <button id="modalDeleteUser" class="btn-danger">Delete User</button>
+                <button id="modalUserActivity" class="btn-primary">View Activity</button>
+                <button id="modalToggleStatus" class="btn-primary" style="display: none;">Activate Account</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Song Details Modal -->
+<div id="songDetailsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Song Details</h2>
+        <div class="song-details-container">
+            <div class="song-details-header">
+                <img id="modalSongCover" src="" alt="Song Cover" class="song-cover-large">
+                <div class="song-basic-info">
+                    <h3 id="modalSongTitle"></h3>
+                    <span id="modalSongArtist" class="song-artist"></span>
+                </div>
+            </div>
+            
+            <div class="song-player">
+                <audio id="songPlayer" controls>
+                    <source id="songSource" src="" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            
+            <div class="song-details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Mood</span>
+                    <span class="detail-value" id="modalSongMood"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Plays</span>
+                    <span class="detail-value" id="modalSongPlays"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Added On</span>
+                    <span class="detail-value" id="modalSongDate"></span>
+                </div>
+            </div>
+            
+            <div class="song-details-actions">
+                <button id="modalEditSong" class="btn-secondary">Edit Song</button>
+                <button id="modalDeleteSong" class="btn-danger">Delete Song</button>
+                <button id="modalSongAnalytics" class="btn-primary">View Analytics</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Subscription Management Modal -->
+<div id="subscriptionModal" class="modal">
+    <div class="modal-content subscription-modal">
+        <span class="close-modal">&times;</span>
+        <h2 id="subscriptionModalTitle">Subscription Management</h2>
+        
+        <div class="subscription-filters">
+            <div class="filter-group">
+                <label for="subFilter">Filter By:</label>
+                <select id="subFilter">
+                    <option value="all">All</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="trial">Trial</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="subSort">Sort By:</label>
+                <select id="subSort">
+                    <option value="date_desc">Date (Newest)</option>
+                    <option value="date_asc">Date (Oldest)</option>
+                    <option value="price_desc">Price (Highest)</option>
+                    <option value="price_asc">Price (Lowest)</option>
+                </select>
+            </div>
+            <button class="btn-secondary" id="applySubFilters">Apply</button>
+        </div>
+        
+        <div class="subscription-list-container">
+            <table class="subscription-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Plan</th>
+                        <th>Started</th>
+                        <th>Expires</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="subscriptionTableBody">
+                    <!-- Dynamically populated -->
+                </tbody>
+            </table>
+            
+            <div id="noSubscriptions" class="no-data" style="display: none;">
+                No subscriptions found matching the current filters.
+            </div>
+        </div>
+        
+        <div class="subscription-actions">
+            <button id="exportSubscriptionData" class="btn-secondary">Export Data</button>
+            <button id="addPromotionCode" class="btn-secondary">Add Promotion</button>
+            <button id="updatePricingPlans" class="btn-primary">Update Pricing</button>
+        </div>
+    </div>
+</div>
+
+<!-- Admin Management Navigation -->
+<div class="admin-management-nav">
+    <a href="{{ url_for('admin_users') }}" class="admin-nav-btn">
+        <span class="material-icons-round">people</span> Users
+    </a>
+    <a href="{{ url_for('admin_songs') }}" class="admin-nav-btn">
+        <span class="material-icons-round">music_note</span> Songs
+    </a>
+    <a href="{{ url_for('admin_add_song') }}" class="admin-nav-btn">
+        <span class="material-icons-round">add_circle</span> Add Song
+    </a>
+    <a href="{{ url_for('admin_subscriptions') }}" class="admin-nav-btn">
+        <span class="material-icons-round">card_membership</span> Subscriptions
+    </a>
+    <a href="{{ url_for('admin_promotions') }}" class="admin-nav-btn">
+        <span class="material-icons-round">local_offer</span> Promotions
+    </a>
+    <a href="{{ url_for('admin_pricing') }}" class="admin-nav-btn">
+        <span class="material-icons-round">attach_money</span> Pricing
+    </a>
+    <a href="{{ url_for('admin_settings') }}" class="admin-nav-btn">
+        <span class="material-icons-round">settings</span> Settings
+    </a>
+    <a href="{{ url_for('admin_logs') }}" class="admin-nav-btn">
+        <span class="material-icons-round">receipt_long</span> Logs
+    </a>
+</div>
+{% endblock %}
+
+{% block additional_styles %}
+<style>
+/* Base styles */
+:root {
+    --container-padding-desktop: 32px;
+    --container-padding-mobile: 16px;
+    --card-gap: 16px;
+}
+
+.admin-container {
+    padding: var(--container-padding-desktop);
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-header {
+    margin-bottom: 2rem;
+}
+
+.admin-actions {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 12px;
+}
+
+.refresh-btn, .settings-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--background-tinted-base);
+    color: var(--text-base);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 500px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.refresh-btn:hover, .settings-btn:hover {
+    background-color: var(--background-tinted-highlight);
+}
+
+.refresh-btn .material-icons-round, .settings-btn .material-icons-round {
+    font-size: 18px;
+}
+
+/* Admin search form */
+.admin-search-form {
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.search-container {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    position: relative;
+}
+
+.search-container input {
+    flex: 1;
+    padding: 10px 16px;
+    border-radius: 500px;
+    border: none;
+    background-color: var(--background-elevated-base);
+    color: var(--text-base);
+}
+
+.search-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-subdued);
+    cursor: pointer;
+}
+
+.filter-container {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-container select {
+    padding: 8px 12px;
+    border-radius: 500px;
+    border: none;
+    background-color: var(--background-tinted-base);
+    color: var(--text-base);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--card-gap);
+    margin-top: 1.5rem;
+}
+
+.stat-card {
+    background: var(--background-elevated-base);
+    padding: 1.25rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-card h3 {
+    color: var(--text-subdued);
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
+}
+
+.admin-section {
+    background: var(--background-elevated-base);
+    border-radius: 8px;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    margin-bottom: 2rem;
+}
+
+.admin-section h2 {
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+}
+
+/* Recent activity section */
+.recent-activity {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.activity-column h3 {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--text-subdued);
+}
+
+.activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.activity-list li {
+    margin-bottom: 0.75rem;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.activity-item:hover {
+    background-color: var(--background-tinted-base);
+}
+
+.item-thumbnail, .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.user-avatar {
+    background-color: var(--essential-bright-accent);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-title {
+    font-weight: 500;
+}
+
+.item-subtitle, .item-date {
+    font-size: 0.8rem;
+    color: var(--text-subdued);
+}
+
+/* Tables */
+.songs-table, .users-table {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: var(--background-tinted-base);
+}
+
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--background-tinted-base);
+}
+
+th {
+    font-weight: 600;
+    color: var(--text-subdued);
+    font-size: 0.9rem;
+}
+
+tr:hover {
+    background-color: var(--background-tinted-highlight);
+}
+
+.song-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.song-thumbnail {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.view-btn, .edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    color: var(--text-subdued);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.view-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-base);
+}
+
+.edit-btn:hover {
+    background-color: rgba(30, 215, 96, 0.1);
+    color: var(--essential-bright-accent);
+}
+
+.delete-btn:hover {
+    background-color: rgba(233, 20, 41, 0.1);
+    color: var(--essential-negative);
+}
+
+button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.no-data {
+    text-align: center;
+    color: var(--text-subdued);
+    padding: 2rem !important;
+}
+
+/* User type badge */
+.user-type {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    background-color: var(--background-tinted-base);
+}
+
+.admin-badge {
+    background-color: rgba(30, 215, 96, 0.2);
+    color: var(--essential-bright-accent);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 1.5rem;
+}
+
+.page-link {
+    color: var(--text-base);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 500px;
+    background-color: var(--background-tinted-base);
+    transition: background-color 0.2s;
+}
+
+.page-link:hover {
+    background-color: var(--background-tinted-highlight);
+}
+
+.page-info {
+    color: var(--text-subdued);
+}
+
+/* Error notification */
+.error-notification {
+    background-color: rgba(233, 20, 41, 0.1);
+    color: var(--essential-negative);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+}
+
+/* Upload form */
+.upload-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-base);
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--background-tinted-base);
+    background-color: var(--background-base);
+    color: var(--text-base);
+}
+
+.submit-btn {
+    background-color: var(--essential-bright-accent);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 500px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.submit-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Subscription stats and actions */
+.subscription-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--card-gap);
+    margin-bottom: 1.5rem;
+}
+
+.sub-stat-card {
+    background: var(--background-tinted-base);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.sub-stat-title {
+    color: var(--text-subdued);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.sub-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.subscription-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Song details modal */
+.song-cover-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.song-details-header {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.song-basic-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.song-artist {
+    color: var(--text-subdued);
+    font-size: 1.1rem;
+}
+
+.song-player {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.song-player audio {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.song-details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+/* Subscription modal */
+.subscription-modal {
+    max-width: 800px;
+}
+
+.subscription-filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    color: var(--text-subdued);
+}
+
+.filter-group select {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--background-tinted-base);
+    background-color: var(--background-base);
+    color: var(--text-base);
+}
+
+.subscription-table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.subscription-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: var(--background-elevated-base);
+    margin: 5% auto;
+    padding: 24px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    animation: modalFade 0.3s ease-in-out;
+}
+
+@keyframes modalFade {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close-modal {
+    color: var(--text-subdued);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: var(--text-base);
+}
+
+.user-details-container,
+.song-details-container {
+    margin-top: 24px;
+}
+
+.user-details-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.user-avatar-large {
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+    background-color: var(--essential-bright-accent);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.user-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.detail-label {
+    color: var(--text-subdued);
+    font-size: 14px;
+}
+
+.detail-value {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.user-details-actions,
+.song-details-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.btn-primary, .btn-secondary, .btn-danger {
+    padding: 8px 16px;
+    border-radius: 500px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--essential-bright-accent);
+    color: black;
+}
+
+.btn-secondary {
+    background-color: var(--background-tinted-base);
+    color: var(--text-base);
+}
+
+.btn-danger {
+    background-color: rgba(233, 20, 41, 0.2);
+    color: var(--essential-negative);
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-danger:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .admin-container {
+        padding: var(--container-padding-mobile);
+    }
+    
+    .admin-actions {
+        flex-wrap: wrap;
+    }
+    
+    .upload-form {
+        grid-template-columns: 1fr;
+    }
+    
+    th, td {
+        padding: 8px;
+    }
+    
+    .song-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .users-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 16px;
+    }
+    
+    .user-details-grid,
+    .song-details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .user-details-actions,
+    .song-details-actions,
+    .subscription-actions {
+        flex-direction: column;
+    }
+    
+    .song-details-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .subscription-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* Status indicators */
+.status-active {
+    color: var(--essential-bright-accent);
+}
+
+.status-locked {
+    color: var(--essential-negative);
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.status-indicator.active {
+    background-color: var(--essential-bright-accent);
+}
+
+.status-indicator.locked {
+    background-color: var(--essential-negative);
+}
+
+/* Playlist grid */
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.playlist-card {
+    background-color: var(--background-tinted-base);
+    border-radius: 8px;
+    padding: 12px;
+    transition: background-color 0.2s;
+}
+
+.playlist-card:hover {
+    background-color: var(--background-tinted-highlight);
+}
+
+.playlist-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.playlist-info {
+    color: var(--text-subdued);
+    font-size: 0.9rem;
+}
+
+/* Admin Management Navigation */
+.admin-management-nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.admin-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background-color: var(--card-bg);
+    color: var(--primary-color);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.admin-nav-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-nav-btn .material-icons-round {
+    font-size: 20px;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-submit form when sort, order, or limit changes
+    const formFilters = document.querySelectorAll('#sort-select, #order-select, #limit-select');
+    formFilters.forEach(filter => {
+        filter.addEventListener('change', function() {
+            this.closest('form').submit();
+        });
+    });
+    
+    // Setup all modals
+    setupModals();
+    
+    // Modal action buttons for user modal
+    document.getElementById('modalEditUser').addEventListener('click', function() {
+        const userId = this.getAttribute('data-user-id');
+        // Redirect to edit page or open edit modal
+        alert('Edit functionality would be implemented here for user ID: ' + userId);
+    });
+    
+    document.getElementById('modalDeleteUser').addEventListener('click', function() {
+        const userId = this.getAttribute('data-user-id');
+        const userName = this.getAttribute('data-user-name');
+        if (confirm('Are you sure you want to delete ' + userName + '?')) {
+            // Submit delete form programmatically
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/admin/users/delete/' + userId;
+            document.body.appendChild(form);
+            form.submit();
+        }
+    });
+    
+    document.getElementById('modalUserActivity').addEventListener('click', function() {
+        const userId = this.getAttribute('data-user-id');
+        // Redirect to user activity page
+        window.location.href = '/admin/users/' + userId + '/activity';
+    });
+    
+    // Modal action buttons for song modal
+    document.getElementById('modalEditSong').addEventListener('click', function() {
+        const songId = this.getAttribute('data-song-id');
+        // Redirect to edit page or open edit modal
+        alert('Edit functionality would be implemented here for song ID: ' + songId);
+    });
+    
+    document.getElementById('modalDeleteSong').addEventListener('click', function() {
+        const songId = this.getAttribute('data-song-id');
+        const songTitle = this.getAttribute('data-song-title');
+        if (confirm('Are you sure you want to delete "' + songTitle + '"?')) {
+            // Submit delete form programmatically
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/admin/songs/delete/' + songId;
+            document.body.appendChild(form);
+            form.submit();
+        }
+    });
+    
+    document.getElementById('modalSongAnalytics').addEventListener('click', function() {
+        const songId = this.getAttribute('data-song-id');
+        // Redirect to song analytics page
+        window.location.href = '/admin/songs/' + songId + '/analytics';
+    });
+    
+    // Subscription modal actions
+    document.getElementById('exportSubscriptionData').addEventListener('click', function() {
+        alert('Export subscription data functionality would be implemented here');
+    });
+    
+    document.getElementById('addPromotionCode').addEventListener('click', function() {
+        alert('Add promotion code functionality would be implemented here');
+    });
+    
+    document.getElementById('updatePricingPlans').addEventListener('click', function() {
+        alert('Update pricing plans functionality would be implemented here');
+    });
+    
+    document.getElementById('applySubFilters').addEventListener('click', function() {
+        const filter = document.getElementById('subFilter').value;
+        const sort = document.getElementById('subSort').value;
+        updateSubscriptionTable(filter, sort);
+    });
+});
+
+// Function to setup all modals
+function setupModals() {
+    const modals = document.querySelectorAll('.modal');
+    const closeBtns = document.querySelectorAll('.close-modal');
+    
+    // Close modal when clicking the X button
+    closeBtns.forEach(btn => {
+        btn.onclick = function() {
+            // Find the parent modal and close it
+            const modal = btn.closest('.modal');
+            modal.style.display = "none";
+            
+            // Stop audio if it's the song modal
+            if (modal.id === 'songDetailsModal') {
+                const audio = document.getElementById('songPlayer');
+                if (audio) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            }
+        }
+    });
+    
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = "none";
+            
+            // Stop audio if it's the song modal
+            if (event.target.id === 'songDetailsModal') {
+                const audio = document.getElementById('songPlayer');
+                if (audio) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            }
+        }
+    }
+}
+
+// Function to show user details modal
+function showUserModal(userId, name, email, username, phone, joinDate, lastActive, playlists, subscription='Free', accountLocked=false) {
+    // Set user data in modal
+    document.getElementById('modalUserName').textContent = name;
+    document.getElementById('modalUserAvatar').textContent = name.charAt(0);
+    document.getElementById('modalUsername').textContent = username;
+    document.getElementById('modalEmail').textContent = email;
+    document.getElementById('modalPhone').textContent = phone;
+    document.getElementById('modalJoinDate').textContent = joinDate;
+    document.getElementById('modalLastActive').textContent = lastActive;
+    document.getElementById('modalPlaylists').textContent = playlists;
+    document.getElementById('modalSubscription').textContent = subscription;
+    
+    // Set account status
+    const statusElement = document.getElementById('modalStatus');
+    const statusIndicator = document.getElementById('modalStatusIndicator');
+    const toggleStatusBtn = document.getElementById('modalToggleStatus');
+    
+    if (accountLocked === 'True' || accountLocked === true || accountLocked === "true") {
+        statusElement.textContent = 'Locked';
+        statusElement.className = 'status-locked';
+        statusIndicator.className = 'status-indicator locked';
+        toggleStatusBtn.textContent = 'Activate Account';
+        toggleStatusBtn.style.display = 'inline-block';
+        toggleStatusBtn.className = 'btn-primary';
+    } else {
+        statusElement.textContent = 'Active';
+        statusElement.className = 'status-active';
+        statusIndicator.className = 'status-indicator active';
+        toggleStatusBtn.textContent = 'Lock Account';
+        toggleStatusBtn.style.display = 'inline-block';
+        toggleStatusBtn.className = 'btn-danger';
+    }
+    
+    // Set admin badge if admin
+    const isAdmin = email.includes('admin');
+    const userType = document.getElementById('modalUserType');
+    userType.textContent = isAdmin ? 'Admin' : 'User';
+    userType.className = 'user-type ' + (isAdmin ? 'admin-badge' : '');
+    
+    // Set user ID for action buttons
+    document.getElementById('modalEditUser').setAttribute('data-user-id', userId);
+    document.getElementById('modalDeleteUser').setAttribute('data-user-id', userId);
+    document.getElementById('modalDeleteUser').setAttribute('data-user-name', name);
+    document.getElementById('modalUserActivity').setAttribute('data-user-id', userId);
+    toggleStatusBtn.setAttribute('data-user-id', userId);
+    toggleStatusBtn.setAttribute('data-account-locked', accountLocked);
+    
+    // If there are playlists, set up the toggle button event
+    if (parseInt(playlists) > 0) {
+        document.getElementById('userPlaylistsContainer').style.display = 'block';
+        // Here you would typically load the playlists via AJAX
+        // For now we'll simulate it with a placeholder
+        document.getElementById('userPlaylistsList').innerHTML = 
+            '<p>Click "View Activity" to see user playlists</p>';
+    } else {
+        document.getElementById('userPlaylistsContainer').style.display = 'none';
+    }
+    
+    // Disable delete button if it's the current user
+    const currentUserId = '{{ session.get('user_id') }}';
+    if (userId === currentUserId) {
+        document.getElementById('modalDeleteUser').disabled = true;
+        document.getElementById('modalDeleteUser').title = 'Cannot delete yourself';
+        toggleStatusBtn.style.display = 'none';
+    } else {
+        document.getElementById('modalDeleteUser').disabled = false;
+        document.getElementById('modalDeleteUser').title = '';
+    }
+    
+    // Set up toggle status button event handler
+    toggleStatusBtn.onclick = function() {
+        const locked = this.getAttribute('data-account-locked');
+        const userId = this.getAttribute('data-user-id');
+        const action = locked === 'True' || locked === true || locked === "true" ? 'activate' : 'lock';
+        
+        if (confirm(`Are you sure you want to ${action} this user account?`)) {
+            // Here you would send an AJAX request or submit a form
+            // For now we'll simulate with an alert
+            alert(`User would be ${action}d - implement the backend endpoint for this`);
+            
+            // In a real implementation you would update the UI after success
+            // toggleStatusBtn.setAttribute('data-account-locked', !locked);
+            // showUserModal(...updated params...);
+        }
+    };
+    
+    // Show modal
+    document.getElementById('userDetailsModal').style.display = 'block';
+}
+
+// Function to show song details modal
+function showSongModal(songId, title, artist, mood, plays, date, imagePath, filePath) {
+    // Set song data in modal
+    document.getElementById('modalSongTitle').textContent = title;
+    document.getElementById('modalSongArtist').textContent = artist;
+    document.getElementById('modalSongMood').textContent = mood;
+    document.getElementById('modalSongPlays').textContent = plays;
+    document.getElementById('modalSongDate').textContent = date;
+    
+    // Set song cover image
+    const coverImg = document.getElementById('modalSongCover');
+    coverImg.src = '{{ url_for('static', filename='') }}' + imagePath;
+    coverImg.alt = title;
+    
+    // Set audio source if available
+    if (filePath && filePath.trim() !== '') {
+        const songSource = document.getElementById('songSource');
+        songSource.src = '{{ url_for('static', filename='') }}' + filePath;
+        const audioPlayer = document.getElementById('songPlayer');
+        audioPlayer.load(); // Reload the audio element
+        document.querySelector('.song-player').style.display = 'block';
+    } else {
+        document.querySelector('.song-player').style.display = 'none';
+    }
+    
+    // Set song ID for action buttons
+    document.getElementById('modalEditSong').setAttribute('data-song-id', songId);
+    document.getElementById('modalDeleteSong').setAttribute('data-song-id', songId);
+    document.getElementById('modalDeleteSong').setAttribute('data-song-title', title);
+    document.getElementById('modalSongAnalytics').setAttribute('data-song-id', songId);
+    
+    // Show modal
+    document.getElementById('songDetailsModal').style.display = 'block';
+}
+
+// Function to show subscription management modal
+function showSubscriptionModal(type) {
+    // Set modal title based on type
+    const titleElement = document.getElementById('subscriptionModalTitle');
+    
+    switch(type) {
+        case 'premium':
+            titleElement.textContent = 'Premium Subscriptions';
+            break;
+        case 'free':
+            titleElement.textContent = 'Free Tier Users';
+            break;
+        case 'expired':
+            titleElement.textContent = 'Expired Subscriptions';
+            break;
+        default:
+            titleElement.textContent = 'Subscription Management';
+    }
+    
+    // Update the subscription table
+    updateSubscriptionTable('all', 'date_desc', type);
+    
+    // Show modal
+    document.getElementById('subscriptionModal').style.display = 'block';
+}
+
+// Function to update subscription table based on filters
+function updateSubscriptionTable(filter, sort, type = 'all') {
+    // This would be an AJAX call in a real implementation
+    // For demo purposes, we'll simulate some data
+    const tableBody = document.getElementById('subscriptionTableBody');
+    const noSubs = document.getElementById('noSubscriptions');
+    
+    // Clear the table
+    tableBody.innerHTML = '';
+    
+    // Sample subscription data (would come from server)
+    let subscriptions = [];
+    
+    // Add some sample data based on the type
+    if (type === 'premium' || type === 'all') {
+        subscriptions.push(
+            {
+                user: {id: '1', name: 'John Doe', email: 'john@example.com'},
+                plan: 'Premium Monthly',
+                started: '2023-01-15',
+                expires: '2023-02-15',
+                status: 'active',
+                cost: '$9.99'
+            },
+            {
+                user: {id: '2', name: 'Jane Smith', email: 'jane@example.com'},
+                plan: 'Premium Yearly',
+                started: '2022-08-10',
+                expires: '2023-08-10',
+                status: 'active',
+                cost: '$99.99'
+            }
+        );
+    }
+    
+    if (type === 'free' || type === 'all') {
+        subscriptions.push(
+            {
+                user: {id: '3', name: 'Bob Johnson', email: 'bob@example.com'},
+                plan: 'Free Tier',
+                started: '2023-03-05',
+                expires: 'N/A',
+                status: 'free',
+                cost: '$0.00'
+            }
+        );
+    }
+    
+    if (type === 'expired' || type === 'all') {
+        subscriptions.push(
+            {
+                user: {id: '4', name: 'Alice Brown', email: 'alice@example.com'},
+                plan: 'Premium Monthly',
+                started: '2022-12-01',
+                expires: '2023-01-01',
+                status: 'expired',
+                cost: '$9.99'
+            }
+        );
+    }
+    
+    // Apply filter
+    if (filter !== 'all') {
+        subscriptions = subscriptions.filter(sub => {
+            switch(filter) {
+                case 'monthly':
+                    return sub.plan.includes('Monthly');
+                case 'yearly':
+                    return sub.plan.includes('Yearly');
+                case 'trial':
+                    return sub.plan.includes('Trial');
+                default:
+                    return true;
+            }
+        });
+    }
+    
+    // Apply sort
+    subscriptions.sort((a, b) => {
+        switch(sort) {
+            case 'date_desc':
+                return new Date(b.started) - new Date(a.started);
+            case 'date_asc':
+                return new Date(a.started) - new Date(b.started);
+            case 'price_desc':
+                return parseFloat(b.cost.replace('$', '')) - parseFloat(a.cost.replace('$', ''));
+            case 'price_asc':
+                return parseFloat(a.cost.replace('$', '')) - parseFloat(b.cost.replace('$', ''));
+            default:
+                return 0;
+        }
+    });
+    
+    // Show or hide no subscriptions message
+    if (subscriptions.length === 0) {
+        noSubs.style.display = 'block';
+    } else {
+        noSubs.style.display = 'none';
+        
+        // Add subscriptions to table
+        subscriptions.forEach(sub => {
+            const row = document.createElement('tr');
+            
+            // Status class
+            let statusClass = '';
+            switch(sub.status) {
+                case 'active':
+                    statusClass = 'status-active';
+                    break;
+                case 'expired':
+                    statusClass = 'status-expired';
+                    break;
+                case 'free':
+                    statusClass = 'status-free';
+                    break;
+            }
+            
+            row.innerHTML = `
+                <td>${sub.user.name}<br><small>${sub.user.email}</small></td>
+                <td>${sub.plan}</td>
+                <td>${sub.started}</td>
+                <td>${sub.expires}</td>
+                <td><span class="status-badge ${statusClass}">${sub.status}</span></td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="view-btn" title="View Details" onclick="alert('View subscription details for ${sub.user.name}')">
+                            <span class="material-icons-round">visibility</span>
+                        </button>
+                        <button class="edit-btn" title="Edit Subscription" onclick="alert('Edit subscription for ${sub.user.name}')">
+                            <span class="material-icons-round">edit</span>
+                        </button>
+                    </div>
+                </td>
+            `;
+            
+            tableBody.appendChild(row);
+        });
+    }
+}
+</script>
+{% endblock %}

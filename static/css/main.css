@@ -1,0 +1,301 @@
+/*****************************************************************************
+ * MAIN CSS FILE - IMPORTS ALL MODULES
+ *****************************************************************************/
+
+/* Import module stylesheets */
+@import url('variables.css');
+@import url('player.css');
+@import url('footer.css');
+
+/* Global settings & resets */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-base);
+    background-color: var(--background-base);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Global layout */
+.main-container {
+    display: flex;
+    flex: 1;
+    height: 100%;
+}
+
+.app-container {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-areas:
+        "sidebar main-view"
+        "player player";
+    grid-template-columns: var(--sidebar-width) 1fr;
+    grid-template-rows: 1fr var(--player-height);
+    overflow: hidden;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    grid-area: sidebar;
+    background-color: var(--background-base);
+    border-right: var(--border-thin);
+    overflow-y: auto;
+    position: relative;
+    z-index: var(--z-index-sidebar);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Main Content Area */
+.main-view {
+    grid-area: main-view;
+    position: relative;
+    overflow-y: auto;
+    background-color: var(--background-base);
+    padding-bottom: var(--player-height); /* Ensure content isn't hidden behind player */
+}
+
+/* Top Navigation Bar */
+.topbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--topbar-height);
+    padding: 0 var(--space-md);
+    background-color: var(--background-base);
+    z-index: var(--z-index-topbar);
+    transition: var(--transition-standard);
+}
+
+.topbar.scrolled {
+    background-color: var(--background-elevated-base);
+    box-shadow: var(--shadow-small);
+}
+
+/* Content Container */
+.content-container {
+    padding: var(--space-lg);
+    min-height: calc(100vh - var(--topbar-height) - var(--player-height));
+}
+
+/* Navigation Controls */
+.nav-controls {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.nav-button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--background-elevated-base);
+    color: var(--text-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.nav-button:hover {
+    background-color: var(--background-elevated-highlight);
+}
+
+/* User Controls */
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+/* Cards and Grids */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-md);
+}
+
+.card {
+    background-color: var(--background-elevated-base);
+    border-radius: var(--border-radius-medium);
+    padding: var(--space-md);
+    transition: var(--transition-standard);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    background-color: var(--background-elevated-highlight);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+}
+
+.card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--border-radius-small);
+    margin-bottom: var(--space-sm);
+}
+
+.card-title {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-md);
+    margin-bottom: var(--space-xs);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-subtitle {
+    color: var(--text-subdued);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        grid-template-areas:
+            "main-view"
+            "player"
+            "sidebar";
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr var(--player-height) var(--topbar-height);
+    }
+    
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-top: var(--border-thin);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    
+    .content-container {
+        padding: var(--space-md);
+    }
+    
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: var(--space-sm);
+    }
+    
+    .topbar {
+        padding: 0 var(--space-sm);
+    }
+    
+    .content-container {
+        padding: var(--space-sm);
+    }
+}
+
+/* Utility classes */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Fade animations */
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+} 

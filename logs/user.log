@@ -1,0 +1,1097 @@
+2025-04-18 00:41:43,488 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:41:44,380 - user_model - INFO - Admin user already exists
+2025-04-18 00:41:45,494 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:41:46,394 - user_model - INFO - Admin user already exists
+2025-04-18 00:42:24,011 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:42:25,638 - user_model - INFO - Admin user already exists
+2025-04-18 00:42:26,926 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:42:27,754 - user_model - INFO - Admin user already exists
+2025-04-18 00:49:23,582 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:49:24,390 - user_model - INFO - Admin user already exists
+2025-04-18 00:49:25,495 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:49:26,303 - user_model - INFO - Admin user already exists
+2025-04-18 00:51:13,282 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:51:14,318 - user_model - INFO - Admin user already exists
+2025-04-18 00:51:15,490 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:51:16,373 - user_model - INFO - Admin user already exists
+2025-04-18 00:55:44,747 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:55:45,573 - user_model - INFO - Admin user already exists
+2025-04-18 00:55:46,665 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:55:47,492 - user_model - INFO - Admin user already exists
+2025-04-18 00:56:39,186 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:56:40,028 - user_model - INFO - Admin user already exists
+2025-04-18 00:57:01,029 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:57:01,845 - user_model - INFO - Admin user already exists
+2025-04-18 00:57:13,511 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:57:14,464 - user_model - INFO - Admin user already exists
+2025-04-18 00:57:26,760 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:57:27,646 - user_model - INFO - Admin user already exists
+2025-04-18 00:57:28,769 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:57:29,585 - user_model - INFO - Admin user already exists
+2025-04-18 00:58:07,872 - user_model - WARNING - Login attempt with non-existent email: nrupal85@gmail.com
+2025-04-18 00:59:40,808 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:59:41,175 - user_model - INFO - Connected to database for users collection
+2025-04-18 00:59:41,629 - user_model - INFO - Admin user already exists
+2025-04-18 00:59:42,106 - user_model - INFO - Admin user already exists
+2025-04-18 00:59:59,613 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:00:00,131 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:00:02,456 - user_model - INFO - Admin user already exists
+2025-04-18 01:00:02,499 - user_model - INFO - Admin user already exists
+2025-04-18 01:00:21,748 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:00:21,784 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:00:22,681 - user_model - INFO - Admin user already exists
+2025-04-18 01:00:22,688 - user_model - INFO - Admin user already exists
+2025-04-18 01:00:39,588 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:00:40,438 - user_model - INFO - Admin user already exists
+2025-04-18 01:00:41,679 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:00:42,506 - user_model - INFO - Admin user already exists
+2025-04-18 01:01:05,410 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:01:05,479 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:01:05,672 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:01:06,352 - user_model - INFO - Admin user already exists
+2025-04-18 01:01:06,429 - user_model - INFO - Admin user already exists
+2025-04-18 01:01:06,575 - user_model - INFO - Admin user already exists
+2025-04-18 01:01:31,836 - user_model - WARNING - Login attempt with non-existent email: nrupal85@gmail.com
+2025-04-18 01:03:07,751 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:03:09,377 - user_model - INFO - Admin user already exists
+2025-04-18 01:03:11,723 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:03:12,703 - user_model - INFO - Admin user already exists
+2025-04-18 01:03:57,477 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:06:14,029 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:07:48,932 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:07:50,709 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:08:18,203 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:08:20,027 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:09:04,914 - user_model - WARNING - Login attempt with non-existent email: nrupal85@gmail.com
+2025-04-18 01:11:44,415 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:11:59,285 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:13:55,342 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:14:45,847 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:15:05,418 - user_model - INFO - Connected to database for users collection
+2025-04-18 01:15:07,265 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:06:18,962 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:06:19,810 - user_model - INFO - Admin user already exists
+2025-04-18 10:06:21,022 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:06:21,829 - user_model - INFO - Admin user already exists
+2025-04-18 10:07:59,855 - user_model - INFO - User created successfully: 6801d727800bd3e992e8698b (admin: False)
+2025-04-18 10:10:36,425 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:10:37,358 - user_model - INFO - Admin user already exists
+2025-04-18 10:11:11,796 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:11:12,900 - user_model - INFO - Admin user already exists
+2025-04-18 10:11:14,122 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:11:14,959 - user_model - INFO - Admin user already exists
+2025-04-18 10:14:00,476 - user_model - INFO - User created successfully: 6801d89084272486b366343a (admin: False)
+2025-04-18 10:19:06,438 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:19:07,524 - user_model - INFO - Admin user already exists
+2025-04-18 10:19:08,876 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:19:09,718 - user_model - INFO - Admin user already exists
+2025-04-18 10:20:30,120 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:20:31,149 - user_model - INFO - Admin user already exists
+2025-04-18 10:20:32,428 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:20:33,266 - user_model - INFO - Admin user already exists
+2025-04-18 10:23:33,352 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:23:35,148 - user_model - INFO - Admin user already exists
+2025-04-18 10:23:42,365 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:23:43,158 - user_model - INFO - Admin user already exists
+2025-04-18 10:24:30,612 - user_model - WARNING - Login attempt with non-existent email: nrupal7465@gmail.com
+2025-04-18 10:29:38,138 - user_model - WARNING - Failed login attempt for admin@spotify.com (attempt #2)
+2025-04-18 10:31:41,995 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:31:43,036 - user_model - INFO - Admin user already exists
+2025-04-18 10:33:04,647 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:33:05,725 - user_model - INFO - Admin user already exists
+2025-04-18 10:33:07,000 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:33:07,848 - user_model - INFO - Admin user already exists
+2025-04-18 10:33:46,650 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:33:47,663 - user_model - INFO - Admin user already exists
+2025-04-18 10:35:21,837 - user_model - WARNING - Failed login attempt for admin@spotify.com (attempt #3)
+2025-04-18 10:36:28,110 - user_model - WARNING - Failed login attempt for admin@spotify.com (attempt #4)
+2025-04-18 10:38:12,513 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:38:13,396 - user_model - INFO - Admin user doesn't exist - creating default admin
+2025-04-18 10:38:13,623 - user_model - INFO - User created successfully: 6801de3d35da5e44561b791d (admin: True)
+2025-04-18 10:38:13,623 - user_model - ERROR - Database error during user creation: Working outside of application context.
+
+This typically means that you attempted to use functionality that needed
+the current application. To solve this, set up an application context
+with app.app_context(). See the documentation for more information.
+2025-04-18 10:38:13,623 - user_model - ERROR - Error creating admin user: Working outside of application context.
+
+This typically means that you attempted to use functionality that needed
+the current application. To solve this, set up an application context
+with app.app_context(). See the documentation for more information.
+2025-04-18 10:38:39,699 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:38:40,631 - user_model - INFO - Admin user already exists
+2025-04-18 10:38:42,004 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:38:42,884 - user_model - INFO - Admin user already exists
+2025-04-18 10:39:07,187 - user_model - INFO - Successful login: 6801de3d35da5e44561b791d (admin: True)
+2025-04-18 10:46:52,240 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:46:53,147 - user_model - INFO - Admin user already exists
+2025-04-18 10:46:54,839 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:46:55,746 - user_model - INFO - Admin user already exists
+2025-04-18 10:53:13,338 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:53:14,224 - user_model - INFO - Admin user already exists
+2025-04-18 10:53:38,730 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:53:39,743 - user_model - INFO - Admin user already exists
+2025-04-18 10:54:00,344 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:54:02,217 - user_model - INFO - Admin user already exists
+2025-04-18 10:54:03,723 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:54:04,667 - user_model - INFO - Admin user already exists
+2025-04-18 10:58:10,606 - user_model - INFO - Connected to database for users collection
+2025-04-18 10:58:11,541 - user_model - INFO - Admin user already exists
+2025-04-18 11:03:39,701 - user_model - INFO - Connected to database for users collection
+2025-04-18 11:03:40,557 - user_model - INFO - Admin user already exists
+2025-04-18 11:23:18,617 - user_model - INFO - Connected to database for users collection
+2025-04-18 11:23:19,535 - user_model - INFO - Admin user already exists
+2025-04-18 11:23:58,935 - user_model - INFO - Connected to database for users collection
+2025-04-18 11:23:59,805 - user_model - INFO - Admin user already exists
+2025-04-18 11:24:00,962 - user_model - INFO - Connected to database for users collection
+2025-04-18 11:24:01,773 - user_model - INFO - Admin user already exists
+2025-04-18 11:25:57,480 - user_model - INFO - Connected to database for users collection
+2025-04-18 11:25:58,309 - user_model - INFO - Admin user already exists
+2025-04-18 11:25:59,432 - user_model - INFO - Connected to database for users collection
+2025-04-18 11:26:00,268 - user_model - INFO - Admin user already exists
+2025-04-18 11:40:46,346 - user_model - INFO - Connected to database for users collection
+2025-04-18 11:40:47,183 - user_model - INFO - Admin user already exists
+2025-04-18 11:40:48,317 - user_model - INFO - Connected to database for users collection
+2025-04-18 11:40:49,221 - user_model - INFO - Admin user already exists
+2025-04-18 11:40:55,154 - user_model - INFO - Connected to database for users collection
+2025-04-18 11:40:56,066 - user_model - INFO - Admin user already exists
+2025-04-18 11:40:57,319 - user_model - INFO - Connected to database for users collection
+2025-04-18 11:40:58,321 - user_model - INFO - Admin user already exists
+2025-04-18 12:13:54,909 - user_model - INFO - Connected to database for users collection
+2025-04-18 12:13:55,827 - user_model - INFO - Admin user already exists
+2025-04-18 12:13:57,025 - user_model - INFO - Connected to database for users collection
+2025-04-18 12:13:57,830 - user_model - INFO - Admin user already exists
+2025-04-18 12:23:32,842 - user_model - INFO - Connected to database for users collection
+2025-04-18 12:23:33,650 - user_model - INFO - Admin user already exists
+2025-04-18 12:24:48,122 - user_model - INFO - Connected to database for users collection
+2025-04-18 12:24:53,162 - user_model - INFO - Admin user already exists
+2025-04-18 12:24:54,351 - user_model - INFO - Connected to database for users collection
+2025-04-18 12:24:55,314 - user_model - INFO - Admin user already exists
+2025-04-18 12:25:10,998 - user_model - INFO - Connected to database for users collection
+2025-04-18 12:25:11,948 - user_model - INFO - Admin user already exists
+2025-04-18 13:31:16,593 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:31:17,504 - user_model - INFO - Admin user already exists
+2025-04-18 13:31:18,699 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:31:19,553 - user_model - INFO - Admin user already exists
+2025-04-18 13:32:40,714 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:32:41,536 - user_model - INFO - Admin user already exists
+2025-04-18 13:32:42,747 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:32:43,607 - user_model - INFO - Admin user already exists
+2025-04-18 13:34:22,255 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:34:23,142 - user_model - INFO - Admin user already exists
+2025-04-18 13:34:47,531 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:34:48,504 - user_model - INFO - Admin user already exists
+2025-04-18 13:35:33,536 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:35:34,402 - user_model - INFO - Admin user already exists
+2025-04-18 13:40:15,638 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:40:16,559 - user_model - INFO - Admin user already exists
+2025-04-18 13:42:50,075 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:42:50,938 - user_model - INFO - Admin user already exists
+2025-04-18 13:42:56,922 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:42:57,766 - user_model - INFO - Admin user already exists
+2025-04-18 13:48:35,857 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:48:36,714 - user_model - INFO - Admin user already exists
+2025-04-18 13:49:20,326 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:49:22,236 - user_model - INFO - Admin user already exists
+2025-04-18 13:50:04,023 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:50:04,962 - user_model - INFO - Admin user already exists
+2025-04-18 13:50:59,762 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:51:00,613 - user_model - INFO - Admin user already exists
+2025-04-18 13:51:32,610 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:51:33,467 - user_model - INFO - Admin user already exists
+2025-04-18 13:56:47,301 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:56:49,983 - user_model - INFO - Admin user already exists
+2025-04-18 13:57:31,946 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:57:32,774 - user_model - INFO - Admin user already exists
+2025-04-18 13:58:06,012 - user_model - INFO - Connected to database for users collection
+2025-04-18 13:58:41,492 - user_model - INFO - Connected to database for users collection
+2025-04-18 14:19:04,839 - user_model - INFO - Connected to database for users collection
+2025-04-18 14:19:06,741 - user_model - INFO - Connected to database for users collection
+2025-04-18 14:22:53,277 - user_model - INFO - Connected to database for users collection
+2025-04-18 14:24:31,873 - user_model - INFO - Connected to database for users collection
+2025-04-18 14:29:59,042 - user_model - INFO - Connected to database for users collection
+2025-04-18 14:40:12,921 - user_model - WARNING - Failed login attempt for nrupal75@gmail.com (attempt #1)
+2025-04-18 14:40:25,307 - user_model - WARNING - Failed login attempt for nrupal75@gmail.com (attempt #2)
+2025-04-18 14:40:46,683 - user_model - INFO - User created successfully: 68021716a80eb5627b02a2ff (admin: False)
+2025-04-18 15:39:10,044 - user_model - INFO - Connected to database for users collection
+2025-04-18 15:39:12,748 - user_model - INFO - Connected to database for users collection
+2025-04-18 15:58:18,292 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:01:45,173 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:01:49,438 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:13:40,005 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:19:04,362 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:23:37,510 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:23:50,514 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:24:01,612 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:28:13,953 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:28:26,116 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:29:11,717 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:36:44,287 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:37:21,093 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:37:25,210 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:38:00,135 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:38:06,701 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:39:00,379 - user_model - INFO - Connected to database for users collection
+2025-04-18 16:46:34,746 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:04:48,667 - user_model - WARNING - Failed login attempt for nrupal75@gmail.com (attempt #3)
+2025-04-18 17:04:53,619 - user_model - WARNING - Failed login attempt for nrupal75@gmail.com (attempt #4)
+2025-04-18 17:05:02,675 - user_model - WARNING - Account locked after 5 failed attempts: nrupal75@gmail.com
+2025-04-18 17:09:03,874 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:10:02,722 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:21:14,578 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:21:16,533 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:30:21,587 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:30:21,967 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:30:49,094 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:30:49,326 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:31:48,269 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:31:50,709 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:31:55,202 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:31:55,291 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:31:55,314 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:32:55,259 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:32:57,608 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:50:07,221 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:50:13,516 - user_model - INFO - Connected to database for users collection
+2025-04-18 17:56:25,666 - user_model - ERROR - Error connecting to database from user model: The resolution lifetime expired after 10.004 seconds: Server Do53:192.168.59.102@53 answered The DNS operation timed out.; Server Do53:192.168.0.1@53 answered The DNS operation timed out.; Server Do53:192.168.59.102@53 answered The DNS operation timed out.; Server Do53:192.168.0.1@53 answered The DNS operation timed out.; Server Do53:192.168.59.102@53 answered The DNS operation timed out.
+2025-04-18 17:56:39,549 - user_model - WARNING - Using mock collection. No database connection.
+2025-04-18 17:56:39,707 - user_model - WARNING - Using mock collection. No database connection.
+2025-04-18 17:56:39,707 - models.user - INFO - Default admin user created
+2025-04-18 18:01:53,099 - user_model - INFO - Connected to database for users collection
+2025-04-18 18:01:59,181 - user_model - INFO - Connected to database for users collection
+2025-04-18 18:04:50,138 - user_model - INFO - Connected to database for users collection
+2025-04-18 18:09:25,356 - models.user - ERROR - Error getting user 68021716a80eb5627b02a2ff: cluster0-shard-00-01.3cyke.mongodb.net:27017: connection closed (configured timeouts: socketTimeoutMS: 30000.0ms, connectTimeoutMS: 10000.0ms)
+2025-04-18 18:09:28,401 - models.user - ERROR - Error getting user 68021716a80eb5627b02a2ff: cluster0-shard-00-02.3cyke.mongodb.net:27017: [Errno 11001] getaddrinfo failed (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms),cluster0-shard-00-01.3cyke.mongodb.net:27017: [Errno 11001] getaddrinfo failed (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms),cluster0-shard-00-00.3cyke.mongodb.net:27017: [Errno 11001] getaddrinfo failed (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 680246eaa2d20c8c82cbdedf, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('cluster0-shard-00-00.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('cluster0-shard-00-00.3cyke.mongodb.net:27017: [Errno 11001] getaddrinfo failed (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>, <ServerDescription ('cluster0-shard-00-01.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('cluster0-shard-00-01.3cyke.mongodb.net:27017: [Errno 11001] getaddrinfo failed (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>, <ServerDescription ('cluster0-shard-00-02.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('cluster0-shard-00-02.3cyke.mongodb.net:27017: [Errno 11001] getaddrinfo failed (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>]>
+2025-04-18 23:35:17,530 - user_model - INFO - Connected to database for users collection
+2025-04-18 23:35:27,498 - user_model - INFO - Connected to database for users collection
+2025-04-18 23:51:37,609 - user_model - INFO - Successful login: 6801d89084272486b366343a (admin: False)
+2025-04-18 23:53:00,139 - user_model - INFO - Connected to database for users collection
+2025-04-18 23:53:02,035 - user_model - INFO - Connected to database for users collection
+2025-04-18 23:53:37,847 - user_model - INFO - Successful login: 68021716a80eb5627b02a2ff (admin: False)
+2025-04-18 23:55:04,843 - user_model - INFO - Successful login: 6801d89084272486b366343a (admin: False)
+2025-04-19 00:11:02,712 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:13:12,754 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:20:14,235 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:21:53,373 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:24:07,845 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:25:29,383 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:26:30,368 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:33:58,181 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:34:19,710 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:40:34,274 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:41:42,971 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:41:45,860 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:42:02,922 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:56:04,664 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:56:09,791 - user_model - INFO - Connected to database for users collection
+2025-04-19 00:57:11,989 - user_model - INFO - Connected to database for users collection
+2025-04-19 01:00:45,036 - user_model - INFO - Connected to database for users collection
+2025-04-19 01:01:00,228 - user_model - INFO - Connected to database for users collection
+2025-04-19 01:01:24,755 - user_model - INFO - Connected to database for users collection
+2025-04-19 01:01:26,736 - user_model - INFO - Connected to database for users collection
+2025-04-19 01:03:01,733 - user_model - INFO - Connected to database for users collection
+2025-04-19 01:03:29,721 - user_model - INFO - Connected to database for users collection
+2025-04-19 01:04:35,829 - user_model - INFO - Connected to database for users collection
+2025-04-19 01:04:37,999 - user_model - INFO - Connected to database for users collection
+2025-04-19 01:05:44,345 - user_model - INFO - Connected to database for users collection
+2025-04-19 01:06:48,134 - user_model - INFO - Connected to database for users collection
+2025-04-19 01:07:00,897 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:26:39,134 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:26:44,406 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:26:49,383 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:31:08,953 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:36:26,857 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:36:46,670 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:38:13,194 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:41:37,162 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:44:09,130 - user_model - INFO - Successful login: 68021716a80eb5627b02a2ff (admin: False)
+2025-04-19 13:48:00,018 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:48:05,284 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:48:26,142 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:48:56,537 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:49:27,999 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:49:29,251 - user_model - INFO - Successful login: 68021716a80eb5627b02a2ff (admin: False)
+2025-04-19 13:50:23,763 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:50:28,846 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:50:49,707 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:50:54,663 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:52:06,241 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:52:21,561 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:53:49,169 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:53:55,112 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:56:10,221 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:58:05,706 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:58:11,871 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:58:25,620 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:58:37,235 - user_model - INFO - Connected to database for users collection
+2025-04-19 13:58:52,967 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:00:45,867 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:00:51,400 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:01:25,611 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:12:44,303 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:13:04,487 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:13:29,330 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:14:33,694 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:14:37,581 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:17:27,667 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:18:49,025 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:20:53,834 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:21:42,300 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:21:44,264 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:22:18,372 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:35:43,920 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:35:46,283 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:40:56,383 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:41:12,442 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:41:59,270 - user_model - INFO - Connected to database for users collection
+2025-04-19 14:42:36,034 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:01:31,426 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:04:18,604 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:04:51,603 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:23:41,172 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:23:48,585 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:23:54,602 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:23:59,017 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:24:59,767 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:25:04,745 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:33:19,379 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:34:35,696 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:35:11,846 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:36:33,237 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:42:03,029 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:48:05,054 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:48:49,085 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:55:57,307 - user_model - INFO - Connected to database for users collection
+2025-04-19 15:57:03,397 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:03:16,348 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:03:18,400 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:06:02,044 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:06:04,379 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:09:02,165 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:13:08,113 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:14:11,448 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:17:12,443 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:17:18,599 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:17:50,899 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:18:45,313 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:18:50,896 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:19:05,960 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:41:40,712 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:41:42,803 - user_model - INFO - Connected to database for users collection
+2025-04-19 16:42:18,392 - user_model - INFO - Successful login: 68021716a80eb5627b02a2ff (admin: False)
+2025-04-19 17:09:21,284 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:09:56,738 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:10:05,968 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:10:44,472 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:10:49,754 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:12:20,708 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:12:26,880 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:21:54,216 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:21:56,355 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:22:49,608 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:22:52,144 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:23:34,945 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:23:43,234 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:23:46,646 - user_model - INFO - Connected to database for users collection
+2025-04-19 17:24:40,403 - user_model - INFO - Successful login: 6801d89084272486b366343a (admin: False)
+2025-04-19 20:08:53,098 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:08:55,956 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:13:00,050 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:13:54,853 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:15:58,360 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:17:19,224 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:17:25,476 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:18:37,240 - user_model - INFO - Successful login: 6801de3d35da5e44561b791d (admin: True)
+2025-04-19 20:18:50,121 - user_model - INFO - Successful login: 6801de3d35da5e44561b791d (admin: True)
+2025-04-19 20:19:06,981 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:20:05,546 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:21:27,637 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:21:29,660 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:21:37,765 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:21:38,391 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:21:46,351 - user_model - INFO - Successful login: 6801de3d35da5e44561b791d (admin: True)
+2025-04-19 20:21:53,200 - user_model - INFO - Successful login: 6801de3d35da5e44561b791d (admin: True)
+2025-04-19 20:23:15,311 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:23:38,737 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:23:40,580 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:23:41,756 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:23:49,690 - user_model - INFO - Successful login: 6801de3d35da5e44561b791d (admin: True)
+2025-04-19 20:24:12,994 - user_model - INFO - Successful login: 6801de3d35da5e44561b791d (admin: True)
+2025-04-19 20:24:52,801 - user_model - WARNING - Login attempt with non-existent email: admin
+2025-04-19 20:25:03,805 - user_model - INFO - Successful login: 6801de3d35da5e44561b791d (admin: True)
+2025-04-19 20:25:08,442 - user_model - INFO - Successful login: 6801de3d35da5e44561b791d (admin: True)
+2025-04-19 20:29:23,952 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:29:34,380 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:30:05,253 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:30:13,269 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:30:56,095 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:31:03,130 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:32:38,900 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:32:44,771 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:32:53,875 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:33:06,246 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:38:22,971 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:38:24,976 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:50:14,771 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:50:27,475 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:50:32,149 - user_model - INFO - Successful login: 6801de3d35da5e44561b791d (admin: True)
+2025-04-19 20:50:40,087 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:50:41,301 - user_model - INFO - Successful login: 6801de3d35da5e44561b791d (admin: True)
+2025-04-19 20:50:47,283 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:51:04,198 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:51:10,210 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:51:41,961 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:51:43,940 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:52:16,404 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:52:28,885 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:52:44,880 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:52:49,163 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:53:13,277 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:53:15,238 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:55:05,801 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:55:07,646 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:55:42,065 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:55:55,585 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:56:16,650 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:56:19,325 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:56:53,633 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:56:57,488 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:57:09,957 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:57:11,938 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:58:44,751 - user_model - INFO - Connected to database for users collection
+2025-04-19 20:58:46,744 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:02:29,506 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:02:43,460 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:02:45,513 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:03:54,187 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:03:56,128 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:04:10,717 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:07:32,689 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:08:50,245 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:08:52,159 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:08:54,848 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:11:35,206 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:11:37,121 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:12:09,282 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:12:19,773 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:12:30,588 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:14:09,192 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:14:11,182 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:14:14,951 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:14:56,668 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:14:58,536 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:40:32,888 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:43:00,148 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:44:55,931 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:45:09,529 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:45:13,488 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:53:54,751 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:53:56,942 - user_model - INFO - Connected to database for users collection
+2025-04-19 21:59:59,074 - user_model - INFO - Successful login: 68021716a80eb5627b02a2ff (admin: False)
+2025-04-19 22:00:08,520 - user_model - INFO - Successful login: 68021716a80eb5627b02a2ff (admin: False)
+2025-04-19 22:00:13,623 - user_model - INFO - Successful login: 68021716a80eb5627b02a2ff (admin: False)
+2025-04-19 22:00:14,916 - user_model - WARNING - Failed login attempt for issei1@gmail.com (attempt #1)
+2025-04-19 22:01:03,086 - user_model - WARNING - Login attempt with non-existent email: issei
+2025-04-19 22:03:06,134 - user_model - INFO - Successful login: 6801d89084272486b366343a (admin: False)
+2025-04-19 22:14:33,098 - models.user - ERROR - Error getting user 6801de3d35da5e44561b791d: cluster0-shard-00-01.3cyke.mongodb.net:27017: connection pool paused (configured timeouts: socketTimeoutMS: 30000.0ms, connectTimeoutMS: 10000.0ms)
+2025-04-19 22:14:33,098 - models.user - ERROR - Error getting user 6801de3d35da5e44561b791d: cluster0-shard-00-01.3cyke.mongodb.net:27017: [Errno 11001] getaddrinfo failed (configured timeouts: socketTimeoutMS: 30000.0ms, connectTimeoutMS: 10000.0ms)
+2025-04-19 22:14:33,098 - models.user - ERROR - Error getting user 6801de3d35da5e44561b791d: cluster0-shard-00-01.3cyke.mongodb.net:27017: [Errno 11001] getaddrinfo failed (configured timeouts: socketTimeoutMS: 30000.0ms, connectTimeoutMS: 10000.0ms)
+2025-04-19 22:14:33,098 - models.user - ERROR - Error getting user 6801de3d35da5e44561b791d: cluster0-shard-00-01.3cyke.mongodb.net:27017: connection pool paused (configured timeouts: socketTimeoutMS: 30000.0ms, connectTimeoutMS: 10000.0ms)
+2025-04-19 22:14:38,473 - models.user - ERROR - Error getting user 6801de3d35da5e44561b791d: cluster0-shard-00-02.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms),cluster0-shard-00-00.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms),cluster0-shard-00-01.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6803ce1c91e2c9dae203fcf5, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('cluster0-shard-00-00.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('cluster0-shard-00-00.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>, <ServerDescription ('cluster0-shard-00-01.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('cluster0-shard-00-01.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>, <ServerDescription ('cluster0-shard-00-02.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('cluster0-shard-00-02.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>]>
+2025-04-19 22:14:38,473 - models.user - ERROR - Error getting user 6801de3d35da5e44561b791d: cluster0-shard-00-02.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms),cluster0-shard-00-00.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms),cluster0-shard-00-01.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6803ce1c91e2c9dae203fcf5, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('cluster0-shard-00-00.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('cluster0-shard-00-00.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>, <ServerDescription ('cluster0-shard-00-01.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('cluster0-shard-00-01.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>, <ServerDescription ('cluster0-shard-00-02.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('cluster0-shard-00-02.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>]>
+2025-04-19 22:14:38,488 - models.user - ERROR - Error getting user 6801de3d35da5e44561b791d: cluster0-shard-00-02.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms),cluster0-shard-00-00.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms),cluster0-shard-00-01.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6803ce1c91e2c9dae203fcf5, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('cluster0-shard-00-00.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('cluster0-shard-00-00.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>, <ServerDescription ('cluster0-shard-00-01.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('cluster0-shard-00-01.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>, <ServerDescription ('cluster0-shard-00-02.3cyke.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('cluster0-shard-00-02.3cyke.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 10000.0ms, connectTimeoutMS: 10000.0ms)')>]>
+2025-04-19 22:19:44,739 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:19:47,105 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:24:36,409 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:24:38,828 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:27:33,301 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:30:35,438 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:30:38,095 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:30:59,531 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:32:58,245 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:33:00,286 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:49:12,405 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:49:20,135 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:49:26,276 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:49:37,160 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:49:50,754 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:49:54,829 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:50:26,417 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:51:31,813 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:52:15,281 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:52:55,601 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:53:26,575 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:56:22,316 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:56:53,933 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:57:02,404 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:59:42,036 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:59:44,289 - user_model - INFO - Connected to database for users collection
+2025-04-19 22:59:45,405 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:03:04,689 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:03:41,905 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:05:27,281 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:05:31,805 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:05:35,757 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:06:16,630 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:08:24,820 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:10:36,611 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:10:49,592 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:26:19,920 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:26:22,042 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:27:45,144 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:29:01,739 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:31:15,524 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:31:36,185 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:32:06,121 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:37:39,675 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:37:41,951 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:39:34,182 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:39:46,729 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:39:59,909 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:40:01,027 - models.user - ERROR - Error creating admin user: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+2025-04-19 23:40:02,160 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:40:02,997 - models.user - ERROR - Error creating admin user: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+2025-04-19 23:43:43,340 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:43:44,397 - models.user - INFO - Default admin user created
+2025-04-19 23:43:45,557 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:45:03,955 - user_model - ERROR - Authentication error: argument 'hashed_password': 'str' object cannot be converted to 'PyBytes'
+2025-04-19 23:45:10,517 - user_model - ERROR - Authentication error: argument 'hashed_password': 'str' object cannot be converted to 'PyBytes'
+2025-04-19 23:45:20,980 - user_model - ERROR - Authentication error: argument 'hashed_password': 'str' object cannot be converted to 'PyBytes'
+2025-04-19 23:45:47,114 - user_model - ERROR - Authentication error: argument 'hashed_password': 'str' object cannot be converted to 'PyBytes'
+2025-04-19 23:45:51,693 - user_model - ERROR - Authentication error: argument 'hashed_password': 'str' object cannot be converted to 'PyBytes'
+2025-04-19 23:45:58,329 - user_model - ERROR - Authentication error: argument 'hashed_password': 'str' object cannot be converted to 'PyBytes'
+2025-04-19 23:47:53,881 - user_model - INFO - User created successfully: 6803e8d133606cfadcb1e818 (admin: False)
+2025-04-19 23:48:47,017 - user_model - ERROR - Authentication error: argument 'hashed_password': 'str' object cannot be converted to 'PyBytes'
+2025-04-19 23:50:21,787 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:54:52,747 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:54:53,830 - models.user - ERROR - Error creating admin user: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+2025-04-19 23:54:55,114 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:54:55,996 - models.user - ERROR - Error creating admin user: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+2025-04-19 23:55:24,003 - user_model - ERROR - Authentication error: argument 'hashed_password': 'str' object cannot be converted to 'PyBytes'
+2025-04-19 23:57:39,179 - user_model - INFO - Connected to database for users collection
+2025-04-19 23:57:40,062 - models.user - ERROR - Error creating admin user: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+2025-04-20 00:00:32,901 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:00:54,840 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:00:55,674 - models.user - ERROR - Error creating admin user: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+2025-04-20 00:01:29,363 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:01:30,241 - models.user - ERROR - Error creating admin user: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+2025-04-20 00:02:20,020 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:02:25,409 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:05:21,012 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:05:53,678 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:05:55,439 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:07:37,548 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:09:20,240 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:09:28,423 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:09:29,339 - models.user - ERROR - Error creating admin user: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+2025-04-20 00:09:30,501 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:09:31,334 - models.user - ERROR - Error creating admin user: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+2025-04-20 00:10:12,746 - user_model - INFO - Successful login: 6803ec34da1faa0a4ff7333d (admin: True)
+2025-04-20 00:10:20,087 - user_model - INFO - Successful login: 6803ec34da1faa0a4ff7333d (admin: True)
+2025-04-20 00:10:43,623 - user_model - INFO - Successful login: 6803ec34da1faa0a4ff7333d (admin: True)
+2025-04-20 00:10:58,015 - user_model - INFO - User created successfully: 6803ee3a1a495f0f9163aabb (admin: False)
+2025-04-20 00:11:35,487 - user_model - WARNING - Login attempt with non-existent email: admin@admin.com
+2025-04-20 00:11:37,883 - user_model - WARNING - Login attempt with non-existent email: admin@admin.com
+2025-04-20 00:12:00,262 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:12:00,496 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:12:01,157 - models.user - ERROR - Error creating admin user: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+2025-04-20 00:15:42,824 - user_model - WARNING - Login attempt with non-existent email: admin@admin.com
+2025-04-20 00:16:32,344 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:16:32,356 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:16:33,967 - models.user - ERROR - Error creating admin user: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+2025-04-20 00:16:59,048 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:17:01,195 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:17:19,460 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:17:20,773 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:18:01,375 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:18:03,414 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:20:39,255 - user_model - WARNING - Login attempt with non-existent email: admin@admin.com
+2025-04-20 00:21:13,808 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:21:37,780 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:21:39,953 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:21:51,224 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:21:57,926 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:22:06,767 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:22:09,251 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:22:28,224 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:22:36,878 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:23:06,021 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:23:07,988 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:23:17,579 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:23:17,910 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:32:09,299 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:32:09,300 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:32:16,506 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:32:16,584 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:32:22,987 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:32:23,003 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:32:27,486 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:36:35,092 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:36:35,162 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:37:03,474 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:37:03,581 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:38:56,970 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:38:57,054 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:40:39,649 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:40:40,014 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:40:57,594 - user_model - INFO - Connected to database for users collection
+2025-04-20 00:40:58,036 - user_model - INFO - Connected to database for users collection
+2025-04-20 12:46:47,874 - user_model - INFO - Connected to database for users collection
+2025-04-20 12:46:49,853 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:07:30,448 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:21:27,770 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:21:29,641 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:24:20,355 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:24:54,532 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:25:40,856 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:25:55,377 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:26:01,289 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:26:32,649 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:28:53,125 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:34:17,655 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:34:19,740 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:36:31,683 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:36:47,777 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:38:50,230 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:38:52,266 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:46:58,727 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:47:03,666 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:47:19,568 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:47:24,491 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:47:39,708 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:47:40,447 - models.user - INFO - Default admin user created
+2025-04-20 13:47:41,272 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:49:36,887 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:49:37,630 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:49:43,479 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:49:44,009 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:49:58,416 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:50:04,450 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:50:27,449 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:50:28,938 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:51:18,093 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:51:18,673 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:52:27,657 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:52:30,774 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:54:49,231 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:54:49,491 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:54:50,926 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:55:23,029 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:55:23,165 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:55:24,836 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:55:40,578 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:56:19,382 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:56:19,435 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:56:20,175 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:56:23,882 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:56:23,887 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:57:54,669 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:57:55,802 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:57:56,115 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:59:18,663 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:59:18,772 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:59:19,662 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:59:45,746 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:59:46,990 - user_model - INFO - Connected to database for users collection
+2025-04-20 13:59:47,764 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:00:49,503 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:00:50,410 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:00:51,666 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:01:26,703 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:01:27,751 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:02:22,120 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:02:24,426 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:04:33,527 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:04:33,619 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:05:17,579 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:05:20,143 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:06:23,846 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:06:23,880 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:08:42,769 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:08:45,991 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:23:14,169 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:23:18,049 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:23:40,760 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:23:42,705 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:24:03,779 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:24:05,745 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:24:24,738 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:24:26,676 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:26:48,062 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:26:50,718 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:30:19,291 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:30:21,454 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:37:11,037 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:37:12,938 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:38:52,209 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:38:56,239 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:40:20,035 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:41:11,841 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:41:15,550 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:44:18,824 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:44:20,765 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:44:58,683 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:44:58,736 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:45:02,749 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:45:02,786 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:54:02,802 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:54:02,825 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:55:27,611 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:55:28,611 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:55:41,916 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:55:41,980 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:55:58,069 - user_model - INFO - Connected to database for users collection
+2025-04-20 14:55:59,997 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:01:55,813 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:01:55,848 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:09:34,108 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:09:34,552 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:11:10,817 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:11:10,891 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:11:19,061 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:11:19,291 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:14:10,591 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:14:10,659 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:29:44,238 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:29:44,355 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:29:51,565 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:29:51,856 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:31:43,223 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:31:43,248 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:38:34,308 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:38:36,372 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:41:21,683 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:41:23,741 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:44:39,302 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:44:41,571 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:45:22,894 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:45:24,699 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:49:32,959 - user_model - INFO - Connected to database for users collection
+2025-04-20 15:49:35,124 - user_model - INFO - Connected to database for users collection
+2025-04-20 16:04:03,572 - user_model - INFO - Connected to database for users collection
+2025-04-20 16:04:05,562 - user_model - INFO - Connected to database for users collection
+2025-04-20 16:23:08,820 - user_model - INFO - Connected to database for users collection
+2025-04-20 16:23:10,869 - user_model - INFO - Connected to database for users collection
+2025-04-20 16:47:12,812 - user_model - INFO - Connected to database for users collection
+2025-04-20 16:47:53,181 - user_model - INFO - Connected to database for users collection
+2025-04-20 16:48:00,124 - user_model - INFO - Connected to database for users collection
+2025-04-20 16:48:15,643 - user_model - INFO - Connected to database for users collection
+2025-04-20 16:54:58,187 - user_model - INFO - Connected to database for users collection
+2025-04-20 16:55:02,595 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:04:15,595 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:04:17,681 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:08:00,066 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:08:37,130 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:08:41,062 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:08:46,536 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:08:51,424 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:23:20,799 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:26:06,351 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:26:28,242 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:26:42,010 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:26:47,289 - user_model - INFO - Successful login: 6803e8d133606cfadcb1e818 (admin: False)
+2025-04-20 17:26:47,459 - user_model - INFO - Successful login: 6803e8d133606cfadcb1e818 (admin: False)
+2025-04-20 17:28:52,324 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:29:04,971 - user_model - INFO - Successful login: 6803ec34da1faa0a4ff7333d (admin: True)
+2025-04-20 17:29:07,734 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:33:56,040 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:37:35,654 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:37:39,070 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:57:26,113 - user_model - INFO - Connected to database for users collection
+2025-04-20 17:57:28,642 - user_model - INFO - Connected to database for users collection
+2025-04-20 18:00:19,110 - user_model - INFO - Successful login: 6803e8d133606cfadcb1e818 (admin: False)
+2025-04-20 18:01:16,696 - user_model - INFO - Successful login: 6803ec34da1faa0a4ff7333d (admin: True)
+2025-04-20 19:44:39,051 - user_model - INFO - Connected to database for users collection
+2025-04-20 19:44:41,000 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:34:54,019 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:37:16,083 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:37:27,202 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:38:04,345 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:38:06,198 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:39:06,119 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:39:07,885 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:40:38,588 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:40:50,930 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:43:11,227 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:43:12,930 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:54:16,470 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:56:20,453 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:58:08,605 - user_model - INFO - Connected to database for users collection
+2025-04-20 20:59:34,746 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:01:08,802 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:01:29,828 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:02:57,279 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:04:18,880 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:04:22,380 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:06:01,698 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:10:32,872 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:11:37,719 - user_activity - INFO - User 617830 - Logout from IP 192.168.1.98
+2025-04-20 21:11:37,730 - user_activity - INFO - User 675825 - Email verification completed from IP 192.168.1.15
+2025-04-20 21:11:37,740 - user_activity - INFO - User 245763 - Profile updated from IP 192.168.1.70
+2025-04-20 21:11:37,751 - user_activity - INFO - User 776827 - Two-factor authentication enabled from IP 192.168.1.70
+2025-04-20 21:11:37,761 - user_activity - INFO - User 245763 - Two-factor authentication enabled from IP 192.168.1.15
+2025-04-20 21:11:37,772 - user_activity - INFO - User 230920 - Subscription renewed from IP 192.168.1.227
+2025-04-20 21:11:37,782 - user_activity - INFO - User 245763 - Logout from IP 192.168.1.15
+2025-04-20 21:11:37,793 - user_activity - INFO - User 877012 - Login successful from IP 192.168.1.117
+2025-04-20 21:11:37,804 - user_activity - INFO - User 282008 - Password reset requested from IP 192.168.1.70
+2025-04-20 21:11:37,815 - user_activity - INFO - User 926515 - Subscription renewed from IP 192.168.1.98
+2025-04-20 21:11:37,825 - user_activity - INFO - User 282008 - Profile updated from IP 192.168.1.102
+2025-04-20 21:11:37,836 - user_activity - INFO - User 617830 - Logout from IP 192.168.1.107
+2025-04-20 21:11:37,847 - user_activity - INFO - User 916663 - Password changed from IP 192.168.1.102
+2025-04-20 21:11:37,857 - user_activity - INFO - User 729068 - Account settings modified from IP 192.168.1.170
+2025-04-20 21:11:37,868 - user_activity - INFO - User 617830 - Password reset requested from IP 192.168.1.107
+2025-04-20 21:11:37,878 - user_activity - INFO - User 282008 - Account settings modified from IP 192.168.1.170
+2025-04-20 21:11:37,889 - user_activity - INFO - User 926515 - Account settings modified from IP 192.168.1.5
+2025-04-20 21:11:37,900 - user_activity - INFO - User 729068 - Profile updated from IP 192.168.1.254
+2025-04-20 21:11:37,910 - user_activity - INFO - User 245763 - Email verification completed from IP 192.168.1.5
+2025-04-20 21:11:37,921 - user_activity - INFO - User 230920 - Two-factor authentication enabled from IP 192.168.1.154
+2025-04-20 21:11:37,931 - user_activity - INFO - User 729068 - Email verification completed from IP 192.168.1.116
+2025-04-20 21:11:37,942 - user_activity - INFO - User 776827 - Password reset requested from IP 192.168.1.84
+2025-04-20 21:11:37,953 - user_activity - INFO - User 617830 - Two-factor authentication enabled from IP 192.168.1.186
+2025-04-20 21:11:37,963 - user_activity - INFO - User 916663 - Password changed from IP 192.168.1.107
+2025-04-20 21:11:37,973 - user_activity - INFO - User 230920 - Subscription renewed from IP 192.168.1.15
+2025-04-20 21:11:37,984 - user_activity - INFO - User 675825 - Email verification completed from IP 192.168.1.116
+2025-04-20 21:11:37,994 - user_activity - INFO - User 926515 - Subscription renewed from IP 192.168.1.46
+2025-04-20 21:11:38,005 - user_activity - INFO - User 675825 - Password reset requested from IP 192.168.1.21
+2025-04-20 21:11:38,016 - user_activity - INFO - User 245763 - Login successful from IP 192.168.1.15
+2025-04-20 21:11:38,026 - user_activity - INFO - User 877012 - Login successful from IP 192.168.1.5
+2025-04-20 21:11:38,037 - user_activity - INFO - User 617830 - Logout from IP 192.168.1.102
+2025-04-20 21:11:38,047 - user_activity - INFO - User 230920 - Two-factor authentication enabled from IP 192.168.1.102
+2025-04-20 21:11:38,058 - user_activity - INFO - User 877012 - Password reset requested from IP 192.168.1.98
+2025-04-20 21:11:38,068 - user_activity - INFO - User 877012 - Two-factor authentication enabled from IP 192.168.1.15
+2025-04-20 21:11:38,079 - user_activity - INFO - User 776827 - Subscription renewed from IP 192.168.1.21
+2025-04-20 21:11:38,089 - user_activity - INFO - User 916663 - Email verification completed from IP 192.168.1.107
+2025-04-20 21:11:38,100 - user_activity - INFO - User 230920 - Two-factor authentication enabled from IP 192.168.1.25
+2025-04-20 21:11:38,110 - user_activity - INFO - User 776827 - Logout from IP 192.168.1.5
+2025-04-20 21:11:38,121 - user_activity - INFO - User 926515 - Subscription renewed from IP 192.168.1.29
+2025-04-20 21:11:38,131 - user_activity - INFO - User 926515 - Profile updated from IP 192.168.1.144
+2025-04-20 21:11:38,142 - user_activity - INFO - User 245763 - Password changed from IP 192.168.1.21
+2025-04-20 21:11:38,153 - user_activity - INFO - User 230920 - Email verification completed from IP 192.168.1.227
+2025-04-20 21:11:38,164 - user_activity - INFO - User 729068 - Two-factor authentication enabled from IP 192.168.1.37
+2025-04-20 21:11:38,175 - user_activity - INFO - User 916663 - Subscription renewed from IP 192.168.1.107
+2025-04-20 21:11:38,185 - user_activity - INFO - User 245763 - Email verification completed from IP 192.168.1.84
+2025-04-20 21:11:38,196 - user_activity - INFO - User 916663 - Password reset requested from IP 192.168.1.170
+2025-04-20 21:11:38,207 - user_activity - INFO - User 729068 - Password changed from IP 192.168.1.144
+2025-04-20 21:11:38,217 - user_activity - INFO - User 729068 - Login successful from IP 192.168.1.21
+2025-04-20 21:11:38,228 - user_activity - INFO - User 729068 - Account settings modified from IP 192.168.1.37
+2025-04-20 21:11:38,239 - user_activity - INFO - User 729068 - Logout from IP 192.168.1.98
+2025-04-20 21:11:38,249 - user_activity - INFO - User 877012 - Subscription renewed from IP 192.168.1.25
+2025-04-20 21:11:38,260 - user_activity - INFO - User 617830 - Login successful from IP 192.168.1.37
+2025-04-20 21:11:38,270 - user_activity - INFO - User 617830 - Account settings modified from IP 192.168.1.102
+2025-04-20 21:11:38,281 - user_activity - INFO - User 916663 - Password reset requested from IP 192.168.1.227
+2025-04-20 21:11:38,292 - user_activity - INFO - User 282008 - Subscription renewed from IP 192.168.1.186
+2025-04-20 21:11:38,302 - user_activity - INFO - User 877012 - Logout from IP 192.168.1.98
+2025-04-20 21:11:38,313 - user_activity - INFO - User 877012 - Two-factor authentication enabled from IP 192.168.1.102
+2025-04-20 21:11:38,323 - user_activity - INFO - User 245763 - Email verification completed from IP 192.168.1.102
+2025-04-20 21:11:38,334 - user_activity - INFO - User 282008 - Password reset requested from IP 192.168.1.227
+2025-04-20 21:11:38,345 - user_activity - INFO - User 926515 - Password changed from IP 192.168.1.116
+2025-04-20 21:11:38,356 - user_activity - INFO - User 877012 - Profile updated from IP 192.168.1.46
+2025-04-20 21:11:38,367 - user_activity - INFO - User 675825 - Password changed from IP 192.168.1.154
+2025-04-20 21:11:38,377 - user_activity - INFO - User 282008 - Password reset requested from IP 192.168.1.170
+2025-04-20 21:11:38,388 - user_activity - INFO - User 877012 - Two-factor authentication enabled from IP 192.168.1.116
+2025-04-20 21:11:38,399 - user_activity - INFO - User 245763 - Two-factor authentication enabled from IP 192.168.1.154
+2025-04-20 21:11:38,409 - user_activity - INFO - User 245763 - Profile updated from IP 192.168.1.84
+2025-04-20 21:11:38,420 - user_activity - INFO - User 675825 - Account settings modified from IP 192.168.1.107
+2025-04-20 21:11:38,430 - user_activity - INFO - User 675825 - Logout from IP 192.168.1.170
+2025-04-20 21:11:38,441 - user_activity - INFO - User 877012 - Login successful from IP 192.168.1.102
+2025-04-20 21:11:38,452 - user_activity - INFO - User 230920 - Subscription renewed from IP 192.168.1.186
+2025-04-20 21:11:38,463 - user_activity - INFO - User 729068 - Profile updated from IP 192.168.1.84
+2025-04-20 21:11:38,474 - user_activity - INFO - User 776827 - Subscription renewed from IP 192.168.1.21
+2025-04-20 21:11:38,484 - user_activity - INFO - User 916663 - Subscription renewed from IP 192.168.1.21
+2025-04-20 21:11:38,495 - user_activity - INFO - User 230920 - Email verification completed from IP 192.168.1.5
+2025-04-20 21:11:38,505 - user_activity - INFO - User 776827 - Email verification completed from IP 192.168.1.29
+2025-04-20 21:11:38,516 - user_activity - INFO - User 916663 - Profile updated from IP 192.168.1.37
+2025-04-20 21:11:38,526 - user_activity - INFO - User 926515 - Two-factor authentication enabled from IP 192.168.1.46
+2025-04-20 21:11:38,536 - user_activity - INFO - User 617830 - Profile updated from IP 192.168.1.15
+2025-04-20 21:11:38,547 - user_activity - INFO - User 729068 - Login successful from IP 192.168.1.154
+2025-04-20 21:11:38,557 - user_activity - INFO - User 729068 - Subscription renewed from IP 192.168.1.98
+2025-04-20 21:11:38,568 - user_activity - INFO - User 916663 - Account settings modified from IP 192.168.1.227
+2025-04-20 21:11:38,578 - user_activity - INFO - User 916663 - Login successful from IP 192.168.1.5
+2025-04-20 21:11:38,589 - user_activity - INFO - User 245763 - Profile updated from IP 192.168.1.70
+2025-04-20 21:11:38,600 - user_activity - INFO - User 617830 - Account settings modified from IP 192.168.1.116
+2025-04-20 21:11:38,610 - user_activity - INFO - User 245763 - Email verification completed from IP 192.168.1.154
+2025-04-20 21:11:38,621 - user_activity - INFO - User 916663 - Logout from IP 192.168.1.116
+2025-04-20 21:11:38,631 - user_activity - INFO - User 926515 - Password changed from IP 192.168.1.21
+2025-04-20 21:11:38,641 - user_activity - INFO - User 617830 - Profile updated from IP 192.168.1.107
+2025-04-20 21:11:38,652 - user_activity - INFO - User 916663 - Logout from IP 192.168.1.102
+2025-04-20 21:11:38,663 - user_activity - INFO - User 729068 - Password changed from IP 192.168.1.144
+2025-04-20 21:11:38,673 - user_activity - INFO - User 776827 - Logout from IP 192.168.1.25
+2025-04-20 21:11:38,684 - user_activity - INFO - User 877012 - Two-factor authentication enabled from IP 192.168.1.15
+2025-04-20 21:11:38,695 - user_activity - INFO - User 916663 - Logout from IP 192.168.1.5
+2025-04-20 21:11:38,705 - user_activity - INFO - User 877012 - Password reset requested from IP 192.168.1.29
+2025-04-20 21:11:38,716 - user_activity - INFO - User 776827 - Email verification completed from IP 192.168.1.98
+2025-04-20 21:11:38,727 - user_activity - INFO - User 877012 - Login successful from IP 192.168.1.29
+2025-04-20 21:11:38,737 - user_activity - INFO - User 877012 - Two-factor authentication enabled from IP 192.168.1.154
+2025-04-20 21:11:38,748 - user_activity - INFO - User 245763 - Login successful from IP 192.168.1.98
+2025-04-20 21:11:38,758 - user_activity - INFO - User 926515 - Logout from IP 192.168.1.170
+2025-04-20 21:11:38,769 - user_activity - INFO - User 729068 - Email verification completed from IP 192.168.1.25
+2025-04-20 21:11:38,780 - user_activity - INFO - User 776827 - Two-factor authentication enabled from IP 192.168.1.46
+2025-04-20 21:11:38,790 - user_activity - INFO - User 245763 - Logout from IP 192.168.1.70
+2025-04-20 21:11:38,801 - user_activity - INFO - User 230920 - Two-factor authentication enabled from IP 192.168.1.170
+2025-04-20 21:11:38,812 - user_activity - INFO - User 776827 - Login successful from IP 192.168.1.70
+2025-04-20 21:11:38,822 - user_activity - INFO - User 877012 - Account settings modified from IP 192.168.1.254
+2025-04-20 21:11:38,833 - user_activity - INFO - User 617830 - Logout from IP 192.168.1.5
+2025-04-20 21:11:38,843 - user_activity - INFO - User 282008 - Logout from IP 192.168.1.15
+2025-04-20 21:11:38,854 - user_activity - INFO - User 776827 - Email verification completed from IP 192.168.1.29
+2025-04-20 21:11:38,864 - user_activity - INFO - User 675825 - Email verification completed from IP 192.168.1.25
+2025-04-20 21:11:38,875 - user_activity - INFO - User 230920 - Login successful from IP 192.168.1.15
+2025-04-20 21:11:38,885 - user_activity - INFO - User 675825 - Logout from IP 192.168.1.70
+2025-04-20 21:11:38,896 - user_activity - INFO - User 926515 - Password reset requested from IP 192.168.1.102
+2025-04-20 21:11:38,907 - user_activity - INFO - User 776827 - Account settings modified from IP 192.168.1.117
+2025-04-20 21:11:38,917 - user_activity - INFO - User 776827 - Profile updated from IP 192.168.1.5
+2025-04-20 21:11:38,928 - user_activity - INFO - User 282008 - Two-factor authentication enabled from IP 192.168.1.102
+2025-04-20 21:11:38,938 - user_activity - INFO - User 729068 - Login successful from IP 192.168.1.46
+2025-04-20 21:11:38,949 - user_activity - INFO - User 926515 - Account settings modified from IP 192.168.1.102
+2025-04-20 21:11:38,960 - user_activity - INFO - User 877012 - Email verification completed from IP 192.168.1.37
+2025-04-20 21:11:38,970 - user_activity - INFO - User 282008 - Password changed from IP 192.168.1.102
+2025-04-20 21:11:38,981 - user_activity - INFO - User 776827 - Password reset requested from IP 192.168.1.144
+2025-04-20 21:11:38,991 - user_activity - INFO - User 230920 - Profile updated from IP 192.168.1.29
+2025-04-20 21:11:39,002 - user_activity - INFO - User 926515 - Login successful from IP 192.168.1.25
+2025-04-20 21:11:39,012 - user_activity - INFO - User 245763 - Subscription renewed from IP 192.168.1.116
+2025-04-20 21:11:39,023 - user_activity - INFO - User 916663 - Password reset requested from IP 192.168.1.21
+2025-04-20 21:11:39,033 - user_activity - INFO - User 926515 - Subscription renewed from IP 192.168.1.170
+2025-04-20 21:11:39,044 - user_activity - INFO - User 230920 - Account settings modified from IP 192.168.1.117
+2025-04-20 21:11:39,054 - user_activity - INFO - User 617830 - Email verification completed from IP 192.168.1.84
+2025-04-20 21:11:39,065 - user_activity - INFO - User 675825 - Account settings modified from IP 192.168.1.15
+2025-04-20 21:11:39,076 - user_activity - INFO - User 877012 - Password reset requested from IP 192.168.1.102
+2025-04-20 21:11:39,086 - user_activity - INFO - User 245763 - Subscription renewed from IP 192.168.1.254
+2025-04-20 21:11:39,097 - user_activity - INFO - User 916663 - Login successful from IP 192.168.1.37
+2025-04-20 21:11:39,108 - user_activity - INFO - User 230920 - Profile updated from IP 192.168.1.154
+2025-04-20 21:11:39,118 - user_activity - INFO - User 245763 - Two-factor authentication enabled from IP 192.168.1.84
+2025-04-20 21:11:39,129 - user_activity - INFO - User 877012 - Logout from IP 192.168.1.25
+2025-04-20 21:11:39,140 - user_activity - INFO - User 916663 - Account settings modified from IP 192.168.1.5
+2025-04-20 21:11:39,150 - user_activity - INFO - User 675825 - Email verification completed from IP 192.168.1.46
+2025-04-20 21:11:39,161 - user_activity - INFO - User 877012 - Password changed from IP 192.168.1.70
+2025-04-20 21:11:39,172 - user_activity - INFO - User 245763 - Account settings modified from IP 192.168.1.98
+2025-04-20 21:11:39,182 - user_activity - INFO - User 926515 - Email verification completed from IP 192.168.1.116
+2025-04-20 21:11:39,193 - user_activity - INFO - User 729068 - Account settings modified from IP 192.168.1.102
+2025-04-20 21:11:39,203 - user_activity - INFO - User 877012 - Password reset requested from IP 192.168.1.102
+2025-04-20 21:11:39,214 - user_activity - INFO - User 877012 - Logout from IP 192.168.1.254
+2025-04-20 21:11:39,224 - user_activity - INFO - User 877012 - Profile updated from IP 192.168.1.107
+2025-04-20 21:11:39,234 - user_activity - INFO - User 776827 - Two-factor authentication enabled from IP 192.168.1.254
+2025-04-20 21:11:39,245 - user_activity - INFO - User 282008 - Logout from IP 192.168.1.70
+2025-04-20 21:11:39,255 - user_activity - INFO - User 230920 - Two-factor authentication enabled from IP 192.168.1.117
+2025-04-20 21:11:39,266 - user_activity - INFO - User 776827 - Subscription renewed from IP 192.168.1.186
+2025-04-20 21:11:39,276 - user_activity - INFO - User 675825 - Email verification completed from IP 192.168.1.29
+2025-04-20 21:11:39,287 - user_activity - INFO - User 282008 - Subscription renewed from IP 192.168.1.144
+2025-04-20 21:11:39,297 - user_activity - INFO - User 776827 - Password changed from IP 192.168.1.254
+2025-04-20 21:11:39,308 - user_activity - INFO - User 776827 - Email verification completed from IP 192.168.1.254
+2025-04-20 21:11:39,318 - user_activity - INFO - User 230920 - Logout from IP 192.168.1.117
+2025-04-20 21:11:39,329 - user_activity - INFO - User 729068 - Password reset requested from IP 192.168.1.154
+2025-04-20 21:11:39,339 - user_activity - INFO - User 617830 - Password reset requested from IP 192.168.1.84
+2025-04-20 21:11:39,350 - user_activity - INFO - User 617830 - Password reset requested from IP 192.168.1.186
+2025-04-20 21:11:39,360 - user_activity - INFO - User 776827 - Two-factor authentication enabled from IP 192.168.1.70
+2025-04-20 21:11:39,370 - user_activity - INFO - User 617830 - Account settings modified from IP 192.168.1.46
+2025-04-20 21:11:39,381 - user_activity - INFO - User 230920 - Subscription renewed from IP 192.168.1.144
+2025-04-20 21:11:39,392 - user_activity - INFO - User 230920 - Account settings modified from IP 192.168.1.5
+2025-04-20 21:11:39,403 - user_activity - INFO - User 776827 - Email verification completed from IP 192.168.1.21
+2025-04-20 21:11:39,413 - user_activity - INFO - User 776827 - Two-factor authentication enabled from IP 192.168.1.254
+2025-04-20 21:11:39,424 - user_activity - INFO - User 926515 - Subscription renewed from IP 192.168.1.107
+2025-04-20 21:11:39,435 - user_activity - INFO - User 729068 - Password reset requested from IP 192.168.1.102
+2025-04-20 21:11:39,445 - user_activity - INFO - User 230920 - Password changed from IP 192.168.1.254
+2025-04-20 21:11:39,456 - user_activity - INFO - User 245763 - Email verification completed from IP 192.168.1.117
+2025-04-20 21:11:39,467 - user_activity - INFO - User 282008 - Subscription renewed from IP 192.168.1.186
+2025-04-20 21:11:39,477 - user_activity - INFO - User 877012 - Profile updated from IP 192.168.1.144
+2025-04-20 21:11:39,487 - user_activity - INFO - User 617830 - Account settings modified from IP 192.168.1.21
+2025-04-20 21:11:39,498 - user_activity - INFO - User 916663 - Password changed from IP 192.168.1.254
+2025-04-20 21:11:39,509 - user_activity - INFO - User 916663 - Account settings modified from IP 192.168.1.186
+2025-04-20 21:11:39,519 - user_activity - INFO - User 230920 - Two-factor authentication enabled from IP 192.168.1.15
+2025-04-20 21:11:39,530 - user_activity - INFO - User 675825 - Login successful from IP 192.168.1.186
+2025-04-20 21:11:39,541 - user_activity - INFO - User 245763 - Email verification completed from IP 192.168.1.15
+2025-04-20 21:11:39,552 - user_activity - INFO - User 230920 - Logout from IP 192.168.1.5
+2025-04-20 21:11:39,562 - user_activity - INFO - User 916663 - Login successful from IP 192.168.1.98
+2025-04-20 21:11:39,573 - user_activity - INFO - User 729068 - Login successful from IP 192.168.1.98
+2025-04-20 21:11:39,583 - user_activity - INFO - User 245763 - Password reset requested from IP 192.168.1.29
+2025-04-20 21:11:39,594 - user_activity - INFO - User 282008 - Password reset requested from IP 192.168.1.46
+2025-04-20 21:11:39,605 - user_activity - INFO - User 926515 - Email verification completed from IP 192.168.1.5
+2025-04-20 21:11:39,615 - user_activity - INFO - User 776827 - Password changed from IP 192.168.1.84
+2025-04-20 21:11:39,626 - user_activity - INFO - User 245763 - Password reset requested from IP 192.168.1.15
+2025-04-20 21:11:39,636 - user_activity - INFO - User 617830 - Email verification completed from IP 192.168.1.186
+2025-04-20 21:11:39,647 - user_activity - INFO - User 675825 - Email verification completed from IP 192.168.1.25
+2025-04-20 21:11:39,657 - user_activity - INFO - User 877012 - Password changed from IP 192.168.1.117
+2025-04-20 21:11:39,668 - user_activity - INFO - User 916663 - Email verification completed from IP 192.168.1.102
+2025-04-20 21:11:39,678 - user_activity - INFO - User 729068 - Subscription renewed from IP 192.168.1.21
+2025-04-20 21:11:39,689 - user_activity - INFO - User 245763 - Two-factor authentication enabled from IP 192.168.1.186
+2025-04-20 21:11:39,699 - user_activity - INFO - User 245763 - Subscription renewed from IP 192.168.1.29
+2025-04-20 21:11:39,710 - user_activity - INFO - User 675825 - Password reset requested from IP 192.168.1.25
+2025-04-20 21:11:39,721 - user_activity - INFO - User 776827 - Password changed from IP 192.168.1.154
+2025-04-20 21:11:39,731 - user_activity - INFO - User 617830 - Email verification completed from IP 192.168.1.25
+2025-04-20 21:11:39,742 - user_activity - INFO - User 729068 - Password reset requested from IP 192.168.1.227
+2025-04-20 21:11:39,753 - user_activity - INFO - User 245763 - Logout from IP 192.168.1.21
+2025-04-20 21:11:39,764 - user_activity - INFO - User 926515 - Account settings modified from IP 192.168.1.21
+2025-04-20 21:11:39,775 - user_activity - INFO - User 230920 - Logout from IP 192.168.1.254
+2025-04-20 21:11:39,785 - user_activity - INFO - User 877012 - Subscription renewed from IP 192.168.1.5
+2025-04-20 21:11:39,796 - user_activity - INFO - User 245763 - Logout from IP 192.168.1.46
+2025-04-20 21:11:39,806 - user_activity - INFO - User 617830 - Logout from IP 192.168.1.144
+2025-04-20 21:11:39,817 - user_activity - INFO - User 230920 - Two-factor authentication enabled from IP 192.168.1.46
+2025-04-20 21:11:39,827 - user_activity - INFO - User 245763 - Account settings modified from IP 192.168.1.170
+2025-04-20 21:12:42,234 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:13:58,396 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:14:56,993 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:15:00,934 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:15:21,104 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:17:55,438 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:27:55,462 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:29:57,921 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:30:03,823 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:30:34,058 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:31:26,515 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:31:28,304 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:31:46,616 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:31:46,837 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:33:03,428 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:33:03,559 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:33:10,804 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:33:11,211 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:33:48,071 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:33:48,424 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:34:04,214 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:34:04,466 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:36:37,381 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:36:39,306 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:37:43,428 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:37:51,926 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:39:09,041 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:39:30,158 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:40:31,074 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:40:46,261 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:40:58,111 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:41:26,887 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:41:31,959 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:41:41,000 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:41:55,162 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:42:01,616 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:42:32,583 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:42:42,988 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:44:46,258 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:44:48,052 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:47:15,835 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:47:17,457 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:48:57,145 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:48:58,185 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:48:59,763 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:49:01,914 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:49:04,654 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:49:07,337 - user_model - INFO - Connected to database for users collection
+2025-04-20 21:49:09,626 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:20:09,567 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:20:12,946 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:25:44,837 - user_model - WARNING - Failed login attempt for admin@example.com (attempt #1)
+2025-04-21 11:26:24,114 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:26:28,633 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:29:55,970 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:30:03,741 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:30:29,201 - user_model - INFO - Successful login: 6803ec34da1faa0a4ff7333d (admin: True)
+2025-04-21 11:31:35,032 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:31:44,464 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:31:51,058 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:31:59,650 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:32:04,368 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:32:22,981 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:32:26,989 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:32:48,954 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:32:52,537 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:33:03,074 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:33:06,548 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:33:40,259 - user_model - INFO - Connected to database for users collection
+2025-04-21 11:38:47,918 - user_model - INFO - Connected to database for users collection

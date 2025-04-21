@@ -1,0 +1,508 @@
+{% extends 'base.html' %}
+
+{% block title %}Search - Spotify{% endblock %}
+
+{% block content %}
+<div class="search-results-container">
+    {% if query %}
+    <div class="search-header">
+        <h1>Search results for "{{ query }}"</h1>
+        <p class="result-count">{{ result_count }} result{% if result_count != 1 %}s{% endif %}</p>
+    </div>
+
+    {% if results %}
+    <div class="section">
+        <div class="section-header">
+            <h2>Songs</h2>
+        </div>
+        
+        <div class="tracks-container">
+            {% for song in results %}
+            <div class="track-row" data-song-id="{{ song._id }}">
+                <div class="track-info">
+                    <div class="track-number">{{ loop.index }}</div>
+                    <div class="track-image">
+                        <img src="{{ url_for('static', filename=song.image_path) if song.image_path else 'img/default-cover.jpg' }}" 
+                             alt="{{ song.title }}"
+                             onerror="this.src='{{ url_for('static', filename='img/default-cover.jpg') }}'">
+                        <button class="play-button" data-song-id="{{ song._id }}">
+                            <span class="material-icons">play_arrow</span>
+                        </button>
+                    </div>
+                    <div class="track-details">
+                        <div class="track-title">{{ song.title }}</div>
+                        <div class="track-artist">{{ song.artist }}</div>
+                    </div>
+                </div>
+                <div class="track-duration">
+                    {% if song.duration %}
+                    {{ song.duration }}
+                    {% else %}
+                    --:--
+                    {% endif %}
+                </div>
+                <div class="track-actions">
+                    {% if user %}
+                    <button class="action-button like-button">
+                        <span class="material-icons">favorite_border</span>
+                    </button>
+                    <button class="action-button more-button">
+                        <span class="material-icons">more_horiz</span>
+                    </button>
+                    {% else %}
+                    <a href="{{ url_for('login_page') }}" class="preview-badge">Preview</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>Related Artists</h2>
+        </div>
+        <div class="card-grid">
+            {% for artist in related_artists[:6] %}
+            <div class="card artist-card">
+                <div class="card-img">
+                    <img src="{{ url_for('static', filename=artist.image_path) if artist.image_path else 'img/default-cover.jpg' }}" 
+                         alt="{{ artist.name }}">
+                    <button class="play-button">
+                        <span class="material-icons">play_arrow</span>
+                    </button>
+                </div>
+                <h{{ artist.>Username }}</h{{ artist.>
+                <p class="description">Artist</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>Similar Moods</h2>
+        </div>
+        <div class="mood-grid">
+            {% for mood in similar_moods %}
+            <a href="/mood/{{ mood.toLowerCase() }}" class="mood-card" style="--mood-color: {{ mood_colors[mood] }}">
+                <h3>{{ mood }}</h3>
+                <div class="mood-overlay"></div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <span class="material-icons">search_off</span>
+        <h2>No results found for "{{ query }}"</h2>
+        <p>Please make sure your words are spelled correctly or try different keywords.</p>
+        <div class="suggestions">
+            <h3>Popular searches</h3>
+            <div class="suggestion-tags">
+                <a href="/search?q=happy">Happy</a>
+                <a href="/search?q=chill">Chill</a>
+                <a href="/search?q=focus">Focus</a>
+                <a href="/search?q=workout">Workout</a>
+                <a href="/search?q=party">Party</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% else %}
+    <div class="browse-categories">
+        <h1>Browse all</h1>
+        <div class="category-grid">
+            {% for category in categories %}
+            <a href="/category/{{ category.id }}" class="category-card" style="--category-color: {{ category.color }}">
+                <h{{ category.>Username }}</h{{ category.>
+                <div class="category-overlay"></div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if not user %}
+    <div class="login-banner">
+        <div class="banner-content">
+            <h2>Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.</h2>
+            <a href="{{ url_for('signup_page') }}" class="btn-signup">Sign up free</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block additional_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Track row hover effects
+    const trackRows = document.querySelectorAll('.track-row');
+    trackRows.forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            this.querySelector('.play-button').style.opacity = '1';
+            this.querySelector('.track-number').style.opacity = '0';
+        });
+        
+        row.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('playing')) {
+                this.querySelector('.play-button').style.opacity = '0';
+                this.querySelector('.track-number').style.opacity = '1';
+            }
+        });
+    });
+
+    // Play button click handler
+    const playButtons = document.querySelectorAll('.play-button');
+    playButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const songId = this.closest('[data-song-id]').dataset.songId;
+            const row = this.closest('.track-row');
+            
+            // Remove playing state from all other rows
+            document.querySelectorAll('.track-row.playing').forEach(playingRow => {
+                if (playingRow !== row) {
+                    playingRow.classList.remove('playing');
+                    playingRow.querySelector('.play-button .material-icons').textContent = 'play_arrow';
+                }
+            });
+            
+            // Toggle playing state
+            if (row.classList.contains('playing')) {
+                row.classList.remove('playing');
+                this.querySelector('.material-icons').textContent = 'play_arrow';
+            } else {
+                row.classList.add('playing');
+                this.querySelector('.material-icons').textContent = 'pause';
+            }
+        });
+    });
+});
+</script>
+
+<style>
+.search-results-container {
+    padding: 24px 32px;
+}
+
+.search-header {
+    margin-bottom: 32px;
+}
+
+.search-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.result-count {
+    color: var(--text-subdued);
+    font-size: 14px;
+}
+
+/* Tracks Container */
+.tracks-container {
+    margin-top: 16px;
+}
+
+.track-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.track-row:hover {
+    background-color: var(--background-tinted-base);
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.track-number {
+    width: 24px;
+    text-align: center;
+    color: var(--text-subdued);
+}
+
+.track-image {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.track-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.track-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.track-title {
+    font-weight: 500;
+}
+
+.track-artist {
+    font-size: 14px;
+    color: var(--text-subdued);
+}
+
+.track-duration {
+    color: var(--text-subdued);
+    font-size: 14px;
+}
+
+.track-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    color: var(--text-subdued);
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.track-row:hover .action-button {
+    opacity: 1;
+}
+
+.action-button:hover {
+    color: var(--text-base);
+    transform: scale(1.1);
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 32px;
+    height: 32px;
+    background: var(--essential-bright-accent);
+    border: none;
+    border-radius: 50%;
+    color: var(--background-press);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.play-button:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: var(--essential-bright-accent-hover);
+}
+
+/* Artist Cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+    margin-top: 16px;
+}
+
+.artist-card .card-img {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* Mood Grid */
+.mood-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+    margin-top: 16px;
+}
+
+.mood-card {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    padding: 20px;
+    background: var(--mood-color, var(--background-elevated-base));
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-base);
+}
+
+.mood-card h3 {
+    font-size: 24px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.mood-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 0%, rgba(0,0,0,0.4) 100%);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 64px 0;
+}
+
+.empty-state .material-icons {
+    font-size: 64px;
+    color: var(--text-subdued);
+    margin-bottom: 24px;
+}
+
+.empty-state h2 {
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+.empty-state p {
+    color: var(--text-subdued);
+    margin-bottom: 32px;
+}
+
+.suggestions {
+    margin-top: 48px;
+}
+
+.suggestions h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.suggestion-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.suggestion-tags a {
+    padding: 8px 16px;
+    background: var(--background-tinted-base);
+    border-radius: 500px;
+    color: var(--text-base);
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.suggestion-tags a:hover {
+    background: var(--background-tinted-highlight);
+}
+
+/* Browse Categories */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.category-card {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    padding: 20px;
+    background: var(--category-color, var(--background-elevated-base));
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-base);
+}
+
+.category-card h3 {
+    font-size: 24px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.category-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 0%, rgba(0,0,0,0.4) 100%);
+}
+
+/* Login Banner */
+.login-banner {
+    margin-top: 48px;
+    padding: 24px;
+    background: linear-gradient(90deg, #AF2896 0%, #509BF5 100%);
+    border-radius: 8px;
+}
+
+.banner-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.banner-content h2 {
+    font-size: 16px;
+    max-width: 600px;
+}
+
+.btn-signup {
+    padding: 12px 32px;
+    background: var(--text-base);
+    color: var(--background-base);
+    border-radius: 500px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.2s ease;
+}
+
+.btn-signup:hover {
+    transform: scale(1.04);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-results-container {
+        padding: 16px;
+    }
+
+    .track-row {
+        grid-template-columns: 1fr auto;
+    }
+
+    .track-duration {
+        display: none;
+    }
+
+    .banner-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .card-grid,
+    .mood-grid,
+    .category-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 16px;
+    }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,549 @@
+{% extends "base.html" %}
+
+{% block title %}Your Library | Spotify Clone{% endblock %}
+
+{% block content %}
+<div class="library-container">
+    <div class="library-header">
+        <h1>Your Library</h1>
+        <div class="library-filters">
+            <button class="filter-button active">All</button>
+            <button class="filter-button">Playlists</button>
+            <button class="filter-button">Albums</button>
+            <button class="filter-button">Artists</button>
+        </div>
+    </div>
+
+    <div class="library-content">
+        {% if liked_songs|length > 0 or playlists|length > 0 %}
+            <!-- Liked Songs Section -->
+            <div class="library-section">
+                <div class="section-header">
+                    <h2>Liked Songs</h2>
+                </div>
+                <div class="tracks-container">
+                    {% if liked_songs|length > 0 %}
+                        {% for song in liked_songs %}
+                        <div class="track-row" data-song-id="{{ song._id }}">
+                            <div class="track-info">
+                                <div class="track-number">{{ loop.index }}</div>
+                                <div class="track-image">
+                                    <img src="{{ url_for('static', filename=song.image_path) if song.image_path else 'img/default-cover.jpg' }}" 
+                                         alt="{{ song.title }}"
+                                         onerror="this.src='{{ url_for('static', filename='img/default-cover.jpg') }}'">
+                                    <button class="play-button" data-song-id="{{ song._id }}" 
+                                            data-song-url="{{ url_for('songs.play_song', song_id=song._id) }}">
+                                        <span class="material-icons-round">play_arrow</span>
+                                    </button>
+                                </div>
+                                <div class="track-details">
+                                    <div class="track-title">{{ song.title }}</div>
+                                    <div class="track-artist">{{ song.artist }}</div>
+                                </div>
+                            </div>
+                            <div class="track-album">{{ song.album if song.album else 'Single' }}</div>
+                            <div class="track-duration">
+                                {% if song.duration %}
+                                {{ song.duration }}
+                                {% else %}
+                                --:--
+                                {% endif %}
+                            </div>
+                            <div class="track-actions">
+                                <button class="action-button like-button active" data-song-id="{{ song._id }}">
+                                    <span class="material-icons-round">favorite</span>
+                                </button>
+                                <button class="action-button more-button">
+                                    <span class="material-icons-round">more_horiz</span>
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state">
+                            <div class="empty-icon">
+                                <span class="material-icons-round">favorite</span>
+                            </div>
+                            <h3>Songs you like will appear here</h3>
+                            <p>Save songs by tapping the heart icon.</p>
+                            <a href="/" class="browse-button">Browse music</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Playlists Section -->
+            <div class="library-section">
+                <div class="section-header">
+                    <h2>Playlists</h2>
+                    <button class="create-playlist-button">
+                        <span class="material-icons-round">add</span>
+                        Create Playlist
+                    </button>
+                </div>
+                
+                <div class="playlists-grid">
+                    {% if playlists|length > 0 %}
+                        {% for playlist in playlists %}
+                        <div class="playlist-card" data-playlist-id="{{ playlist._id }}">
+                            <div class="playlist-image">
+                                <img src="{{ url_for('static', filename=playlist.image_path) if playlist.image_path else 'img/default-cover.jpg' }}" 
+                                     alt="{{ playlist.name }}"
+                                     onerror="this.src='{{ url_for('static', filename='img/default-cover.jpg') }}'">
+                                <button class="play-button">
+                                    <span class="material-icons-round">play_arrow</span>
+                                </button>
+                            </div>
+                            <div class="playlist-info">
+                                <h{{ playlist.>Username }}</h{{ playlist.>
+                                <p class="playlist-owner">By {{ playlist.owner_name }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="create-first-playlist">
+                            <div class="playlist-create-icon">
+                                <span class="material-icons-round">add</span>
+                            </div>
+                            <h3>Create your first playlist</h3>
+                            <p>It's easy, we'll help you</p>
+                            <button class="create-playlist-button">Create playlist</button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <!-- Empty Library State -->
+            <div class="empty-library">
+                <div class="empty-icon">
+                    <span class="material-icons-round">library_music</span>
+                </div>
+                <h2>Your library is empty</h2>
+                <p>Save songs, artists, albums, and playlists to see them here.</p>
+                <a href="/" class="browse-button">Browse music</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_styles %}
+<style>
+    .library-container {
+        padding: 24px 32px;
+    }
+
+    .library-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 32px;
+    }
+
+    .library-header h1 {
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .library-filters {
+        display: flex;
+        gap: 16px;
+    }
+
+    .filter-button {
+        padding: 8px 16px;
+        border-radius: 24px;
+        background: var(--background-tinted-base);
+        color: var(--text-base);
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .filter-button.active, .filter-button:hover {
+        background: var(--background-tinted-highlight);
+    }
+
+    .library-section {
+        margin-bottom: 48px;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    .section-header h2 {
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .create-playlist-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 24px;
+        background: transparent;
+        color: var(--text-base);
+        border: 1px solid var(--text-subdued);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .create-playlist-button:hover {
+        border-color: var(--text-base);
+        transform: scale(1.02);
+    }
+
+    .tracks-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .track-row {
+        display: grid;
+        grid-template-columns: 4fr 2fr 1fr 80px;
+        align-items: center;
+        padding: 8px 16px;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+    }
+
+    .track-row:hover {
+        background: var(--background-tinted-base);
+    }
+
+    .track-info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .track-number {
+        width: 16px;
+        text-align: right;
+        color: var(--text-subdued);
+    }
+
+    .track-image {
+        position: relative;
+        width: 40px;
+        height: 40px;
+    }
+
+    .track-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .play-button {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        border-radius: 4px;
+        color: var(--text-base);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        cursor: pointer;
+    }
+
+    .track-row:hover .play-button {
+        opacity: 1;
+    }
+
+    .track-details {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    .track-title {
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .track-artist {
+        color: var(--text-subdued);
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .track-album {
+        color: var(--text-subdued);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .track-duration {
+        color: var(--text-subdued);
+        text-align: right;
+    }
+
+    .track-actions {
+        display: flex;
+        gap: 16px;
+        justify-content: flex-end;
+    }
+
+    .action-button {
+        background: transparent;
+        border: none;
+        color: var(--text-subdued);
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+
+    .action-button:hover, .action-button.active {
+        color: var(--text-base);
+    }
+
+    .like-button.active {
+        color: var(--essential-bright-accent);
+    }
+
+    .empty-state, .empty-library {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 64px;
+        text-align: center;
+    }
+
+    .empty-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+        width: 72px;
+        height: 72px;
+        background: var(--background-tinted-base);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .empty-state h3, .empty-library h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .empty-state p, .empty-library p {
+        color: var(--text-subdued);
+        margin-bottom: 24px;
+    }
+
+    .browse-button {
+        padding: 12px 32px;
+        border-radius: 24px;
+        background: var(--text-base);
+        color: var(--background-base);
+        font-weight: 700;
+        text-decoration: none;
+        transition: transform 0.2s ease;
+    }
+
+    .browse-button:hover {
+        transform: scale(1.04);
+    }
+
+    .playlists-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 24px;
+    }
+
+    .playlist-card {
+        background: var(--background-elevated-base);
+        border-radius: 8px;
+        padding: 16px;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+    }
+
+    .playlist-card:hover {
+        background: var(--background-elevated-highlight);
+    }
+
+    .playlist-image {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1;
+        margin-bottom: 16px;
+    }
+
+    .playlist-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .playlist-image .play-button {
+        right: 8px;
+        bottom: 8px;
+        left: auto;
+        top: auto;
+        width: 48px;
+        height: 48px;
+        background: var(--essential-bright-accent);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    .playlist-image .play-button:hover {
+        transform: scale(1.04);
+        background: var(--essential-bright-accent-hover);
+    }
+
+    .playlist-info h3 {
+        font-weight: 700;
+        margin-bottom: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .playlist-info p {
+        color: var(--text-subdued);
+        font-size: 14px;
+    }
+
+    .create-first-playlist {
+        background: var(--background-tinted-base);
+        border-radius: 8px;
+        padding: 32px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .playlist-create-icon {
+        width: 64px;
+        height: 64px;
+        background: var(--background-elevated-base);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+    }
+
+    .playlist-create-icon .material-icons-round {
+        font-size: 32px;
+    }
+
+    @media (max-width: 768px) {
+        .library-container {
+            padding: 16px;
+        }
+
+        .track-row {
+            grid-template-columns: 3fr 1fr 60px;
+        }
+
+        .track-album {
+            display: none;
+        }
+
+        .playlists-grid {
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        }
+    }
+</style>
+{% endblock %}
+
+{% block additional_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Track row hover effects
+    const trackRows = document.querySelectorAll('.track-row');
+    trackRows.forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            this.querySelector('.play-button').style.opacity = '1';
+            this.querySelector('.track-number').style.opacity = '0';
+        });
+        
+        row.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('playing')) {
+                this.querySelector('.play-button').style.opacity = '0';
+                this.querySelector('.track-number').style.opacity = '1';
+            }
+        });
+    });
+
+    // Play button functionality
+    const playButtons = document.querySelectorAll('.play-button');
+    playButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            const songId = this.dataset.songId;
+            const songUrl = this.dataset.songUrl;
+            
+            if (songUrl && window.PlayerControls) {
+                // Use the global PlayerControls API to control playback
+                window.PlayerControls.play(songUrl, songId);
+                
+                // Update UI to show currently playing
+                document.querySelectorAll('.track-row.playing').forEach(row => {
+                    row.classList.remove('playing');
+                });
+                
+                const currentRow = this.closest('.track-row');
+                if (currentRow) {
+                    currentRow.classList.add('playing');
+                }
+            }
+        });
+    });
+
+    // Like button functionality
+    const likeButtons = document.querySelectorAll('.like-button');
+    likeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const songId = this.dataset.songId;
+            this.classList.toggle('active');
+            
+            // Here you would call an API to like/unlike the song
+            const isLiked = this.classList.contains('active');
+            console.log(`Song ${songId} is now ${isLiked ? 'liked' : 'unliked'}`);
+            
+            // In a real app, you would make an AJAX request here
+            // fetch('/api/songs/like', { method: 'POST', body: JSON.stringify({ songId, isLiked }) });
+        });
+    });
+
+    // Filter buttons
+    const filterButtons = document.querySelectorAll('.filter-button');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Here you would filter the content based on the selected filter
+            // For now, we'll just log it
+            console.log(`Filter selected: ${this.textContent.trim()}`);
+        });
+    });
+});
+</script>
+{% endblock %} 

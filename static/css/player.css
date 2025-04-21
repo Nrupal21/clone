@@ -1,0 +1,364 @@
+/*****************************************************************************
+ * APPLE MUSIC INSPIRED PLAYER STYLES
+ *****************************************************************************/
+:root {
+    --nowplaying-height: 90px;
+    --z-index-player: 1000;
+    --player-accent: var(--apple-red);
+    --player-accent-hover: var(--apple-red-hover);
+    --player-text: var(--text-base);
+    --player-text-subdued: var(--text-subdued);
+    --player-background: var(--background-elevated-base);
+    --player-border: var(--apple-border);
+    --player-control-size: 32px;
+    --player-play-button-size: 40px;
+}
+
+/* Apple Music-inspired Player Bar */
+.now-playing-bar {
+    background-color: var(--background-elevated-base);
+    border-top: var(--border-thin);
+    height: var(--player-height);
+    padding: 0 var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: var(--z-index-player);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+.now-playing-info {
+    display: flex;
+    align-items: center;
+    min-width: 180px;
+    max-width: 300px;
+    overflow: hidden;
+}
+
+.track-image-container {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    margin-right: var(--space-sm);
+    border-radius: var(--border-radius-small);
+    overflow: hidden;
+    box-shadow: var(--shadow-small);
+}
+
+.track-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.track-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-right: var(--space-md);
+}
+
+.track-title {
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    margin: 0;
+    color: var(--text-base);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-artist {
+    font-size: var(--font-size-xs);
+    color: var(--text-subdued);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.track-action-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--text-subdued);
+    cursor: pointer;
+    transition: var(--transition-standard);
+}
+
+.track-action-btn:hover {
+    color: var(--apple-red);
+}
+
+.track-action-btn.active {
+    color: var(--apple-red);
+}
+
+.player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    max-width: 500px;
+}
+
+.control-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+/* Material icons alignment fix */
+.now-playing-bar i.material-icons-round,
+.topbar-player i.material-icons-round {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+    font-size: 20px;
+}
+
+/* Consistent button styles between both players */
+.control-btn, 
+.control-btn-small {
+    background: transparent;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--player-control-color-subdued);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.control-btn-small {
+    width: 28px;
+    height: 28px;
+}
+
+.control-btn:hover, 
+.control-btn-small:hover {
+    color: var(--player-control-color);
+    background-color: var(--player-control-hover);
+    transform: scale(1.05);
+}
+
+.control-btn.active, 
+.control-btn-small.active {
+    color: var(--apple-red);
+}
+
+.play-btn, 
+.play-btn-small {
+    background-color: var(--apple-red);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.play-btn {
+    width: 42px;
+    height: 42px;
+    margin: 0 var(--space-sm);
+}
+
+.play-btn-small {
+    width: 32px;
+    height: 32px;
+}
+
+.play-btn:hover, 
+.play-btn-small:hover {
+    transform: scale(1.06);
+    background-color: var(--apple-red-hover);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.timestamp {
+    font-size: var(--font-size-xs);
+    color: var(--text-subdued);
+    min-width: 40px;
+    text-align: center;
+}
+
+/* Progress and volume controls */
+.progress-bar, 
+.volume-bar {
+    height: 4px;
+    background-color: var(--player-progress-bg);
+    border-radius: var(--border-radius-pill);
+    position: relative;
+    flex: 1;
+    cursor: pointer;
+    transition: height 0.15s ease;
+}
+
+.progress-bar {
+    margin: 0 var(--space-xs);
+}
+
+.progress-bar:hover, 
+.volume-bar:hover {
+    height: 6px;
+}
+
+.progress, 
+.volume-level {
+    height: 100%;
+    border-radius: var(--border-radius-pill);
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: width 0.1s linear;
+}
+
+.progress {
+    background-color: var(--player-progress-fill);
+    width: 0;
+}
+
+.volume-level {
+    background-color: var(--text-subdued);
+    width: 70%;
+}
+
+.progress-handle, 
+.volume-handle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.progress-handle {
+    background-color: var(--player-handle-color);
+    left: 0;
+    z-index: 2;
+}
+
+.volume-handle {
+    background-color: var(--text-subdued);
+    left: 70%;
+}
+
+.progress-bar:hover .progress-handle, 
+.volume-bar:hover .volume-handle {
+    opacity: 1;
+}
+
+.player-options {
+    display: flex;
+    align-items: center;
+    min-width: 180px;
+    max-width: 300px;
+    justify-content: flex-end;
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    width: 120px;
+}
+
+.volume-icon {
+    color: var(--text-subdued);
+    margin-right: var(--space-xs);
+    flex-shrink: 0;
+}
+
+.player-action-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-subdued);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: var(--space-sm);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.player-action-btn:hover {
+    color: var(--text-base);
+    background-color: var(--background-tinted-highlight);
+}
+
+/* Fix for mobile player */
+@media (max-width: 768px) {
+    .now-playing-bar {
+        height: 70px;
+        padding: 0 var(--space-sm);
+    }
+    
+    .track-image-container {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .player-controls {
+        max-width: 320px;
+    }
+    
+    .control-btn {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .play-btn {
+        width: 36px;
+        height: 36px;
+        margin: 0 4px;
+    }
+    
+    .now-playing-bar i.material-icons-round {
+        font-size: 18px;
+    }
+    
+    .progress-container {
+        padding: 0 8px;
+    }
+    
+    .volume-container {
+        display: none;
+    }
+} 

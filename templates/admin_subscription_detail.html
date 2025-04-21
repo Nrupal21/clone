@@ -1,0 +1,254 @@
+{% extends 'admin_base.html' %}
+
+{% block title %}Subscription Details | Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/admin/subscriptions">Subscriptions</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Subscription Details</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Subscription Details</h6>
+                    <div>
+                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSubscriptionModal">Edit</button>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelSubscriptionModal">Cancel</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="subscription-info mb-4">
+                                <h5 class="font-weight-bold">Subscription Information</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr>
+                                                <th width="30%">ID:</th>
+                                                <td>{{ subscription.id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Plan:</th>
+                                                <td><span class="badge bg-primary p-2">{{ subscription.plan_name }}</span></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Status:</th>
+                                                <td>
+                                                    {% if subscription.status == 'active' %}
+                                                    <span class="badge bg-success p-2">Active</span>
+                                                    {% elif subscription.status == 'past_due' %}
+                                                    <span class="badge bg-warning p-2">Past Due</span>
+                                                    {% elif subscription.status == 'canceled' %}
+                                                    <span class="badge bg-danger p-2">Canceled</span>
+                                                    {% else %}
+                                                    <span class="badge bg-secondary p-2">{{ subscription.status }}</span>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Price:</th>
+                                                <td>${{ subscription.price }}/month</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="subscription-dates mb-4">
+                                <h5 class="font-weight-bold">Timeline</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr>
+                                                <th width="40%">Start Date:</th>
+                                                <td>{{ subscription.start_date }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Current Period:</th>
+                                                <td>{{ subscription.current_period_start }} to {{ subscription.current_period_end }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Next Billing:</th>
+                                                <td>{{ subscription.next_billing_date }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Cancel Date:</th>
+                                                <td>{% if subscription.canceled_at %}{{ subscription.canceled_at }}{% else %}N/A{% endif %}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="user-info mb-4">
+                        <h5 class="font-weight-bold">User Information</h5>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0">
+                                <img src="{{ user.profile_image or '/static/img/default-avatar.png' }}" alt="User avatar" class="rounded-circle" width="50" height="50">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">{{ user.full_name }}</h6>
+                                <a href="/admin/users/{{ user.id }}" class="text-muted">View User Profile</a>
+                            </div>
+                            <div>
+                                <span class="badge bg-info p-2">User since {{ user.created_at|date }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="billing-history">
+                        <h5 class="font-weight-bold">Billing History</h5>
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Transaction ID</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for transaction in transactions %}
+                                    <tr>
+                                        <td>{{ transaction.date }}</td>
+                                        <td>{{ transaction.id }}</td>
+                                        <td>${{ transaction.amount }}</td>
+                                        <td>
+                                            {% if transaction.status == 'succeeded' %}
+                                            <span class="badge bg-success">Success</span>
+                                            {% elif transaction.status == 'failed' %}
+                                            <span class="badge bg-danger">Failed</span>
+                                            {% elif transaction.status == 'pending' %}
+                                            <span class="badge bg-warning">Pending</span>
+                                            {% elif transaction.status == 'refunded' %}
+                                            <span class="badge bg-info">Refunded</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View Receipt</button>
+                                            {% if transaction.status == 'succeeded' %}
+                                            <button class="btn btn-sm btn-outline-warning">Issue Refund</button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="5" class="text-center">No transactions found</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Subscription Modal -->
+<div class="modal fade" id="editSubscriptionModal" tabindex="-1" aria-labelledby="editSubscriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editSubscriptionModalLabel">Edit Subscription</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editSubscriptionForm">
+                    <div class="mb-3">
+                        <label for="subscriptionPlan" class="form-label">Subscription Plan</label>
+                        <select class="form-select" id="subscriptionPlan" required>
+                            <option value="basic" {% if subscription.plan_name == 'basic' %}selected{% endif %}>Basic</option>
+                            <option value="premium" {% if subscription.plan_name == 'premium' %}selected{% endif %}>Premium</option>
+                            <option value="family" {% if subscription.plan_name == 'family' %}selected{% endif %}>Family</option>
+                            <option value="student" {% if subscription.plan_name == 'student' %}selected{% endif %}>Student</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subscriptionStatus" class="form-label">Status</label>
+                        <select class="form-select" id="subscriptionStatus" required>
+                            <option value="active" {% if subscription.status == 'active' %}selected{% endif %}>Active</option>
+                            <option value="past_due" {% if subscription.status == 'past_due' %}selected{% endif %}>Past Due</option>
+                            <option value="canceled" {% if subscription.status == 'canceled' %}selected{% endif %}>Canceled</option>
+                            <option value="trialing" {% if subscription.status == 'trialing' %}selected{% endif %}>Trialing</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="currentPeriodEnd" class="form-label">Current Period End</label>
+                        <input type="date" class="form-control" id="currentPeriodEnd" value="{{ subscription.current_period_end|date }}">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Subscription Modal -->
+<div class="modal fade" id="cancelSubscriptionModal" tabindex="-1" aria-labelledby="cancelSubscriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelSubscriptionModalLabel">Cancel Subscription</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <span>Are you sure you want to cancel this subscription? This action cannot be undone.</span>
+                </div>
+                <div class="mb-3">
+                    <label for="cancelReason" class="form-label">Cancellation Reason</label>
+                    <select class="form-select" id="cancelReason" required>
+                        <option value="">Select a reason...</option>
+                        <option value="too_expensive">Too expensive</option>
+                        <option value="not_using">Not using enough</option>
+                        <option value="switching">Switching to another service</option>
+                        <option value="technical_issues">Technical issues</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="cancelNotes" class="form-label">Additional Notes</label>
+                    <textarea class="form-control" id="cancelNotes" rows="3"></textarea>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="endImmediately">
+                    <label class="form-check-label" for="endImmediately">
+                        End subscription immediately (otherwise continues until billing period ends)
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger">Confirm Cancellation</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Subscription management logic would go here
+    });
+</script>
+{% endblock %} 

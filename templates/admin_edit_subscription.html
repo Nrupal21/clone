@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Edit Subscription{% endblock %}
+
+{% block styles %}
+<style>
+    .subscription-card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    .card-header {
+        background-color: #1DB954;
+        color: white;
+        padding: 15px;
+        border-radius: 10px 10px 0 0;
+    }
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    .form-label {
+        font-weight: bold;
+    }
+    .btn-spotify {
+        background-color: #1DB954;
+        color: white;
+    }
+    .btn-spotify:hover {
+        background-color: #1aa34a;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Edit Subscription</h1>
+        <a href="{{ url_for('admin_view_subscription', sub_id=subscription._id) }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Subscription
+        </a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <div class="card subscription-card">
+        <div class="card-header">
+            <h4 class="mb-0">Subscription ID: {{ subscription._id }}</h4>
+        </div>
+        <div class="card-body">
+            <form action="{{ url_for('admin_edit_subscription', sub_id=subscription._id) }}" method="POST">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="user_info" class="form-label">User</label>
+                            <input type="text" class="form-control" id="user_info" value="{{ user.email }} ({{ user.username }})" readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="plan_type" class="form-label">Plan Type</label>
+                            <select class="form-select" id="plan_type" name="plan_type">
+                                <option value="free" {% if subscription.plan_type == 'free' %}selected{% endif %}>Free</option>
+                                <option value="premium" {% if subscription.plan_type == 'premium' %}selected{% endif %}>Premium</option>
+                                <option value="family" {% if subscription.plan_type == 'family' %}selected{% endif %}>Family</option>
+                                <option value="student" {% if subscription.plan_type == 'student' %}selected{% endif %}>Student</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" id="status" name="status">
+                                <option value="active" {% if subscription.status == 'active' %}selected{% endif %}>Active</option>
+                                <option value="cancelled" {% if subscription.status == 'cancelled' %}selected{% endif %}>Cancelled</option>
+                                <option value="expired" {% if subscription.status == 'expired' %}selected{% endif %}>Expired</option>
+                                <option value="pending" {% if subscription.status == 'pending' %}selected{% endif %}>Pending</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="start_date" class="form-label">Start Date</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" 
+                                value="{{ subscription.start_date.strftime('%Y-%m-%d') if subscription.start_date else '' }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="end_date" class="form-label">End Date</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" 
+                                value="{{ subscription.end_date.strftime('%Y-%m-%d') if subscription.end_date else '' }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="price" class="form-label">Price ($)</label>
+                            <input type="number" step="0.01" class="form-control" id="price" name="price" 
+                                value="{{ '%.2f'|format(subscription.price|float) }}">
+                        </div>
+                        
+                        <div class="form-check mt-4">
+                            <input class="form-check-input" type="checkbox" id="auto_renew" name="auto_renew" 
+                                {% if subscription.auto_renew %}checked{% endif %}>
+                            <label class="form-check-label" for="auto_renew">
+                                Auto-renew subscription
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group mt-4">
+                    <label for="notes" class="form-label">Admin Notes</label>
+                    <textarea class="form-control" id="notes" name="notes" rows="3">{{ subscription.notes if subscription.notes else '' }}</textarea>
+                </div>
+                
+                <div class="mt-4 d-flex justify-content-between">
+                    <div>
+                        <button type="submit" class="btn btn-spotify">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                        <a href="{{ url_for('admin_view_subscription', sub_id=subscription._id) }}" class="btn btn-outline-secondary">
+                            Cancel
+                        </a>
+                    </div>
+                    {% if subscription.status == 'active' %}
+                    <div>
+                        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">
+                            <i class="fas fa-ban"></i> Cancel Subscription
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Subscription Modal -->
+{% if subscription.status == 'active' %}
+<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="cancelModalLabel">Confirm Subscription Cancellation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to cancel this subscription?</p>
+                <p><strong>User:</strong> {{ user.email }}</p>
+                <p><strong>Plan:</strong> {{ subscription.plan_type|capitalize }}</p>
+                <p><strong>This action will immediately cancel the subscription and cannot be undone.</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form action="{{ url_for('admin_cancel_subscription', sub_id=subscription._id) }}" method="POST">
+                    <button type="submit" class="btn btn-danger">Confirm Cancellation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Validate the form before submission
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            const startDate = document.getElementById('start_date').value;
+            const endDate = document.getElementById('end_date').value;
+            const price = document.getElementById('price').value;
+            
+            // Simple validation
+            if (!startDate) {
+                alert('Please enter a start date');
+                event.preventDefault();
+                return false;
+            }
+            
+            if (price === '' || isNaN(parseFloat(price)) || parseFloat(price) < 0) {
+                alert('Please enter a valid price');
+                event.preventDefault();
+                return false;
+            }
+            
+            // If end date is provided, check it's after start date
+            if (endDate && new Date(endDate) < new Date(startDate)) {
+                alert('End date must be after start date');
+                event.preventDefault();
+                return false;
+            }
+            
+            return true;
+        });
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,726 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - Spotify{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-cover-gradient"></div>
+        <div class="profile-info">
+            <div class="profile-avatar">
+                <span class="material-icons">account_circle</span>
+            </div>
+            <div class="profile-text">
+                <div class="profile-type">Profile</div>
+                <h1>{{ current_user.name }}</h1>
+                <div class="profile-meta">
+                    <span class="user-email">{{ current_user.email }}</span>
+                    {% if is_admin %}
+                    <span class="admin-badge">
+                        <span class="material-icons">admin_panel_settings</span>
+                        Admin
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Actions -->
+    <div class="profile-actions">
+        <button class="edit-profile-btn" id="editProfileBtn">
+            <span class="material-icons">edit</span>
+            Edit profile
+        </button>
+        {% if is_admin %}
+        <a href="{{ url_for('admin.dashboard') }}" class="admin-dashboard-btn">
+            <span class="material-icons">dashboard</span>
+            Admin Dashboard
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- Profile Stats -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="material-icons">playlist_play</span>
+                <h3>Your Playlists</h3>
+            </div>
+            <div class="stat-value">{{ current_user.get('playlists', 0) }}</div>
+        </div>
+        <a href="{{ url_for('library') }}" class="stat-card">
+            <div class="stat-header">
+                <span class="material-icons">favorite</span>
+                <h3>Liked Songs</h3>
+            </div>
+            <div class="stat-value">{{ current_user.get('liked_songs', 0) }}</div>
+        </a>
+        <a href="{{ url_for('user_activity') }}" class="stat-card">
+            <div class="stat-header">
+                <span class="material-icons">history</span>
+                <h3>Activity History</h3>
+            </div>
+            <div class="stat-value">
+                <span class="material-icons">arrow_forward</span>
+            </div>
+        </a>
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="material-icons">album</span>
+                <h3>Following</h3>
+            </div>
+            <div class="stat-value">{{ current_user.get('following', 0) }}</div>
+        </div>
+    </div>
+
+    <!-- Recently Played Section -->
+    <div class="section recently-played">
+        <div class="section-header">
+            <h2>Recently played</h2>
+            <a href="{{ url_for('library') }}" class="show-all">Show all</a>
+        </div>
+        
+        <div class="tracks-container">
+            {% for song in recent_songs %}
+            <div class="track-row" data-song-id="{{ song._id }}">
+                <div class="track-info">
+                    <div class="track-number">{{ loop.index }}</div>
+                    <div class="track-image">
+                        <img src="{{ url_for('static', filename=song.image_path) if song.image_path else 'img/default-cover.jpg' }}" 
+                             alt="{{ song.title }}"
+                             onerror="this.src='{{ url_for('static', filename='img/default-cover.jpg') }}'">
+                        <button class="play-button" data-song-id="{{ song._id }}" data-song-url="{{ url_for('songs.play_song', song_id=song._id) }}">
+                            <span class="material-icons">play_arrow</span>
+                        </button>
+                    </div>
+                    <div class="track-details">
+                        <div class="track-title">{{ song.title }}</div>
+                        <div class="track-artist">{{ song.artist }}</div>
+                    </div>
+                </div>
+                <div class="track-duration">
+                    {% if song.duration %}
+                    {{ song.duration }}
+                    {% else %}
+                    --:--
+                    {% endif %}
+                </div>
+                <div class="track-actions">
+                    <button class="action-button like-button">
+                        <span class="material-icons">favorite_border</span>
+                    </button>
+                    <button class="action-button more-button">
+                        <span class="material-icons">more_horiz</span>
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Profile Settings -->
+    <div class="section settings-section">
+        <div class="section-header">
+            <h2>Profile settings</h2>
+        </div>
+        
+        <div class="settings-container">
+            <div class="settings-group">
+                <h3>Personal information</h3>
+                <div class="settings-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Display name</div>
+                        <div class="setting-value">{{ current_user.name }}</div>
+                    </div>
+                    <button class="setting-action" data-setting="name">Edit</button>
+                </div>
+                <div class="settings-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Email</div>
+                        <div class="setting-value">{{ current_user.email }}</div>
+                    </div>
+                    <button class="setting-action" data-setting="email">Edit</button>
+                </div>
+                <div class="settings-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Phone</div>
+                        <div class="setting-value">{{ current_user.phone }}</div>
+                    </div>
+                    <button class="setting-action" data-setting="phone">Edit</button>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <h3>Security</h3>
+                <div class="settings-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Password</div>
+                        <div class="setting-value">••••••••</div>
+                    </div>
+                    <button class="setting-action" data-setting="password">Change</button>
+                </div>
+                <div class="settings-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Two-factor authentication</div>
+                        <div class="setting-value">
+                            <span class="status-badge disabled">Disabled</span>
+                        </div>
+                    </div>
+                    <button class="setting-action" data-setting="2fa">Enable</button>
+                </div>
+            </div>
+
+            <div class="settings-group danger-zone">
+                <h3>Account</h3>
+                <div class="settings-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Delete account</div>
+                        <div class="setting-value">This action cannot be undone</div>
+                    </div>
+                    <button class="setting-action danger" data-setting="delete-account">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="last-login">
+        Last login: {{ current_user.last_login.strftime('%B %d, %Y at %H:%M') if current_user.last_login else 'First login' }}
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Track row hover effects
+    const trackRows = document.querySelectorAll('.track-row');
+    trackRows.forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            this.querySelector('.play-button').style.opacity = '1';
+            this.querySelector('.track-number').style.opacity = '0';
+        });
+        
+        row.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('playing')) {
+                this.querySelector('.play-button').style.opacity = '0';
+                this.querySelector('.track-number').style.opacity = '1';
+            }
+        });
+    });
+
+    // Play button functionality
+    const playButtons = document.querySelectorAll('.play-button');
+    playButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const row = this.closest('.track-row');
+            const wasPlaying = row.classList.contains('playing');
+            const songId = this.dataset.songId;
+            const songUrl = this.dataset.songUrl;
+            
+            // Reset all other rows
+            document.querySelectorAll('.track-row.playing').forEach(playingRow => {
+                if (playingRow !== row) {
+                    playingRow.classList.remove('playing');
+                    playingRow.querySelector('.play-button .material-icons').textContent = 'play_arrow';
+                }
+            });
+            
+            // Toggle current row
+            row.classList.toggle('playing');
+            this.querySelector('.material-icons').textContent = wasPlaying ? 'play_arrow' : 'pause';
+            
+            // Play the song using the global player if available
+            if (window.PlayerControls && songUrl) {
+                if (wasPlaying) {
+                    window.PlayerControls.pause();
+                } else {
+                    const songTitle = row.querySelector('.track-title').textContent;
+                    const songArtist = row.querySelector('.track-artist').textContent;
+                    window.PlayerControls.play(songUrl, songId, {
+                        title: songTitle,
+                        artist: songArtist
+                    });
+                }
+            }
+        });
+    });
+
+    // Settings buttons
+    document.querySelectorAll('.setting-action').forEach(button => {
+        button.addEventListener('click', function() {
+            const setting = this.dataset.setting;
+            const settingLabel = this.closest('.settings-item').querySelector('.setting-label').textContent;
+            
+            if (setting === 'delete-account') {
+                if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                    // Send delete request
+                    console.log('Deleting account...');
+                    // You would implement actual account deletion here
+                }
+            } else {
+                // Show edit dialog based on setting type
+                const currentValue = this.closest('.settings-item').querySelector('.setting-value').textContent;
+                const newValue = prompt(`Edit ${settingLabel}:`, currentValue);
+                
+                if (newValue && newValue !== currentValue) {
+                    console.log(`Updating ${setting} to: ${newValue}`);
+                    // You would implement actual settings update here
+                }
+            }
+        });
+    });
+    
+    // Edit profile button
+    document.getElementById('editProfileBtn').addEventListener('click', function() {
+        // Navigate to the edit profile page
+        window.location.href = '{{ url_for("edit_profile") }}';
+    });
+});
+</script>
+{% endblock %}
+
+{% block additional_styles %}
+<style>
+.profile-container {
+    padding: 24px 32px;
+}
+
+/* Profile Header */
+.profile-header {
+    position: relative;
+    padding: 100px 32px 32px;
+    margin: -24px -32px 24px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+}
+
+.profile-cover-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 240px;
+    background: linear-gradient(transparent, var(--background-base)),
+                linear-gradient(180deg, rgba(80,155,245,0.4), transparent);
+    z-index: 0;
+}
+
+.profile-info {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+}
+
+.profile-avatar {
+    width: 192px;
+    height: 192px;
+    border-radius: 50%;
+    background: var(--background-elevated-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 60px rgba(0,0,0,.5);
+}
+
+.profile-avatar .material-icons {
+    font-size: 96px;
+    color: var(--text-subdued);
+}
+
+.profile-text {
+    flex: 1;
+}
+
+.profile-type {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.profile-text h1 {
+    font-size: 96px;
+    font-weight: 900;
+    line-height: 96px;
+    padding: 0.08em 0px;
+    margin-bottom: 16px;
+}
+
+.profile-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    color: var(--text-subdued);
+}
+
+.admin-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--essential-bright-accent);
+    color: black;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Profile Actions */
+.profile-actions {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.edit-profile-btn, .admin-dashboard-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--text-subdued);
+    border-radius: 500px;
+    background: transparent;
+    color: var(--text-base);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.edit-profile-btn:hover, .admin-dashboard-btn:hover {
+    border-color: var(--text-base);
+    transform: scale(1.04);
+}
+
+.admin-dashboard-btn {
+    background: var(--essential-bright-accent);
+    color: black;
+    border: none;
+}
+
+.admin-dashboard-btn:hover {
+    background: var(--essential-bright-accent-hover);
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.stat-card {
+    background: var(--background-elevated-base);
+    padding: 24px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.stat-card:hover {
+    background: var(--background-elevated-highlight);
+}
+
+.stat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.stat-header .material-icons {
+    color: var(--essential-bright-accent);
+}
+
+.stat-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+/* Recently Played Section */
+.section {
+    margin-bottom: 48px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.show-all {
+    color: var(--text-subdued);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.show-all:hover {
+    color: var(--text-base);
+    text-decoration: underline;
+}
+
+/* Tracks Container */
+.tracks-container {
+    background: var(--background-elevated-base);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.track-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    padding: 8px 16px;
+    transition: background-color 0.2s ease;
+}
+
+.track-row:hover {
+    background: var(--background-elevated-highlight);
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.track-number {
+    width: 24px;
+    text-align: center;
+    color: var(--text-subdued);
+}
+
+.track-image {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.track-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.play-button {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: var(--text-base);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+}
+
+.play-button:hover {
+    background: rgba(0,0,0,0.7);
+}
+
+.track-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.track-title {
+    font-weight: 500;
+}
+
+.track-artist {
+    font-size: 14px;
+    color: var(--text-subdued);
+}
+
+.track-duration {
+    color: var(--text-subdued);
+}
+
+.track-actions {
+    display: flex;
+    gap: 16px;
+    opacity: 0;
+}
+
+.track-row:hover .track-actions {
+    opacity: 1;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    color: var(--text-subdued);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-button:hover {
+    color: var(--text-base);
+    transform: scale(1.1);
+}
+
+/* Settings Section */
+.settings-container {
+    background: var(--background-elevated-base);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.settings-group {
+    padding: 24px;
+    border-bottom: 1px solid var(--background-tinted-base);
+}
+
+.settings-group:last-child {
+    border-bottom: none;
+}
+
+.settings-group h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--essential-bright-accent);
+    margin-bottom: 16px;
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.setting-info {
+    flex: 1;
+}
+
+.setting-label {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.setting-value {
+    font-size: 14px;
+    color: var(--text-subdued);
+}
+
+.setting-action {
+    background: none;
+    border: none;
+    color: var(--essential-bright-accent);
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.setting-action:hover {
+    color: var(--essential-bright-accent-hover);
+}
+
+.setting-action.danger {
+    color: var(--text-negative);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-badge.disabled {
+    background: var(--background-tinted-base);
+    color: var(--text-subdued);
+}
+
+.danger-zone .setting-action {
+    color: var(--text-negative);
+}
+
+.last-login {
+    text-align: center;
+    color: var(--text-subdued);
+    font-size: 14px;
+    margin-top: 48px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 16px;
+    }
+
+    .profile-header {
+        padding: 80px 16px 24px;
+        margin: -16px -16px 24px;
+    }
+
+    .profile-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-avatar {
+        width: 128px;
+        height: 128px;
+    }
+
+    .profile-avatar .material-icons {
+        font-size: 64px;
+    }
+
+    .profile-text h1 {
+        font-size: 48px;
+        line-height: 48px;
+    }
+
+    .profile-meta {
+        justify-content: center;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .track-row {
+        grid-template-columns: 1fr auto;
+    }
+
+    .track-duration {
+        display: none;
+    }
+
+    .settings-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .setting-action {
+        margin-top: 8px;
+    }
+}
+</style>
+{% endblock %}

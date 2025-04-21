@@ -1,0 +1,180 @@
+[{
+  "_id": {
+    "$oid": "680146b36078af23cfc00e2a"
+  },
+  "title": "Summer Vibes",
+  "artist": "Beach Waves",
+  "mood": "Happy",
+  "file_path": "Happy_(mood)/summer_vibes.mp3",
+  "image_path": "Happy_(mood)/summer_vibes.jpg",
+  "created_at": {
+    "$date": "2025-04-17T18:21:39.102Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-17T18:21:39.103Z"
+  },
+  "plays": 0,
+  "duration": null
+},
+{
+  "_id": {
+    "$oid": "680146b36078af23cfc00e2b"
+  },
+  "title": "Rainy Day",
+  "artist": "Cloud Nine",
+  "mood": "Sad",
+  "file_path": "Sad_(mood)/rainy_day.mp3",
+  "image_path": "Sad_(mood)/rainy_day.jpg",
+  "created_at": {
+    "$date": "2025-04-17T18:21:39.105Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-17T18:21:39.105Z"
+  },
+  "plays": 0,
+  "duration": null
+},
+{
+  "_id": {
+    "$oid": "680146b36078af23cfc00e2c"
+  },
+  "title": "Workout Mix",
+  "artist": "Fitness Kings",
+  "mood": "Energetic",
+  "file_path": "Energetic_(mood)/workout_mix.mp3",
+  "image_path": "Energetic_(mood)/workout_mix.jpg",
+  "created_at": {
+    "$date": "2025-04-17T18:21:39.107Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-17T18:21:39.107Z"
+  },
+  "plays": 0,
+  "duration": null
+},
+{
+  "_id": {
+    "$oid": "680146b36078af23cfc00e2d"
+  },
+  "title": "Study Session",
+  "artist": "Focus Masters",
+  "mood": "Focus",
+  "file_path": "Focus_(mood)/study_session.mp3",
+  "image_path": "Focus_(mood)/study_session.jpg",
+  "created_at": {
+    "$date": "2025-04-17T18:21:39.110Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-17T18:21:39.110Z"
+  },
+  "plays": 0,
+  "duration": null
+},
+{
+  "_id": {
+    "$oid": "680146b36078af23cfc00e2e"
+  },
+  "title": "Night Drive",
+  "artist": "Midnight Cruisers",
+  "mood": "Chill",
+  "file_path": "Chill_(mood)/night_drive.mp3",
+  "image_path": "Chill_(mood)/night_drive.jpg",
+  "created_at": {
+    "$date": "2025-04-17T18:21:39.112Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-17T18:21:39.112Z"
+  },
+  "plays": 0,
+  "duration": null
+},
+{
+  "_id": {
+    "$oid": "680146b36078af23cfc00e2f"
+  },
+  "title": "Epic Battle",
+  "artist": "Warriors",
+  "mood": "Angry",
+  "file_path": "Angry_(mood)/epic_battle.mp3",
+  "image_path": "Angry_(mood)/epic_battle.jpg",
+  "created_at": {
+    "$date": "2025-04-17T18:21:39.114Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-17T18:21:39.114Z"
+  },
+  "plays": 0,
+  "duration": null
+},
+{
+  "_id": {
+    "$oid": "680146b36078af23cfc00e30"
+  },
+  "title": "Love Song",
+  "artist": "Romantics",
+  "mood": "Romantic",
+  "file_path": "Romantic_(mood)/love_song.mp3",
+  "image_path": "Romantic_(mood)/love_song.jpg",
+  "created_at": {
+    "$date": "2025-04-17T18:21:39.117Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-17T18:21:39.117Z"
+  },
+  "plays": 0,
+  "duration": null
+},
+{
+  "_id": {
+    "$oid": "680146b36078af23cfc00e31"
+  },
+  "title": "Dark Thoughts",
+  "artist": "The Shadows",
+  "mood": "Dark",
+  "file_path": "Dark_(mood)/dark_thoughts.mp3",
+  "image_path": "Dark_(mood)/dark_thoughts.jpg",
+  "created_at": {
+    "$date": "2025-04-17T18:21:39.121Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-17T18:21:39.121Z"
+  },
+  "plays": 0,
+  "duration": null
+},
+{
+  "_id": {
+    "$oid": "680146b36078af23cfc00e32"
+  },
+  "title": "Morning Sunshine",
+  "artist": "Daybreak",
+  "mood": "Bright",
+  "file_path": "Bright_(mood)/morning_sunshine.mp3",
+  "image_path": "Bright_(mood)/morning_sunshine.jpg",
+  "created_at": {
+    "$date": "2025-04-17T18:21:39.123Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-17T18:21:39.123Z"
+  },
+  "plays": 0,
+  "duration": null
+},
+{
+  "_id": {
+    "$oid": "680146b36078af23cfc00e33"
+  },
+  "title": "Groovy Beats",
+  "artist": "Funk Masters",
+  "mood": "Funky",
+  "file_path": "Funky_(mood)/groovy_beats.mp3",
+  "image_path": "Funky_(mood)/groovy_beats.jpg",
+  "created_at": {
+    "$date": "2025-04-17T18:21:39.126Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-17T18:21:39.126Z"
+  },
+  "plays": 0,
+  "duration": null
+}]

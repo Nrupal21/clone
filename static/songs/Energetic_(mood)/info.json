@@ -1,0 +1,46 @@
+{
+    "songs": [
+        {
+            "title": "happy 2",
+            "artist": "ayush koli",
+            "filename": "677a71b1-8e22-4ad3-b74b-784ed25e6564_no-copyright-music-chill-312531.mp3",
+            "image": "677a71b1-8e22-4ad3-b74b-784ed25e6564_fa521a02-60cf-46d6-b990-44b8fa94e4a2_cover.jpg"
+        },
+        {
+            "title": "day",
+            "artist": "Ayush",
+            "filename": "717815a4-98c0-45ef-8ff3-a7faa7e1ff29_Shady_-_Density__Time.mp3",
+            "image": "cover_717815a4-98c0-45ef-8ff3-a7faa7e1ff29_cover.jpg"
+        },
+        {
+            "title": "song",
+            "artist": "ayush koli",
+            "filename": "d2e2c0f1-8bd8-42ed-83e9-5d042d6b92dc_Shivrajyabhishek_Geet_128_Kbps-Fun2Desi.Com.Se.mp3",
+            "image": "cover_d2e2c0f1-8bd8-42ed-83e9-5d042d6b92dc_37fdf107be80411cb27b21a80985103f_AdobeStock_486469596.jpeg"
+        },
+        {
+            "title": "song",
+            "artist": "ayush koli",
+            "filename": "5a228afa-3b3d-4785-b962-0d27f1e3ab4d_Shivrajyabhishek_Geet_128_Kbps-Fun2Desi.Com.Se.mp3",
+            "image": "cover_5a228afa-3b3d-4785-b962-0d27f1e3ab4d_37fdf107be80411cb27b21a80985103f_AdobeStock_486469596.jpeg"
+        },
+        {
+            "title": "day",
+            "artist": "ayush koli",
+            "filename": "dea21384-a112-4496-8766-00fc389f4a8b_Amazing_Grace_-_Casa_Rosa.mp3",
+            "image": "cover_dea21384-a112-4496-8766-00fc389f4a8b_cover.jpg"
+        },
+        {
+            "title": "Power Up",
+            "artist": "Energy Crew",
+            "filename": "sample5.mp3",
+            "image": "album_placeholder.svg"
+        },
+        {
+            "title": "Fast Lane",
+            "artist": "Speed Demons",
+            "filename": "sample6.mp3",
+            "image": "album_placeholder.svg"
+        }
+    ]
+}

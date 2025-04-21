@@ -1,0 +1,6 @@
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="300" fill="#3498db" />
+  <text x="150" y="120" font-family="Arial" font-size="40" text-anchor="middle" fill="white">♫</text>
+  <text x="150" y="170" font-family="Arial" font-size="24" text-anchor="middle" fill="white">Album Cover</text>
+  <text x="150" y="200" font-family="Arial" font-size="18" text-anchor="middle" fill="white">Artist Name</text>
+</svg> 

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Spotify{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Circular:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/player.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    {% block additional_styles %}{% endblock %}
+</head>
+<body>
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="{{ url_for('home') }}">
+                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Music App Logo">
+                    </a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul class="nav-links">
+                        <li class="nav-item">
+                            <a href="{{ url_for('home') }}" class="{{ 'active' if request.path == '/' else '' }}">
+                                <i class="material-icons-round">home</i>
+                                <span class="nav-text">Listen Now</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('search') }}" class="{{ 'active' if request.path.startswith('/search') else '' }}">
+                                <i class="material-icons-round">search</i>
+                                <span class="nav-text">Browse</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('library') if session.get('user_id') else url_for('login_handler') }}" 
+                               class="{{ 'active' if request.path.startswith('/library') else '' }}">
+                                <i class="material-icons-round">library_music</i>
+                                <span class="nav-text">Library</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('list_songs') }}" class="{{ 'active' if request.path == '/songs' else '' }}">
+                                <i class="material-icons-round">music_note</i>
+                                <span class="nav-text">All Songs</span>
+                            </a>
+                        </li>
+                        {% if session.get('user_id') %}
+                        <li class="nav-item">
+                            <a href="{{ url_for('create_playlist') }}" class="{{ 'active' if request.path == '/playlist/new' else '' }}">
+                                <i class="material-icons-round">playlist_add</i>
+                                <span class="nav-text">New Playlist</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if session.get('is_admin') %}
+                        <li class="nav-item">
+                            <a href="{{ url_for('admin_dashboard') }}" class="{{ 'active' if request.path.startswith('/admin') else '' }}">
+                                <i class="material-icons-round">admin_panel_settings</i>
+                                <span class="nav-text">Admin</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a href="{{ url_for('admin_subscription_management', type='all') if session.get('is_admin') else '#' }}" class="{{ 'active' if request.path.startswith('/subscription') else '' }}">
+                                <i class="material-icons-round">card_membership</i>
+                                <span class="nav-text">Subscription</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <!-- Mood Navigation Section -->
+                <div class="sidebar-section-header">
+                    <h4 class="section-title">Moods</h4>
+                    <div class="section-actions">
+                        <button class="action-btn">
+                            <i class="material-icons-round">more_horiz</i>
+                        </button>
+                    </div>
+                </div>
+                <nav class="mood-nav">
+                    <ul class="nav-links">
+                        <li class="nav-item">
+                            <a href="{{ url_for('mood_songs', mood_name='Happy') }}" class="{{ 'active' if request.path == '/mood/Happy' else '' }}">
+                                <i class="material-icons-round">sentiment_very_satisfied</i>
+                                <span class="nav-text">Happy</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('mood_songs', mood_name='Chill') }}" class="{{ 'active' if request.path == '/mood/Chill' else '' }}">
+                                <i class="material-icons-round">nightlight_round</i>
+                                <span class="nav-text">Chill</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('mood_songs', mood_name='Energetic') }}" class="{{ 'active' if request.path == '/mood/Energetic' else '' }}">
+                                <i class="material-icons-round">bolt</i>
+                                <span class="nav-text">Energetic</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('mood_songs', mood_name='Focus') }}" class="{{ 'active' if request.path == '/mood/Focus' else '' }}">
+                                <i class="material-icons-round">center_focus_strong</i>
+                                <span class="nav-text">Focus</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('mood_songs', mood_name='Workout') }}" class="{{ 'active' if request.path == '/mood/Workout' else '' }}">
+                                <i class="material-icons-round">fitness_center</i>
+                                <span class="nav-text">Workout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                {% if not session.get('user_id') %}
+                <div class="sidebar-cta">
+                    <p>Create a playlist by logging in to your account.</p>
+                    <a href="{{ url_for('login_handler') }}" class="btn-primary">Log In</a>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Sidebar Footer -->
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-links">
+                    <a href="#">Legal</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Cookies</a>
+                    <a href="#">About</a>
+                </div>
+                
+                {% if session.get('user_id') %}
+                <div class="user-profile-mini">
+                    <div class="user-avatar-mini">
+                        {{ current_user.name[0] if current_user and current_user.name else 'U' }}
+                    </div>
+                    <div class="user-info-mini">
+                        <h4 class="user-name-mini">{{ current_user.name if current_user else 'Guest' }}</h4>
+                        <p class="user-role-mini">{{ 'Admin' if current_user and current_user.is_admin else 'Member' }}</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="auth-buttons">
+                    <a href="{{ url_for('signup_handler') }}" class="btn btn-primary signup-btn">Sign Up</a>
+                    <a href="{{ url_for('login_handler') }}" class="btn login-btn">Log In</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <!-- Mobile menu button - only visible on small screens -->
+                    <button class="nav-btn mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="material-icons-round">menu</i>
+                    </button>
+                    
+                    <div class="nav-controls">
+                        <button class="nav-btn" id="backButton"><i class="material-icons-round">navigate_before</i></button>
+                        <button class="nav-btn" id="forwardButton"><i class="material-icons-round">navigate_next</i></button>
+                    </div>
+                    <div class="search-container">
+                        <form class="search-form" action="/search" method="GET">
+                            <div class="search-input-wrapper">
+                                <i class="material-icons-round search-icon">search</i>
+                                <input type="text" name="q" class="search-input" 
+                                       placeholder="Search for Artists, Songs, or Playlists"
+                                       value="{{ request.args.get('q', '') }}">
+                                {% if request.args.get('q') %}
+                                <button type="button" class="clear-search-btn">
+                                    <i class="material-icons-round">close</i>
+                                </button>
+                                {% endif %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Integrated Player Controls for Navbar -->
+                <div class="topbar-player">
+                    <div class="topbar-controls">
+                        <button class="control-btn-small" id="topShuffleButton">
+                            <i class="material-icons-round">shuffle</i>
+                        </button>
+                        <button class="control-btn-small" id="topPrevButton">
+                            <i class="material-icons-round">skip_previous</i>
+                        </button>
+                        <button class="play-btn-small" id="topPlayPauseButton">
+                            <i class="material-icons-round" id="topPlayPauseIcon">play_arrow</i>
+                        </button>
+                        <button class="control-btn-small" id="topNextButton">
+                            <i class="material-icons-round">skip_next</i>
+                        </button>
+                        <button class="control-btn-small" id="topRepeatButton">
+                            <i class="material-icons-round">repeat</i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="topbar-right">
+                    <!-- Track Info in Navbar -->
+                    <div class="topbar-track-info">
+                        <h5 class="topbar-track-title" id="topCurrentSongTitle">No song playing</h5>
+                        <p class="topbar-track-artist" id="topCurrentSongArtist">-</p>
+                    </div>
+
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="material-icons-round light-icon">light_mode</i>
+                        <i class="material-icons-round dark-icon">dark_mode</i>
+                    </button>
+                    
+                    {% if not session.get('user_id') %}
+                    <div class="auth-buttons">
+                        <a href="{{ url_for('signup_handler') }}" class="auth-btn signup-btn">Sign Up</a>
+                        <a href="{{ url_for('login_handler') }}" class="auth-btn login-btn">Log In</a>
+                    </div>
+                    {% else %}
+                    <!-- User Profile in Top Right Corner -->
+                    <div class="topbar-user-profile">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <span class="user-initial">{{ current_user.name[0] if current_user and current_user.name else 'U' }}</span>
+                            </div>
+                            <span class="user-name">{{ current_user.name }}</span>
+                            <i class="material-icons-round dropdown-icon">expand_more</i>
+                        </div>
+                        <div class="user-dropdown">
+                            <a href="/profile" class="dropdown-item">
+                                <i class="material-icons-round">person</i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="/settings" class="dropdown-item">
+                                <i class="material-icons-round">settings</i>
+                                <span>Settings</span>
+                            </a>
+                            {% if session.get('is_admin') %}
+                            <a href="/admin" class="dropdown-item">
+                                <i class="material-icons-round">admin_panel_settings</i>
+                                <span>Admin Dashboard</span>
+                            </a>
+                            {% endif %}
+                            <div class="dropdown-divider"></div>
+                            <a href="/logout" class="dropdown-item">
+                                <i class="material-icons-round">logout</i>
+                                <span>Log out</span>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="featured-content">
+                <div class="top-bar-gradient"></div>
+                {% block content %}{% endblock %}
+            </div>
+
+            <!-- Main Footer -->
+            <footer class="main-footer">
+                <div class="footer-content">
+                    <div class="footer-col">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Jobs</a></li>
+                            <li><a href="#">For the Record</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="footer-col">
+                            <h4>Communities</h4>
+                            <ul>
+                                <li><a href="#">For Artists</a></li>
+                                <li><a href="#">Developers</a></li>
+                                <li><a href="#">Advertising</a></li>
+                                <li><a href="#">Investors</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-col">
+                            <h4>Useful Links</h4>
+                            <ul>
+                                <li><a href="#">Support</a></li>
+                                <li><a href="#">Web Player</a></li>
+                                <li><a href="#">Premium</a></li>
+                                <li><a href="#">Mobile App</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Connect With Us</h4>
+                        <div class="footer-social">
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-legal">
+                        <a href="#">Legal</a>
+                        <a href="#">Privacy Center</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Cookies</a>
+                        <a href="#">About Ads</a>
+                    </div>
+                    <div class="footer-copyright">
+                        © 2023 Spotify DataBase. All rights reserved.
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Audio player and JavaScript includes -->
+    <audio id="audioPlayer" preload="metadata"></audio>
+
+    <!-- Player Bar - Apple Music Style (Mobile Only) -->
+    
+    <!-- Loading indicator for audio playback -->
+    <div class="loading-indicator" style="display: none; position: fixed; bottom: 70px; right: 20px; background: rgba(0,0,0,0.7); color: white; padding: 10px; border-radius: 5px; z-index: 1000;">
+        Loading audio...
+    </div>
+
+    <!-- App Scripts -->
+    <script src="{{ url_for('static', filename='js/apple-player.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/playback.js') }}"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        // Initialize playbar controls
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioPlayer = document.getElementById('audioPlayer');
+            const playPauseButton = document.getElementById('playPauseButton');
+            const playPauseIcon = document.getElementById('playPauseIcon');
+            const prevButton = document.getElementById('previousButton');
+            const nextButton = document.getElementById('nextButton');
+            const progressBar = document.querySelector('.progress');
+            const currentTimeDisplay = document.querySelector('.current-time');
+            const totalTimeDisplay = document.querySelector('.total-time');
+            const muteButton = document.getElementById('muteButton');
+            const volumeIcon = document.getElementById('volumeIcon');
+            const volumeLevel = document.getElementById('volumeLevel');
+            const nowPlayingBar = document.querySelector('.now-playing-bar');
+            
+            // Ensure the playbar is visible
+            if (nowPlayingBar) {
+                nowPlayingBar.style.display = 'flex';
+                nowPlayingBar.style.visibility = 'visible';
+                nowPlayingBar.style.opacity = '1';
+            }
+            
+            // Update progress bar
+            if (audioPlayer) {
+                audioPlayer.addEventListener('timeupdate', function() {
+                    if (audioPlayer.duration) {
+                        const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                        if (progressBar) progressBar.style.width = progress + '%';
+                        
+                        // Update current time
+                        if (currentTimeDisplay) currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
+                    }
+                });
+                
+                // Load metadata
+                audioPlayer.addEventListener('loadedmetadata', function() {
+                    if (totalTimeDisplay) totalTimeDisplay.textContent = formatTime(audioPlayer.duration);
+                });
+                
+                // Add error handling
+                audioPlayer.addEventListener('error', function(e) {
+                    console.error('Audio player error:', e);
+                    if (playPauseIcon) playPauseIcon.textContent = 'play_arrow';
+                });
+            }
+            
+            // Play/Pause button
+            if (playPauseButton) {
+                playPauseButton.addEventListener('click', function() {
+                    if (!audioPlayer) return;
+                    
+                    if (audioPlayer.paused) {
+                        if (audioPlayer.src) {
+                            audioPlayer.play()
+                                .then(() => {
+                                    if (playPauseIcon) playPauseIcon.textContent = 'pause';
+                                })
+                                .catch(err => {
+                                    console.error('Error playing audio:', err);
+                                });
+                        } else {
+                            // No song loaded
+                            alert('Please select a song to play first');
+                        }
+                    } else {
+                        audioPlayer.pause();
+                        if (playPauseIcon) playPauseIcon.textContent = 'play_arrow';
+                    }
+                });
+            }
+            
+            // Previous button
+            if (prevButton) {
+                prevButton.addEventListener('click', function() {
+                    if (typeof playPreviousSong === 'function') {
+                        playPreviousSong();
+                    } else {
+                        console.log('Previous song function not available');
+                    }
+                });
+            }
+            
+            // Next button
+            if (nextButton) {
+                nextButton.addEventListener('click', function() {
+                    if (typeof playNextSong === 'function') {
+                        playNextSong();
+                    } else {
+                        console.log('Next song function not available');
+                    }
+                });
+            }
+            
+            // Mute button
+            if (muteButton && audioPlayer) {
+                muteButton.addEventListener('click', function() {
+                    if (audioPlayer.volume > 0) {
+                        audioPlayer.volume = 0;
+                        if (volumeIcon) volumeIcon.textContent = 'volume_off';
+                        if (volumeLevel) volumeLevel.style.width = '0%';
+                    } else {
+                        audioPlayer.volume = 0.7;
+                        if (volumeIcon) volumeIcon.textContent = 'volume_up';
+                        if (volumeLevel) volumeLevel.style.width = '70%';
+                    }
+                });
+            }
+            
+            // Click on progress bar to seek
+            const progressContainer = document.querySelector('.progress-bar');
+            if (progressContainer && audioPlayer) {
+                progressContainer.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const clickPosition = (e.clientX - rect.left) / rect.width;
+                    
+                    if (audioPlayer.src && !isNaN(audioPlayer.duration)) {
+                        audioPlayer.currentTime = clickPosition * audioPlayer.duration;
+                    }
+                });
+            }
+            
+            // Click on volume bar to change volume
+            const volumeBar = document.querySelector('.volume-bar');
+            if (volumeBar && audioPlayer) {
+                volumeBar.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const clickPosition = (e.clientX - rect.left) / rect.width;
+                    
+                    audioPlayer.volume = Math.max(0, Math.min(1, clickPosition));
+                    if (volumeLevel) volumeLevel.style.width = (audioPlayer.volume * 100) + '%';
+                    
+                    if (volumeIcon) {
+                        if (audioPlayer.volume === 0) {
+                            volumeIcon.textContent = 'volume_off';
+                        } else if (audioPlayer.volume < 0.5) {
+                            volumeIcon.textContent = 'volume_down';
+                        } else {
+                            volumeIcon.textContent = 'volume_up';
+                        }
+                    }
+                });
+            }
+            
+            // Format time in MM:SS
+            function formatTime(seconds) {
+                if (isNaN(seconds)) return "0:00";
+                
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return minutes + ":" + (secs < 10 ? "0" : "") + secs;
+            }
+        });
+
+        // Force playbar visibility
+        const nowPlayingBar = document.querySelector('.now-playing-bar');
+        if (nowPlayingBar) {
+            nowPlayingBar.style.position = 'fixed';
+            nowPlayingBar.style.bottom = '0';
+            nowPlayingBar.style.left = '0';
+            nowPlayingBar.style.right = '0';
+            nowPlayingBar.style.zIndex = '9999';
+            nowPlayingBar.style.display = 'flex';
+            nowPlayingBar.style.visibility = 'visible';
+            nowPlayingBar.style.opacity = '1';
+        }
+
+        // Make sure the play button is properly styled
+        const playPauseButton = document.getElementById('playPauseButton');
+        if (playPauseButton) {
+            playPauseButton.style.backgroundColor = '#1ed760';
+            playPauseButton.style.color = 'black';
+            playPauseButton.style.width = '40px';
+            playPauseButton.style.height = '40px';
+            playPauseButton.style.display = 'flex';
+            playPauseButton.style.alignItems = 'center';
+            playPauseButton.style.justifyContent = 'center';
+        }
+
+        // Fix admin links
+        const adminLinks = document.querySelectorAll('a[href*="admin/dashboard"]');
+        adminLinks.forEach(link => {
+            link.href = '/admin';
+        });
+
+        // Ensure the player is accessible globally
+        window.player = {
+            loadAndPlaySong: function(songId) {
+                if (!songId) return;
+                
+                // Fetch song data
+                fetch(`/song/${songId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Failed to fetch song data: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(songData => {
+                        const audioPlayer = document.getElementById('audioPlayer');
+                        if (!audioPlayer) {
+                            console.error('Audio player element not found');
+                            return;
+                        }
+                        
+                        // Set audio source
+                        audioPlayer.src = songData.audio_url;
+                        
+                        // Update player UI
+                        const currentSongTitle = document.getElementById('currentSongTitle');
+                        const currentSongArtist = document.getElementById('currentSongArtist');
+                        const currentSongCover = document.getElementById('currentSongCover');
+                        
+                        if (currentSongTitle) currentSongTitle.textContent = songData.title;
+                        if (currentSongArtist) currentSongArtist.textContent = songData.artist;
+                        if (currentSongCover) currentSongCover.src = songData.cover_image_url;
+                        
+                        // Play the song
+                        audioPlayer.play()
+                            .then(() => {
+                                const playPauseIcon = document.getElementById('playPauseIcon');
+                                if (playPauseIcon) playPauseIcon.textContent = 'pause';
+                            })
+                            .catch(error => {
+                                console.error('Error playing song:', error);
+                                alert('Error playing song. Please try again.');
+                            });
+                    })
+                    .catch(error => {
+                        console.error('Error loading song:', error);
+                        alert('Error loading song data. Please try again.');
+                    });
+            },
+            togglePlayPause: function() {
+                const audioPlayer = document.getElementById('audioPlayer');
+                const playPauseIcon = document.getElementById('playPauseIcon');
+                
+                if (!audioPlayer) return;
+                
+                if (audioPlayer.paused) {
+                    if (audioPlayer.src) {
+                        audioPlayer.play()
+                            .then(() => {
+                                if (playPauseIcon) playPauseIcon.textContent = 'pause';
+                            })
+                            .catch(err => {
+                                console.error('Error playing audio:', err);
+                            });
+                    } else {
+                        alert('Please select a song to play first');
+                    }
+                } else {
+                    audioPlayer.pause();
+                    if (playPauseIcon) playPauseIcon.textContent = 'play_arrow';
+                }
+            }
+        };
+    </script>
+    {% block additional_scripts %}{% endblock %}
+</body>
+</html>

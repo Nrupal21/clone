@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Song Details{% endblock %}
+
+{% block styles %}
+<style>
+    .song-card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    .card-header {
+        background-color: #1DB954;
+        color: white;
+        padding: 15px;
+        border-radius: 10px 10px 0 0;
+    }
+    .song-art {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .song-info-label {
+        font-weight: bold;
+        color: #444;
+    }
+    .song-info-value {
+        margin-bottom: 15px;
+    }
+    .badge-explicit {
+        background-color: #dc3545;
+    }
+    .playlist-item {
+        border-left: 3px solid #1DB954;
+        padding-left: 15px;
+        margin-bottom: 10px;
+    }
+    .artist-chip {
+        background-color: #f8f9fa;
+        border-radius: 20px;
+        padding: 5px 10px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        display: inline-block;
+        font-size: 0.9rem;
+    }
+    .stats-card {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    .btn-spotify {
+        background-color: #1DB954;
+        color: white;
+    }
+    .btn-spotify:hover {
+        background-color: #1aa34a;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Song Details</h1>
+        <a href="{{ url_for('admin_songs') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Songs
+        </a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <div class="card song-card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">{{ song.title }}</h4>
+                <div>
+                    <a href="{{ url_for('admin_edit_song', song_id=song._id) }}" class="btn btn-sm btn-light">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    {% if song.is_active %}
+                    <a href="#" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deactivateModal">
+                        <i class="fas fa-ban"></i> Deactivate
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('admin_activate_song', song_id=song._id) }}" class="btn btn-sm btn-success">
+                        <i class="fas fa-check"></i> Activate
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <img src="{{ song.artwork_url or '/static/img/default_album.jpg' }}" alt="{{ song.title }}" class="song-art mb-3">
+                    
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-spotify btn-sm" onclick="playSongPreview()">
+                            <i class="fas fa-play me-1"></i> Play Preview
+                        </button>
+                        <a href="{{ song.file_url }}" class="btn btn-outline-secondary btn-sm" target="_blank">
+                            <i class="fas fa-download me-1"></i> Download File
+                        </a>
+                    </div>
+                    
+                    <div class="stats-card mt-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5>{{ song.play_count|default(0) }}</h5>
+                                <small class="text-muted">Plays</small>
+                            </div>
+                            <div class="col-6">
+                                <h5>{{ song.likes|default(0) }}</h5>
+                                <small class="text-muted">Likes</small>
+                            </div>
+                        </div>
+                        <div class="progress mt-2">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ song.popularity|default(0)*100 }}%" 
+                                aria-valuenow="{{ song.popularity|default(0)*100 }}" aria-valuemin="0" aria-valuemax="100">
+                                Popularity: {{ (song.popularity|default(0)*100)|int }}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="song-info-label">Song ID</p>
+                            <p class="song-info-value">{{ song._id }}</p>
+                            
+                            <p class="song-info-label">Title</p>
+                            <p class="song-info-value">{{ song.title }}
+                            {% if song.explicit %}
+                                <span class="badge badge-explicit ms-2">EXPLICIT</span>
+                            {% endif %}
+                            </p>
+                            
+                            <p class="song-info-label">Artists</p>
+                            <p class="song-info-value">
+                                {% for artist in song.artists %}
+                                <span class="artist-chip">
+                                    {{ artist }}
+                                </span>
+                                {% endfor %}
+                            </p>
+                            
+                            <p class="song-info-label">Album</p>
+                            <p class="song-info-value">{{ song.album }}</p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <p class="song-info-label">Duration</p>
+                            <p class="song-info-value">{{ song.duration|default(0)|int // 60 }}:{{ '%02d'|format(song.duration|default(0)|int % 60) }}</p>
+                            
+                            <p class="song-info-label">Genre</p>
+                            <p class="song-info-value">{{ song.genre|default('N/A') }}</p>
+                            
+                            <p class="song-info-label">Release Date</p>
+                            <p class="song-info-value">{{ song.release_date|default('Unknown') }}</p>
+                            
+                            <p class="song-info-label">Status</p>
+                            <p class="song-info-value">
+                                {% if song.is_active %}
+                                <span class="badge bg-success">Active</span>
+                                {% else %}
+                                <span class="badge bg-danger">Inactive</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h5>Song Description</h5>
+                    <p>{{ song.description or 'No description available' }}</p>
+                    
+                    <hr>
+                    
+                    <h5>Featured In Playlists</h5>
+                    {% if playlists %}
+                        <div class="list-group">
+                            {% for playlist in playlists %}
+                            <div class="playlist-item">
+                                <a href="{{ url_for('admin_view_playlist', playlist_id=playlist._id) }}" class="text-decoration-none">
+                                    <strong>{{ playlist.name }}</strong>
+                                </a>
+                                <small class="text-muted d-block">Created by: {{ playlist.user.username }}</small>
+                                <small class="text-muted">{{ playlist.song_count }} songs • {{ playlist.follower_count }} followers</small>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted">This song is not in any playlists.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Deactivate Song Modal -->
+{% if song.is_active %}
+<div class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="deactivateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deactivateModalLabel">Confirm Deactivation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to deactivate this song?</p>
+                <p><strong>Title:</strong> {{ song.title }}</p>
+                <p><strong>Artists:</strong> {{ song.artists|join(', ') }}</p>
+                <p><strong>This will make the song unavailable to users.</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form action="{{ url_for('admin_deactivate_song', song_id=song._id) }}" method="POST">
+                    <button type="submit" class="btn btn-danger">Confirm Deactivation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function playSongPreview() {
+        // Create audio element if not exists
+        let audioPlayer = document.getElementById('audioPlayer');
+        if (!audioPlayer) {
+            audioPlayer = document.createElement('audio');
+            audioPlayer.id = 'audioPlayer';
+            audioPlayer.controls = false;
+            document.body.appendChild(audioPlayer);
+        }
+        
+        // Set source and play
+        audioPlayer.src = "{{ song.preview_url or song.file_url }}";
+        audioPlayer.play();
+        
+        // Update play button
+        const playButton = document.querySelector('.btn-spotify');
+        playButton.innerHTML = '<i class="fas fa-pause me-1"></i> Pause Preview';
+        playButton.onclick = pauseSongPreview;
+    }
+    
+    function pauseSongPreview() {
+        const audioPlayer = document.getElementById('audioPlayer');
+        if (audioPlayer) {
+            audioPlayer.pause();
+            
+            // Update play button
+            const playButton = document.querySelector('.btn-spotify');
+            playButton.innerHTML = '<i class="fas fa-play me-1"></i> Play Preview';
+            playButton.onclick = playSongPreview;
+        }
+    }
+</script>
+{% endblock %} 

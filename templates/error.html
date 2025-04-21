@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block title %}Error{% endblock %}
+
+{% block content %}
+<h1>Error</h1>
+<p>{{ error }}</p>
+<a href="{{ url_for('home') }}" class="btn-home">Go to Home</a>
+{% endblock %}
+
+{% block additional_scripts %}
+<style>
+.error-page {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: radial-gradient(circle at center, var(--background-elevated-base) 0%, var(--background-base) 100%);
+}
+
+.error-container {
+    text-align: center;
+    max-width: 600px;
+    padding: 48px;
+    background: var(--background-elevated-base);
+    border-radius: 8px;
+    box-shadow: 0 4px 60px rgba(0,0,0,.5);
+}
+
+.error-icon {
+    margin-bottom: 24px;
+}
+
+.error-icon .material-icons {
+    font-size: 64px;
+    color: var(--text-subdued);
+}
+
+.error-container h1 {
+    font-size: 96px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 16px;
+    background: linear-gradient(to right, #1DB954, #1ed760);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.error-container h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.error-message {
+    color: var(--text-subdued);
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 32px;
+}
+
+.error-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.btn-home,
+.btn-refresh {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 500px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-home {
+    background-color: var(--essential-bright-accent);
+    color: black;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-home:hover {
+    background-color: var(--essential-bright-accent-hover);
+    transform: scale(1.04);
+}
+
+.btn-refresh {
+    background-color: transparent;
+    color: var(--text-base);
+    border: 1px solid var(--text-subdued);
+}
+
+.btn-refresh:hover {
+    border-color: var(--text-base);
+    transform: scale(1.04);
+}
+
+.help-section {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--background-tinted-base);
+}
+
+.help-section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.help-section p {
+    color: var(--text-subdued);
+    margin-bottom: 16px;
+}
+
+.contact-support {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--essential-bright-accent);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+.contact-support:hover {
+    color: var(--essential-bright-accent-hover);
+}
+
+@media (max-width: 768px) {
+    .error-page {
+        padding: 16px;
+    }
+
+    .error-container {
+        padding: 32px 24px;
+    }
+
+    .error-container h1 {
+        font-size: 72px;
+    }
+
+    .error-actions {
+        flex-direction: column;
+    }
+
+    .btn-home,
+    .btn-refresh {
+        width: 100%;
+        justify-content: center;
+    }
+}
+</style>
+{% endblock %}

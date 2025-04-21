@@ -1,0 +1,3 @@
+[
+{"name": "Admin", "email": "admin@admin.com", "password": "scrypt:32768:8:1$TW0KCgq5hQn5aijY$254bf2d1c1a2ec098e873a7230df88045f4e43161ed31b869136a2eb2a68025ea03f38d832cda0c9781049ef13e51c1a7e0ddaafef51bcac610312deeea08945", "is_admin": true, "created_at": {"$date": 1745137060444}, "_id": {"$oid": "6804ada483046f4c515d255e"}}
+]

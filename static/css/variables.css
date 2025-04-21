@@ -1,0 +1,324 @@
+/*****************************************************************************
+ * CSS VARIABLES - APPLE MUSIC INSPIRED THEME
+ *****************************************************************************/
+
+:root {
+    /* Brand Colors */
+    --apple-red: #ff3b30;
+    --apple-red-hover: #ff5146;
+    --apple-red-active: #ff1f14;
+    --apple-dark: #1a1a1a;
+    --apple-darker: #000000;
+    --apple-light: #f7f7f7;
+    --apple-medium: #333333;
+    --apple-background: #fff;
+    --apple-card: #f8f8f8;
+    --apple-card-hover: #f2f2f2;
+    --apple-border: #e5e5e5;
+
+    /* Text Colors */
+    --text-base: #1a1a1a;
+    --text-subdued: #666666;
+    --text-bright: #000000;
+    --text-negative: #fa2f45;
+    --text-warning: #ff9500;
+    --text-positive: #34c759;
+    --text-announcement: #007aff;
+    --text-success: #34c759;
+    --text-disabled: #999999;
+    --text-inverse: #ffffff;
+
+    /* Background Colors */
+    --background-base: var(--apple-background);
+    --background-highlight: #f2f2f2;
+    --background-press: #e8e8e8;
+    --background-elevated-base: #ffffff;
+    --background-elevated-highlight: #f5f5f5;
+    --background-elevated-press: #ebebeb;
+    --background-tinted-base: #f9f9f9;
+    --background-tinted-highlight: #f0f0f0;
+    --background-unsafe: #fff0f0;
+    --background-noise: rgba(0, 0, 0, 0.03);
+    --background-subtle: rgba(0, 0, 0, 0.05);
+    --background-dark: #1a1a1a;
+
+    /* Essential Colors */
+    --essential-base: #1a1a1a;
+    --essential-subdued: #666666;
+    --essential-bright-accent: var(--apple-red);
+    --essential-bright-accent-hover: var(--apple-red-hover);
+    --essential-negative: #fa2f45;
+    --essential-warning: #ff9500;
+    --essential-positive: #34c759;
+    --essential-announcement: #007aff;
+    --essential-success: #34c759;
+    --essential-disabled: #999999;
+    --essential-error: #fa2f45;
+
+    /* Decorative Colors */
+    --decorative-base: #1a1a1a;
+    --decorative-subdued: #f2f2f2;
+    --decorative-category-1: #fa2f45;
+    --decorative-category-2: #34c759;
+    --decorative-category-3: #007aff;
+    --decorative-category-4: #ff9500;
+    --decorative-category-5: #af52de;
+    --decorative-category-6: #ff2d55;
+
+    /* Layout & Sizing */
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 80px;
+    --topbar-height: 64px;
+    --player-height: 90px;
+    --player-height-mobile: 70px;
+    --mini-player-height: 72px;
+    --mobile-player-height: 64px;
+    --card-height: 280px;
+    
+    /* Spacing */
+    --space-xxs: 4px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-xxl: 48px;
+    
+    /* Borders & Effects */
+    --border-radius-small: 8px;
+    --border-radius-medium: 12px;
+    --border-radius-large: 16px;
+    --border-radius-pill: 500px;
+    --border-thin: 1px solid var(--apple-border);
+    --border-medium: 2px solid var(--apple-border);
+    --border-heavy: 3px solid var(--apple-border);
+    
+    /* Shadows */
+    --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-large: 0 16px 24px rgba(0, 0, 0, 0.1);
+    --shadow-focus: 0 0 0 2px var(--essential-bright-accent);
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-heavy: 0 8px 24px rgba(0, 0, 0, 0.15);
+    
+    /* Z-index Layers */
+    --z-index-base: 0;
+    --z-index-content: 10;
+    --z-index-sidebar: 3;
+    --z-index-topbar: 2;
+    --z-index-popup: 200;
+    --z-index-player: 3000;
+    --z-index-modal: 4000;
+    --z-index-toast: 5000;
+    --z-index-dropdown: 1000;
+    --z-index-overlay: 10;
+    --z-index-maximum: 9999;
+    --z-index-navbar: 2000;
+    
+    /* Transitions */
+    --transition-fast: all 0.1s ease;
+    --transition-standard: all 0.3s ease;
+    --transition-slow: all 0.5s ease;
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    
+    /* Fonts */
+    --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-md: 16px;
+    --font-size-lg: 20px;
+    --font-size-xl: 24px;
+    --font-size-xxl: 32px;
+    --font-size-xxxl: 40px;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+    --font-weight-black: 800;
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+    --line-height-loose: 1.8;
+    
+    /* Dark mode specific variables */
+    --dark-background-base: #1a1a1a;
+    --dark-background-elevated: #252525;
+    --dark-text-base: #ffffff;
+    --dark-text-subdued: #a0a0a0;
+    --dark-border: #333333;
+
+    /* Player-specific variables */
+    --player-control-bg: var(--background-tinted-base);
+    --player-control-hover: var(--background-tinted-highlight);
+    --player-control-color: var(--text-base);
+    --player-control-color-subdued: var(--text-subdued);
+    --player-progress-bg: rgba(127, 127, 127, 0.2);
+    --player-progress-fill: var(--apple-red);
+    --player-handle-color: var(--apple-red);
+
+    /* Spotify-specific variables */
+    --spotify-green: #1DB954;
+    --spotify-green-hover: #1ED760;
+    --spotify-black: #191414;
+    --spotify-gray: #535353;
+    --spotify-light-gray: #B3B3B3;
+    
+    /* Apple Music Inspired Colors */
+    --brand-color: #FF3B30;
+    --brand-color-hover: #ff5147;
+    --text-color: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --surface-color: rgba(255, 255, 255, 0.1);
+    --surface-color-hover: rgba(255, 255, 255, 0.15);
+    --accent-color: #FF3B30;
+    
+    /* Text Colors */
+    --spotify-text: #FFFFFF;
+    --spotify-text-secondary: #B3B3B3;
+    --spotify-text-disabled: #535353;
+    
+    /* Background Colors */
+    --spotify-bg-base: #121212;
+    --spotify-bg-highlight: #1A1A1A;
+    --spotify-bg-press: #000000;
+    --spotify-bg-elevated-base: #242424;
+    --spotify-bg-elevated-highlight: #2A2A2A;
+    --spotify-bg-elevated-press: #171717;
+    --spotify-bg-tinted-base: hsla(0,0%,100%,.07);
+    --spotify-bg-tinted-highlight: hsla(0,0%,100%,.1);
+    --spotify-bg-tinted-press: hsla(0,0%,100%,.04);
+    
+    /* Essential Colors */
+    --spotify-essential-negative: #E91429;
+    --spotify-essential-warning: #FFCE32;
+    --spotify-essential-positive: #1DB954;
+    --spotify-essential-announcement: #FC8D0A;
+    --spotify-essential-announcement-subdued: rgba(252, 141, 10, 0.7);
+    
+    /* Decorative Colors */
+    --spotify-decorative-red: #E91429;
+    --spotify-decorative-orange: #FF8200;
+    --spotify-decorative-yellow: #F8D145;
+    --spotify-decorative-green: #1DB954;
+    --spotify-decorative-blue: #148AD2;
+    --spotify-decorative-purple: #AF2996;
+    --spotify-decorative-pink: #FF3B30;
+    
+    /* Layout & Sizing */
+    --spotify-topbar-height: 64px;
+    --spotify-playbar-height: 90px;
+    --spotify-sidebar-width: 240px;
+    --spotify-sidebar-width-sm: 72px;
+    
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-xxl: 48px;
+    
+    /* Borders & Effects */
+    --spotify-border-color: rgba(255, 255, 255, 0.1);
+    --spotify-border-radius: 8px;
+    --spotify-hover-opacity: 0.8;
+    
+    /* Shadows */
+    --spotify-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --spotify-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --spotify-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
+    
+    /* Z-index Layers */
+    --z-index-dropdown: 100;
+    --z-index-sticky: 200;
+    --z-index-fixed: 300;
+    --z-index-modal: 400;
+    --z-index-popup: 500;
+    --z-index-toast: 600;
+    
+    /* Transitions */
+    --transition-fast: 0.1s;
+    --transition-medium: 0.2s;
+    --transition-slow: 0.3s;
+    
+    /* Fonts */
+    --font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+}
+
+/* Global Styles */
+body {
+    font-family: var(--font-family);
+    color: var(--text-base);
+    background-color: var(--background-base);
+    margin: 0;
+    padding: 0;
+    line-height: var(--line-height-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Improved Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius-small);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Apple Music style buttons */
+.btn {
+    background-color: var(--background-elevated-base);
+    color: var(--text-base);
+    border: var(--border-thin);
+    border-radius: var(--border-radius-pill);
+    padding: var(--space-xs) var(--space-md);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--essential-bright-accent);
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--essential-bright-accent-hover);
+}
+
+.btn-secondary {
+    background-color: var(--background-elevated-base);
+    color: var(--text-base);
+}
+
+.btn-secondary:hover {
+    background-color: var(--background-elevated-highlight);
+}
+
+/* Dark theme variables */
+.darkTheme {
+    --spotify-green: #1DB954;
+    --spotify-green-hover: #1ED760;
+    --spotify-black: #191414;
+    --spotify-gray: #535353;
+    --spotify-light-gray: #B3B3B3;
+} 

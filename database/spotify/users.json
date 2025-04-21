@@ -1,0 +1,3 @@
+[
+{"_id": "6803b81e77d6a92606e6c843", "username": "admin", "name": "Administrator", "email": "admin@example.com", "password": {"$binary": {"base64": "JDJiJDEyJC9lWFZGeXJIOExVMnFmM29zcWk0NmVPSW40OXguR1JrZ1FCTmlSbHI2MnAxSndnR3l2QVpl", "subType": "00"}}, "created_on": {"$date": 1745094006476}, "is_admin": true}
+]

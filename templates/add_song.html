@@ -1,0 +1,173 @@
+<!-- templates/add_song.html -->
+{% extends 'base.html' %}
+
+{% block title %}Add New Song{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="content-header">
+        <h1>Add New Song</h1>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn-secondary">Back to Dashboard</a>
+    </div>
+
+    <div class="form-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('admin_upload_song') }}" method="POST" enctype="multipart/form-data" class="add-song-form">
+            <div class="form-group">
+                <label for="title">Song Title *</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="artist">Artist *</label>
+                <input type="text" id="artist" name="artist" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="mood">Mood *</label>
+                <select id="mood" name="mood" required>
+                    <option value="">Select a mood</option>
+                    <option value="Happy">Happy</option>
+                    <option value="Sad">Sad</option>
+                    <option value="Energetic">Energetic</option>
+                    <option value="Chill">Chill</option>
+                    <option value="Focus">Focus</option>
+                    <option value="Workout">Workout</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="audioFile">Audio File (MP3) *</label>
+                <input type="file" id="audioFile" name="audioFile" accept=".mp3" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="coverImage">Cover Image</label>
+                <input type="file" id="coverImage" name="coverImage" accept="image/*">
+                <small>Recommended size: 300x300 pixels. Leave empty to use default cover.</small>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Upload Song</button>
+                <a href="{{ url_for('admin_dashboard') }}" class="btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+.content-wrapper {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    background-color: var(--background-elevated-base);
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.add-song-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+}
+
+.form-group input, .form-group select {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--essential-subdued);
+    background-color: var(--background-base);
+    color: var(--text-base);
+}
+
+.form-group input[type="file"] {
+    padding: 8px 0;
+}
+
+.form-group small {
+    color: var(--text-subdued);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.btn-primary {
+    background-color: var(--essential-bright-accent);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-base);
+    padding: 10px 20px;
+    border: 1px solid var(--essential-subdued);
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background-color: #1ed75fe0;
+}
+
+.btn-secondary:hover {
+    background-color: var(--background-highlight);
+}
+
+.flash-message {
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.success {
+    background-color: rgba(30, 215, 96, 0.2);
+    color: #1ed760;
+}
+
+.error {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #ff5555;
+}
+</style>
+{% endblock %}

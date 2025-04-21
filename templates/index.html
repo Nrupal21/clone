@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Spotify Clone{% endblock %}
+
+{% block content %}
+<div class="apple-music-layout">
+    <!-- Main content container -->
+    <div class="main-content">
+        <!-- Featured section header -->
+        <div class="section-header">
+            <h1 class="section-title">New</h1>
+        </div>
+
+        <!-- Hot Playlist Section -->
+        <div class="music-grid">
+            <div class="grid-column">
+                <div class="playlist-card hot-playlist">
+                    <div class="playlist-header">
+                        <span class="label">HOT PLAYLIST</span>
+                        <h3 class="playlist-title">Friday Feeling</h3>
+                        <p class="playlist-subtitle">Spotify Pop</p>
+                    </div>
+                    <div class="playlist-cover">
+                        <img src="{{ url_for('static', filename='img/playlist-covers/friday-feeling.jpg') }}" alt="Friday Feeling Playlist">
+                        <div class="playlist-description">
+                            <p>Songs for that upbeat weekend vibe—no matter what day it is.</p>
+                        </div>
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-column">
+                <div class="playlist-card updated-playlist">
+                    <div class="playlist-header">
+                        <span class="label">UPDATED PLAYLIST</span>
+                        <h3 class="playlist-title">New Music Daily</h3>
+                        <p class="playlist-subtitle">Spotify Music</p>
+                    </div>
+                    <div class="playlist-cover">
+                        <img src="{{ url_for('static', filename='img/playlist-covers/new-music-daily.jpg') }}" alt="New Music Daily Playlist">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Latest Songs Section -->
+        <div class="section">
+            <div class="section-header-with-link">
+                <h2 class="section-title">Latest Songs</h2>
+                <a href="{{ url_for('search') }}?sort=newest" class="section-link">See All</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-content">
+                    {% for song in trending_songs[:6] %}
+                    <div class="song-card">
+                        <div class="song-artwork">
+                            <img src="{{ url_for('static', filename=song.image_path) if song.image_path else url_for('static', filename='img/default-cover.jpg') }}" alt="{{ song.title }}">
+                            <div class="play-overlay">
+                                <button class="play-button" data-song-id="{{ song._id }}">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="song-info">
+                            <h3 class="song-title">{{ song.title }}</h3>
+                            <p class="song-artist">{{ song.artist }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- New Releases Section -->
+        <div class="section">
+            <div class="section-header-with-link">
+                <h2 class="section-title">New Releases</h2>
+                <a href="{{ url_for('search') }}?sort=newest" class="section-link">See All</a>
+            </div>
+            <div class="album-grid">
+                {% for song in all_songs[:8] %}
+                <div class="album-card">
+                    <div class="album-artwork">
+                        <img src="{{ url_for('static', filename=song.image_path) if song.image_path else url_for('static', filename='img/default-cover.jpg') }}" alt="{{ song.title }}">
+                        <div class="play-overlay">
+                            <button class="play-button" data-song-id="{{ song._id }}">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="album-info">
+                        <h3 class="album-title">{{ song.title }}</h3>
+                        <p class="album-artist">{{ song.artist }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Playlists by Mood -->
+        {% for mood, songs in songs_by_mood.items() %}
+        {% if songs|length > 0 %}
+        <div class="section">
+            <div class="section-header-with-link">
+                <h2 class="section-title">{{ mood }}</h2>
+                <a href="{{ url_for('mood_songs', mood_name=mood) }}" class="section-link">See All</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-content">
+                    {% for song in songs[:6] %}
+                    <div class="song-card">
+                        <div class="song-artwork">
+                            <img src="{{ url_for('static', filename=song.image_path) if song.image_path else url_for('static', filename='img/default-cover.jpg') }}" alt="{{ song.title }}">
+                            <div class="play-overlay">
+                                <button class="play-button" data-song-id="{{ song._id }}">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="song-info">
+                            <h3 class="song-title">{{ song.title }}</h3>
+                            <p class="song-artist">{{ song.artist }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        <!-- Listen Now Section -->
+        <div class="section listen-now-section">
+            <div class="section-header">
+                <h2 class="section-title">Listen Now</h2>
+            </div>
+            <div class="listen-now-grid">
+                {% for song in trending_songs[:4] %}
+                <div class="listen-now-card">
+                    <div class="listen-now-artwork">
+                        <img src="{{ url_for('static', filename=song.image_path) if song.image_path else url_for('static', filename='img/default-cover.jpg') }}" alt="{{ song.title }}">
+                        <div class="play-overlay">
+                            <button class="play-button" data-song-id="{{ song._id }}">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="listen-now-info">
+                        <h3 class="listen-now-title">{{ song.title }}</h3>
+                        <p class="listen-now-artist">{{ song.artist }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Category Pills Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Browse by Category</h2>
+            </div>
+            <div class="category-pills">
+                {% for mood in songs_by_mood.keys() %}
+                <a href="{{ url_for('mood_songs', mood_name=mood) }}" class="category-pill">{{ mood }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Setup play buttons for songs
+    const playButtons = document.querySelectorAll('.play-button');
+    playButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const songId = this.getAttribute('data-song-id');
+            if (songId) {
+                console.log('Play button clicked for song ID:', songId);
+                // Try different player APIs that might be available
+                if (window.player && typeof window.player.loadAndPlaySong === 'function') {
+                    window.player.loadAndPlaySong(songId);
+                } else if (typeof playSong === 'function') {
+                    playSong(songId);
+                } else {
+                    // Direct approach - fetch the song data and play
+                    fetch(`/song/${songId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const audioPlayer = document.getElementById('audioPlayer');
+                            if (audioPlayer) {
+                                audioPlayer.src = data.audio_url;
+                                audioPlayer.play()
+                                    .then(() => {
+                                        // Update UI elements if they exist
+                                        if (document.getElementById('currentSongTitle')) {
+                                            document.getElementById('currentSongTitle').textContent = data.title;
+                                        }
+                                        if (document.getElementById('currentSongArtist')) {
+                                            document.getElementById('currentSongArtist').textContent = data.artist;
+                                        }
+                                        if (document.getElementById('currentSongCover')) {
+                                            document.getElementById('currentSongCover').src = data.cover_image_url;
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error playing song:', error);
+                                        alert('Error playing song. Please try again.');
+                                    });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching song data:', error);
+                            alert('Error loading song data. Please try again.');
+                        });
+                }
+            }
+        });
+    });
+
+    // Initialize horizontal scrolling for scroll-content
+    const scrollContainers = document.querySelectorAll('.horizontal-scroll');
+    scrollContainers.forEach(container => {
+        const scrollContent = container.querySelector('.scroll-content');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        container.addEventListener('mousedown', (e) => {
+            isDown = true;
+            container.classList.add('active');
+            startX = e.pageX - container.offsetLeft;
+            scrollLeft = container.scrollLeft;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isDown = false;
+            container.classList.remove('active');
+        });
+
+        container.addEventListener('mouseup', () => {
+            isDown = false;
+            container.classList.remove('active');
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startX) * 2;
+            container.scrollLeft = scrollLeft - walk;
+        });
+    });
+});
+</script>
+{% endblock %}

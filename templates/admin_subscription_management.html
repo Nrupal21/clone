@@ -1,0 +1,367 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ subscriptions_title }} - Spotify Admin{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>{{ subscriptions_title }}</h1>
+        <div class="admin-actions">
+            <a href="{{ url_for('admin_dashboard') }}" class="back-btn">
+                <span class="material-icons-round">arrow_back</span> Back to Dashboard
+            </a>
+            <a href="{{ url_for('admin_subscription_export') }}" class="export-btn">
+                <span class="material-icons-round">download</span> Export Data
+            </a>
+        </div>
+    </div>
+
+    <div class="subscription-stats">
+        <div class="sub-stat-card">
+            <div class="sub-stat-title">Active Premium</div>
+            <div class="sub-stat-value">{{ stats.premium_count }}</div>
+        </div>
+        <div class="sub-stat-card">
+            <div class="sub-stat-title">Free Tier</div>
+            <div class="sub-stat-value">{{ stats.free_count }}</div>
+        </div>
+        <div class="sub-stat-card">
+            <div class="sub-stat-title">Expired Premium</div>
+            <div class="sub-stat-value">{{ stats.expired_count }}</div>
+        </div>
+        <div class="sub-stat-card">
+            <div class="sub-stat-title">Monthly Plans</div>
+            <div class="sub-stat-value">{{ stats.monthly_count }}</div>
+        </div>
+        <div class="sub-stat-card">
+            <div class="sub-stat-title">Yearly Plans</div>
+            <div class="sub-stat-value">{{ stats.yearly_count }}</div>
+        </div>
+    </div>
+
+    <div class="subscription-filters">
+        <form action="{{ url_for('admin_subscription_management', type=type) }}" method="GET" class="filter-form">
+            <div class="filter-group">
+                <label for="status">Status:</label>
+                <select name="status" id="status">
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="expired">Expired</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="plan_type">Plan Type:</label>
+                <select name="plan_type" id="plan_type">
+                    <option value="all">All Plans</option>
+                    <option value="premium">Premium</option>
+                    <option value="basic">Basic</option>
+                    <option value="free">Free</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="cycle">Billing Cycle:</label>
+                <select name="cycle" id="cycle">
+                    <option value="all">All Cycles</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="trial">Trial</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="sort">Sort By:</label>
+                <select name="sort" id="sort">
+                    <option value="start_date">Start Date</option>
+                    <option value="end_date">End Date</option>
+                    <option value="price">Price</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="direction">Direction:</label>
+                <select name="direction" id="direction">
+                    <option value="desc">Descending</option>
+                    <option value="asc">Ascending</option>
+                </select>
+            </div>
+            <button type="submit" class="filter-btn">Apply Filters</button>
+        </form>
+    </div>
+
+    <section class="admin-section">
+        <div class="subscription-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Plan</th>
+                        <th>Price</th>
+                        <th>Started</th>
+                        <th>Expires</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sub in subscriptions %}
+                    <tr>
+                        <td>{{ sub.user.name if sub.user else 'Unknown' }}</td>
+                        <td>{{ sub.user.email if sub.user else 'N/A' }}</td>
+                        <td>{{ sub.plan_type }}</td>
+                        <td>{{ sub.price|format_currency }}</td>
+                        <td>{{ sub.start_date.strftime('%Y-%m-%d') if sub.start_date else 'N/A' }}</td>
+                        <td>{{ sub.end_date.strftime('%Y-%m-%d') if sub.end_date else 'N/A' }}</td>
+                        <td><span class="status-badge {{ sub.status }}">{{ sub.status }}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="{{ url_for('admin_view_subscription', sub_id=sub._id) }}" class="view-btn" title="View Details">
+                                    <span class="material-icons-round">visibility</span>
+                                </a>
+                                <a href="{{ url_for('admin_edit_subscription', sub_id=sub._id) }}" class="edit-btn" title="Edit Subscription">
+                                    <span class="material-icons-round">edit</span>
+                                </a>
+                                {% if sub.status == 'active' %}
+                                <form action="{{ url_for('admin_cancel_subscription', sub_id=sub._id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to cancel this subscription?');">
+                                    <button type="submit" class="delete-btn" title="Cancel Subscription">
+                                        <span class="material-icons-round">cancel</span>
+                                    </button>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="8" class="no-data">No subscriptions found matching your criteria.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        {% if subscriptions %}
+        <div class="pagination">
+            {% if pagination.has_prev %}
+            <a href="{{ url_for('admin_subscription_management', type=type, page=pagination.page-1, status=request.args.get('status', 'all'), plan_type=request.args.get('plan_type', 'all'), cycle=request.args.get('cycle', 'all'), sort=request.args.get('sort', 'start_date'), direction=request.args.get('direction', 'desc')) }}" class="page-link">&laquo; Previous</a>
+            {% endif %}
+            
+            <span class="page-info">Page {{ pagination.page }} of {{ pagination.total_pages }}</span>
+            
+            {% if pagination.has_next %}
+            <a href="{{ url_for('admin_subscription_management', type=type, page=pagination.page+1, status=request.args.get('status', 'all'), plan_type=request.args.get('plan_type', 'all'), cycle=request.args.get('cycle', 'all'), sort=request.args.get('sort', 'start_date'), direction=request.args.get('direction', 'desc')) }}" class="page-link">Next &raquo;</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </section>
+
+    <div class="tab-navigation">
+        <a href="{{ url_for('admin_subscription_management', type='all') }}" class="tab-link {% if type == 'all' %}active{% endif %}">All Subscriptions</a>
+        <a href="{{ url_for('admin_subscription_management', type='premium') }}" class="tab-link {% if type == 'premium' %}active{% endif %}">Premium</a>
+        <a href="{{ url_for('admin_subscription_management', type='free') }}" class="tab-link {% if type == 'free' %}active{% endif %}">Free Tier</a>
+        <a href="{{ url_for('admin_subscription_management', type='expired') }}" class="tab-link {% if type == 'expired' %}active{% endif %}">Expired</a>
+    </div>
+</div>
+
+<!-- Include Admin Management Navigation -->
+<div class="admin-management-nav">
+    <a href="{{ url_for('admin_dashboard') }}" class="admin-nav-btn">
+        <span class="material-icons-round">dashboard</span> Dashboard
+    </a>
+    <a href="{{ url_for('admin_users') }}" class="admin-nav-btn">
+        <span class="material-icons-round">people</span> Users
+    </a>
+    <a href="{{ url_for('admin_songs') }}" class="admin-nav-btn">
+        <span class="material-icons-round">music_note</span> Songs
+    </a>
+    <a href="{{ url_for('admin_add_song') }}" class="admin-nav-btn">
+        <span class="material-icons-round">add_circle</span> Add Song
+    </a>
+    <a href="{{ url_for('admin_subscriptions') }}" class="admin-nav-btn active">
+        <span class="material-icons-round">card_membership</span> Subscriptions
+    </a>
+    <a href="{{ url_for('admin_promotions') }}" class="admin-nav-btn">
+        <span class="material-icons-round">local_offer</span> Promotions
+    </a>
+    <a href="{{ url_for('admin_pricing') }}" class="admin-nav-btn">
+        <span class="material-icons-round">attach_money</span> Pricing
+    </a>
+    <a href="{{ url_for('admin_settings') }}" class="admin-nav-btn">
+        <span class="material-icons-round">settings</span> Settings
+    </a>
+    <a href="{{ url_for('admin_logs') }}" class="admin-nav-btn">
+        <span class="material-icons-round">receipt_long</span> Logs
+    </a>
+</div>
+{% endblock %}
+
+{% block additional_styles %}
+<style>
+.subscription-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.sub-stat-card {
+    background: var(--background-tinted-base);
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.sub-stat-title {
+    color: var(--text-subdued);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.sub-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.subscription-filters {
+    background: var(--background-elevated-base);
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.filter-group label {
+    font-size: 0.8rem;
+    color: var(--text-subdued);
+}
+
+.filter-group select {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--background-tinted-base);
+    background-color: var(--background-base);
+    color: var(--text-base);
+}
+
+.filter-btn {
+    background-color: var(--background-tinted-highlight);
+    color: var(--text-base);
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-btn:hover {
+    background-color: var(--essential-bright-accent);
+    color: black;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-badge.active {
+    background-color: rgba(30, 215, 96, 0.2);
+    color: var(--essential-bright-accent);
+}
+
+.status-badge.expired {
+    background-color: rgba(233, 20, 41, 0.2);
+    color: var(--essential-negative);
+}
+
+.status-badge.cancelled {
+    background-color: rgba(200, 200, 200, 0.2);
+    color: var(--text-subdued);
+}
+
+.export-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--background-tinted-base);
+    color: var(--text-base);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 500px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.export-btn:hover {
+    background-color: var(--background-tinted-highlight);
+}
+
+.tab-navigation {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.tab-link {
+    padding: 8px 16px;
+    border-radius: 500px;
+    text-decoration: none;
+    color: var(--text-base);
+    background-color: var(--background-tinted-base);
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.tab-link:hover {
+    background-color: var(--background-tinted-highlight);
+}
+
+.tab-link.active {
+    background-color: var(--essential-bright-accent);
+    color: black;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Pre-select dropdowns based on URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    const dropdowns = {
+        'status': urlParams.get('status') || 'all',
+        'plan_type': urlParams.get('plan_type') || 'all',
+        'cycle': urlParams.get('cycle') || 'all',
+        'sort': urlParams.get('sort') || 'start_date',
+        'direction': urlParams.get('direction') || 'desc'
+    };
+    
+    // Set selected values
+    Object.keys(dropdowns).forEach(id => {
+        const select = document.getElementById(id);
+        if (select) {
+            select.value = dropdowns[id];
+        }
+    });
+});
+</script>
+{% endblock %} 

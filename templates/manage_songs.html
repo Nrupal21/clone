@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Songs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        #add-song-button {
+            background-color: var(--essential-bright-accent);
+            color: black;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        
+        #add-song-button:hover {
+            transform: scale(1.05);
+        }
+        
+        #search {
+            background-color: var(--background-elevated-base);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: var(--text-base);
+            width: 300px;
+        }
+        
+        #search:focus {
+            outline: none;
+            background-color: var(--background-elevated-highlight);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background-color: var(--background-elevated-base);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        thead {
+            background-color: var(--background-tinted-base);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--background-tinted-base);
+        }
+        
+        th {
+            font-weight: bold;
+            color: var(--text-subdued);
+        }
+        
+        tr:hover {
+            background-color: var(--background-tinted-highlight);
+        }
+        
+        .song-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .delete-button, .play-button, .edit-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-subdued);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: all 0.2s;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .delete-button:hover {
+            color: var(--essential-negative);
+            background-color: rgba(233, 20, 41, 0.1);
+        }
+        
+        .play-button:hover {
+            color: var(--essential-bright-accent);
+            background-color: rgba(30, 215, 96, 0.1);
+        }
+        
+        .edit-button:hover {
+            color: var(--text-announcement);
+            background-color: rgba(61, 145, 244, 0.1);
+        }
+        
+        .song-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .song-thumbnail {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+        
+        .song-details span {
+            display: block;
+        }
+        
+        .song-title {
+            font-weight: bold;
+        }
+        
+        .song-artist {
+            color: var(--text-subdued);
+            font-size: 0.9rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-subdued);
+        }
+        
+        .empty-state .material-icons-round {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .flashes {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .flashes .success {
+            background-color: rgba(30, 215, 96, 0.2);
+            color: var(--essential-bright-accent);
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .flashes .error {
+            background-color: rgba(233, 20, 41, 0.2);
+            color: var(--essential-negative);
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background-color: var(--background-elevated-base);
+            border-radius: 8px;
+            padding: 1rem;
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            color: var(--text-subdued);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <h1>Manage Songs</h1>
+            <a href="{{ url_for('admin.dashboard') }}" class="back-link">
+                <span class="material-icons-round">arrow_back</span> Back to Dashboard
+            </a>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">{{ songs|length }}</div>
+                <div class="stat-label">Total Songs</div>
+            </div>
+            {% if songs %}
+            <div class="stat-card">
+                <div class="stat-value">{{ songs|map(attribute='mood')|list|unique|count }}</div>
+                <div class="stat-label">Moods</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ songs|map(attribute='artist')|list|unique|count }}</div>
+                <div class="stat-label">Artists</div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="actions">
+            <button id="add-song-button">
+                <span class="material-icons-round">add</span> Add New Song
+            </button>
+            <input type="text" id="search" placeholder="Search songs by title, artist or mood..." />
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Song</th>
+                    <th>Mood</th>
+                    <th>Plays</th>
+                    <th>Added</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="song-table-body">
+                {% if songs and songs|length > 0 %}
+                    {% for song in songs %}
+                    <tr data-song-id="{{ song._id }}">
+                        <td>
+                            <div class="song-info">
+                                <img src="{{ url_for('static', filename=song.image_path) if song.image_path and song.image_path.startswith('img/') else url_for('static', filename='img/default-cover.jpg') }}" alt="{{ song.title }}" class="song-thumbnail">
+                                <div class="song-details">
+                                    <span class="song-title">{{ song.title }}</span>
+                                    <span class="song-artist">{{ song.artist }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ song.mood }}</td>
+                        <td>{{ song.plays|default(0) }}</td>
+                        <td>{{ song.created_at.strftime('%Y-%m-%d') if song.created_at else 'Unknown' }}</td>
+                        <td>
+                            <div class="song-actions">
+                                <button class="play-button" data-song-id="{{ song._id }}">
+                                    <span class="material-icons-round">play_arrow</span>
+                                </button>
+                                <button class="edit-button" data-song-id="{{ song._id }}">
+                                    <span class="material-icons-round">edit</span>
+                                </button>
+                                <form action="{{ url_for('delete_song', song_id=song._id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete {{ song.title }}?');">
+                                    <button type="submit" class="delete-button">
+                                        <span class="material-icons-round">delete</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5">
+                            <div class="empty-state">
+                                <span class="material-icons-round">music_off</span>
+                                <h3>No songs available</h3>
+                                <p>Start adding songs to your collection</p>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Audio player for previewing songs -->
+    <audio id="audio-preview" style="display: none;"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search functionality
+            const searchInput = document.getElementById('search');
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#song-table-body tr');
+                
+                rows.forEach(row => {
+                    const songId = row.getAttribute('data-song-id');
+                    if (songId) { // Only filter actual song rows, not the empty state row
+                        const title = row.querySelector('.song-title').textContent.toLowerCase();
+                        const artist = row.querySelector('.song-artist').textContent.toLowerCase();
+                        const mood = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                        
+                        if (title.includes(query) || artist.includes(query) || mood.includes(query)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    }
+                });
+                
+                // Check if any results are visible
+                const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none' && row.getAttribute('data-song-id'));
+                const emptyState = document.querySelector('.empty-state');
+                
+                if (visibleRows.length === 0 && query !== '') {
+                    // No results for search
+                    if (!emptyState) {
+                        const noResultsRow = document.createElement('tr');
+                        noResultsRow.innerHTML = `
+                            <td colspan="5">
+                                <div class="empty-state">
+                                    <span class="material-icons-round">search_off</span>
+                                    <h3>No results found</h3>
+                                    <p>Try a different search term</p>
+                                </div>
+                            </td>
+                        `;
+                        document.getElementById('song-table-body').appendChild(noResultsRow);
+                    }
+                } else if (emptyState && visibleRows.length > 0) {
+                    // Remove no results message if we now have results
+                    emptyState.closest('tr').remove();
+                }
+            });
+
+            // Add new song button functionality
+            const addSongButton = document.getElementById('add-song-button');
+            if (addSongButton) {
+                addSongButton.addEventListener('click', function() {
+                    window.location.href = "{{ url_for('add_song_page') }}";
+                });
+            }
+            
+            // Play button functionality
+            const playButtons = document.querySelectorAll('.play-button');
+            const audioPreview = document.getElementById('audio-preview');
+            
+            playButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const songId = this.getAttribute('data-song-id');
+                    
+                    // Stop current playback if any
+                    audioPreview.pause();
+                    audioPreview.currentTime = 0;
+                    
+                    // Reset all play buttons
+                    playButtons.forEach(btn => {
+                        btn.innerHTML = '<span class="material-icons-round">play_arrow</span>';
+                    });
+                    
+                    // Start playing the selected song
+                    fetch(`/play/${songId}`)
+                        .then(response => {
+                            if (!response.ok) throw new Error('Failed to load audio');
+                            return response.blob();
+                        })
+                        .then(blob => {
+                            const url = URL.createObjectURL(blob);
+                            audioPreview.src = url;
+                            audioPreview.play();
+                            this.innerHTML = '<span class="material-icons-round">pause</span>';
+                            
+                            // Listen for audio end to reset button
+                            audioPreview.onended = () => {
+                                this.innerHTML = '<span class="material-icons-round">play_arrow</span>';
+                            };
+                        })
+                        .catch(error => {
+                            console.error('Error playing preview:', error);
+                            alert('Error playing audio preview');
+                        });
+                });
+            });
+            
+            // Edit button functionality
+            const editButtons = document.querySelectorAll('.edit-button');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const songId = this.getAttribute('data-song-id');
+                    // Redirect to edit page - you'll need to create this route
+                    window.location.href = `/admin/edit-song/${songId}`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

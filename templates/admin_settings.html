@@ -1,0 +1,501 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Settings{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <!-- Admin Sidebar -->
+    <div class="admin-sidebar">
+        <div class="admin-sidebar-header">
+            <h3>Admin Panel</h3>
+        </div>
+        <ul class="admin-sidebar-menu">
+            <li><a href="/admin"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="/admin/users"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="/admin/songs"><i class="fas fa-music"></i> Songs</a></li>
+            <li><a href="/admin/subscriptions"><i class="fas fa-credit-card"></i> Subscriptions</a></li>
+            <li><a href="/admin/promotions"><i class="fas fa-percentage"></i> Promotions</a></li>
+            <li><a href="/admin/logs"><i class="fas fa-file-alt"></i> Logs</a></li>
+            <li class="active"><a href="/admin/settings"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Admin Content -->
+    <div class="admin-content">
+        <div class="admin-header">
+            <h2><i class="fas fa-cog"></i> System Settings</h2>
+            <div class="admin-header-actions">
+                <button id="saveAllSettings" class="btn btn-primary"><i class="fas fa-save"></i> Save All Changes</button>
+            </div>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Settings Tabs -->
+        <div class="settings-container">
+            <ul class="nav nav-tabs" id="settingsTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="general" aria-selected="true">General</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab" aria-controls="security" aria-selected="false">Security</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="email-tab" data-bs-toggle="tab" data-bs-target="#email" type="button" role="tab" aria-controls="email" aria-selected="false">Email</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="storage-tab" data-bs-toggle="tab" data-bs-target="#storage" type="button" role="tab" aria-controls="storage" aria-selected="false">Storage</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="maintenance-tab" data-bs-toggle="tab" data-bs-target="#maintenance" type="button" role="tab" aria-controls="maintenance" aria-selected="false">Maintenance</button>
+                </li>
+            </ul>
+
+            <div class="tab-content p-3 border border-top-0 rounded-bottom" id="settingsTabContent">
+                <!-- General Settings -->
+                <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+                    <form id="generalSettingsForm">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5>Application Settings</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="siteName" class="form-label">Site Name</label>
+                                    <input type="text" class="form-control" id="siteName" name="siteName" value="{{ settings.site_name if settings.site_name else 'Spotify Clone' }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="siteDescription" class="form-label">Site Description</label>
+                                    <textarea class="form-control" id="siteDescription" name="siteDescription" rows="2">{{ settings.site_description if settings.site_description else 'Music Streaming Platform' }}</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactEmail" class="form-label">Contact Email</label>
+                                    <input type="email" class="form-control" id="contactEmail" name="contactEmail" value="{{ settings.contact_email if settings.contact_email else 'admin@example.com' }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="defaultLanguage" class="form-label">Default Language</label>
+                                    <select class="form-select" id="defaultLanguage" name="defaultLanguage">
+                                        <option value="en" {% if settings.default_language == 'en' %}selected{% endif %}>English</option>
+                                        <option value="es" {% if settings.default_language == 'es' %}selected{% endif %}>Spanish</option>
+                                        <option value="fr" {% if settings.default_language == 'fr' %}selected{% endif %}>French</option>
+                                        <option value="de" {% if settings.default_language == 'de' %}selected{% endif %}>German</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5>User Registration</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="allowRegistration" name="allowRegistration" {% if settings.allow_registration %}checked{% endif %}>
+                                    <label class="form-check-label" for="allowRegistration">Allow New User Registration</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="requireEmailVerification" name="requireEmailVerification" {% if settings.require_email_verification %}checked{% endif %}>
+                                    <label class="form-check-label" for="requireEmailVerification">Require Email Verification</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="allowSocialLogin" name="allowSocialLogin" {% if settings.allow_social_login %}checked{% endif %}>
+                                    <label class="form-check-label" for="allowSocialLogin">Allow Social Media Login</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+                    <form id="securitySettingsForm">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5>Authentication</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="sessionTimeout" class="form-label">Session Timeout (minutes)</label>
+                                    <input type="number" class="form-control" id="sessionTimeout" name="sessionTimeout" value="{{ settings.session_timeout if settings.session_timeout else 60 }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="maxLoginAttempts" class="form-label">Max Login Attempts</label>
+                                    <input type="number" class="form-control" id="maxLoginAttempts" name="maxLoginAttempts" value="{{ settings.max_login_attempts if settings.max_login_attempts else 5 }}">
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="enable2FA" name="enable2FA" {% if settings.enable_2fa %}checked{% endif %}>
+                                    <label class="form-check-label" for="enable2FA">Enable Two-Factor Authentication</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5>Password Policy</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="minPasswordLength" class="form-label">Minimum Password Length</label>
+                                    <input type="number" class="form-control" id="minPasswordLength" name="minPasswordLength" value="{{ settings.min_password_length if settings.min_password_length else 8 }}">
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="requireUppercase" name="requireUppercase" {% if settings.require_uppercase %}checked{% endif %}>
+                                    <label class="form-check-label" for="requireUppercase">Require Uppercase Letter</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="requireLowercase" name="requireLowercase" {% if settings.require_lowercase %}checked{% endif %}>
+                                    <label class="form-check-label" for="requireLowercase">Require Lowercase Letter</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="requireNumbers" name="requireNumbers" {% if settings.require_numbers %}checked{% endif %}>
+                                    <label class="form-check-label" for="requireNumbers">Require Numbers</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="requireSpecialChars" name="requireSpecialChars" {% if settings.require_special_chars %}checked{% endif %}>
+                                    <label class="form-check-label" for="requireSpecialChars">Require Special Characters</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Email Settings -->
+                <div class="tab-pane fade" id="email" role="tabpanel" aria-labelledby="email-tab">
+                    <form id="emailSettingsForm">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5>SMTP Configuration</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="smtpServer" class="form-label">SMTP Server</label>
+                                    <input type="text" class="form-control" id="smtpServer" name="smtpServer" value="{{ settings.smtp_server if settings.smtp_server else '' }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="smtpPort" class="form-label">SMTP Port</label>
+                                    <input type="number" class="form-control" id="smtpPort" name="smtpPort" value="{{ settings.smtp_port if settings.smtp_port else 587 }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="smtpUsername" class="form-label">SMTP Username</label>
+                                    <input type="text" class="form-control" id="smtpUsername" name="smtpUsername" value="{{ settings.smtp_username if settings.smtp_username else '' }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="smtpPassword" class="form-label">SMTP Password</label>
+                                    <input type="password" class="form-control" id="smtpPassword" name="smtpPassword" value="{{ settings.smtp_password if settings.smtp_password else '' }}">
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="smtpUseTLS" name="smtpUseTLS" {% if settings.smtp_use_tls %}checked{% endif %}>
+                                    <label class="form-check-label" for="smtpUseTLS">Use TLS</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="senderEmail" class="form-label">Sender Email</label>
+                                    <input type="email" class="form-control" id="senderEmail" name="senderEmail" value="{{ settings.sender_email if settings.sender_email else 'noreply@example.com' }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="senderName" class="form-label">Sender Name</label>
+                                    <input type="text" class="form-control" id="senderName" name="senderName" value="{{ settings.sender_name if settings.sender_name else 'Spotify Admin' }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5>Email Templates</h5>
+                                <button type="button" class="btn btn-sm btn-primary">Test Email</button>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="emailTemplate" class="form-label">Email Template</label>
+                                    <select class="form-select" id="emailTemplate" name="emailTemplate">
+                                        <option value="welcome">Welcome Email</option>
+                                        <option value="password_reset">Password Reset</option>
+                                        <option value="email_verification">Email Verification</option>
+                                        <option value="subscription_confirmation">Subscription Confirmation</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="emailSubject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="emailSubject" name="emailSubject" value="Welcome to Spotify Clone">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="emailBody" class="form-label">Email Body</label>
+                                    <textarea class="form-control" id="emailBody" name="emailBody" rows="8">Hello {name},
+
+Thank you for joining Spotify Clone! We're excited to have you as part of our community.
+
+To get started, you can explore our vast music library, create playlists, and follow your favorite artists.
+
+Best regards,
+The Spotify Clone Team</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Storage Settings -->
+                <div class="tab-pane fade" id="storage" role="tabpanel" aria-labelledby="storage-tab">
+                    <form id="storageSettingsForm">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5>File Storage</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="storageType" class="form-label">Storage Type</label>
+                                    <select class="form-select" id="storageType" name="storageType">
+                                        <option value="local" {% if settings.storage_type == 'local' %}selected{% endif %}>Local Storage</option>
+                                        <option value="s3" {% if settings.storage_type == 's3' %}selected{% endif %}>Amazon S3</option>
+                                        <option value="gcs" {% if settings.storage_type == 'gcs' %}selected{% endif %}>Google Cloud Storage</option>
+                                    </select>
+                                </div>
+                                <div class="local-storage-options">
+                                    <div class="mb-3">
+                                        <label for="uploadDir" class="form-label">Upload Directory</label>
+                                        <input type="text" class="form-control" id="uploadDir" name="uploadDir" value="{{ settings.upload_dir if settings.upload_dir else 'uploads' }}">
+                                    </div>
+                                </div>
+                                <div class="cloud-storage-options d-none">
+                                    <div class="mb-3">
+                                        <label for="accessKey" class="form-label">Access Key/ID</label>
+                                        <input type="text" class="form-control" id="accessKey" name="accessKey" value="{{ settings.access_key if settings.access_key else '' }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="secretKey" class="form-label">Secret Key</label>
+                                        <input type="password" class="form-control" id="secretKey" name="secretKey" value="{{ settings.secret_key if settings.secret_key else '' }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="bucketName" class="form-label">Bucket Name</label>
+                                        <input type="text" class="form-control" id="bucketName" name="bucketName" value="{{ settings.bucket_name if settings.bucket_name else '' }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="region" class="form-label">Region</label>
+                                        <input type="text" class="form-control" id="region" name="region" value="{{ settings.region if settings.region else 'us-east-1' }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5>Media Settings</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="maxUploadSize" class="form-label">Maximum Upload Size (MB)</label>
+                                    <input type="number" class="form-control" id="maxUploadSize" name="maxUploadSize" value="{{ settings.max_upload_size if settings.max_upload_size else 10 }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="allowedFileTypes" class="form-label">Allowed File Types</label>
+                                    <input type="text" class="form-control" id="allowedFileTypes" name="allowedFileTypes" value="{{ settings.allowed_file_types if settings.allowed_file_types else 'mp3,wav,ogg,flac' }}">
+                                    <div class="form-text">Comma-separated list of extensions</div>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="enableImageCompression" name="enableImageCompression" {% if settings.enable_image_compression %}checked{% endif %}>
+                                    <label class="form-check-label" for="enableImageCompression">Enable Image Compression</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Maintenance Settings -->
+                <div class="tab-pane fade" id="maintenance" role="tabpanel" aria-labelledby="maintenance-tab">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Maintenance Mode</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="maintenanceMode" name="maintenanceMode" {% if settings.maintenance_mode %}checked{% endif %}>
+                                <label class="form-check-label" for="maintenanceMode">Enable Maintenance Mode</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="maintenanceMessage" class="form-label">Maintenance Message</label>
+                                <textarea class="form-control" id="maintenanceMessage" name="maintenanceMessage" rows="3">{{ settings.maintenance_message if settings.maintenance_message else 'We are currently performing scheduled maintenance. Please check back soon.' }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>System Backup</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Last backup: <span id="lastBackupTime">{{ settings.last_backup_time if settings.last_backup_time else 'Never' }}</span></p>
+                            <div class="d-flex gap-2 mb-3">
+                                <button type="button" class="btn btn-primary" id="createBackup">Create Backup</button>
+                                <button type="button" class="btn btn-outline-secondary" id="restoreBackup">Restore from Backup</button>
+                            </div>
+                            <div class="mb-3">
+                                <label for="backupSchedule" class="form-label">Backup Schedule</label>
+                                <select class="form-select" id="backupSchedule" name="backupSchedule">
+                                    <option value="daily" {% if settings.backup_schedule == 'daily' %}selected{% endif %}>Daily</option>
+                                    <option value="weekly" {% if settings.backup_schedule == 'weekly' %}selected{% endif %}>Weekly</option>
+                                    <option value="monthly" {% if settings.backup_schedule == 'monthly' %}selected{% endif %}>Monthly</option>
+                                    <option value="never" {% if settings.backup_schedule == 'never' %}selected{% endif %}>Never</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Database Operations</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="d-grid">
+                                        <button type="button" class="btn btn-warning" id="optimizeDB">Optimize Database</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-grid">
+                                        <button type="button" class="btn btn-danger" id="clearCacheBtn">Clear Cache</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for the settings page -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle cloud storage options based on storage type selection
+        const storageTypeSelect = document.getElementById('storageType');
+        const localStorageOptions = document.querySelector('.local-storage-options');
+        const cloudStorageOptions = document.querySelector('.cloud-storage-options');
+        
+        storageTypeSelect.addEventListener('change', function() {
+            if (this.value === 'local') {
+                localStorageOptions.classList.remove('d-none');
+                cloudStorageOptions.classList.add('d-none');
+            } else {
+                localStorageOptions.classList.add('d-none');
+                cloudStorageOptions.classList.remove('d-none');
+            }
+        });
+        
+        // Save all settings
+        document.getElementById('saveAllSettings').addEventListener('click', function() {
+            // Here you would collect all form data and submit it to the server
+            alert('All settings have been saved successfully!');
+        });
+        
+        // Database operations
+        document.getElementById('optimizeDB').addEventListener('click', function() {
+            if (confirm('Are you sure you want to optimize the database? This may take some time.')) {
+                // Here you would send an AJAX request to optimize the database
+                alert('Database optimization initiated. This may take a few minutes.');
+            }
+        });
+        
+        document.getElementById('clearCacheBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to clear all cache?')) {
+                // Here you would send an AJAX request to clear the cache
+                alert('Cache cleared successfully!');
+            }
+        });
+        
+        // Backup functions
+        document.getElementById('createBackup').addEventListener('click', function() {
+            // Here you would send an AJAX request to create a backup
+            alert('Backup process started. You will be notified when it completes.');
+        });
+        
+        document.getElementById('restoreBackup').addEventListener('click', function() {
+            if (confirm('Are you sure you want to restore from a backup? This will overwrite current data.')) {
+                // Here you would show a backup selection UI and handle the restore process
+                alert('Backup restore initiated.');
+            }
+        });
+    });
+</script>
+
+<style>
+    .admin-container {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        min-height: calc(100vh - 60px);
+    }
+    
+    .admin-sidebar {
+        background-color: #212529;
+        color: #fff;
+        padding: 20px 0;
+    }
+    
+    .admin-sidebar-header {
+        padding: 0 20px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .admin-sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .admin-sidebar-menu li {
+        padding: 0;
+    }
+    
+    .admin-sidebar-menu li a {
+        display: block;
+        padding: 12px 20px;
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+    
+    .admin-sidebar-menu li a:hover,
+    .admin-sidebar-menu li.active a {
+        color: #fff;
+        background-color: rgba(255,255,255,0.1);
+    }
+    
+    .admin-sidebar-menu li a i {
+        margin-right: 10px;
+        width: 20px;
+        text-align: center;
+    }
+    
+    .admin-content {
+        padding: 20px;
+        background-color: #f8f9fa;
+    }
+    
+    .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .settings-container {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    
+    .card-header {
+        background-color: rgba(0,0,0,0.03);
+    }
+</style>
+{% endblock %} 

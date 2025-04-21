@@ -1,0 +1,508 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock %}
+
+{% block styles %}
+<style>
+    .search-hero {
+        background: linear-gradient(135deg, var(--bs-primary) 0%, var(--bs-info) 100%);
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+        color: #fff;
+        border-radius: 0.5rem;
+    }
+    
+    .search-form {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .search-input {
+        height: 3.5rem;
+        border-radius: 30px;
+        padding-left: 1.5rem;
+        font-size: 1.1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .search-btn {
+        border-radius: 30px;
+        padding: 0.5rem 2rem;
+        font-weight: 600;
+    }
+    
+    .filter-tabs {
+        border-bottom: 1px solid #eee;
+        margin-bottom: 2rem;
+    }
+    
+    .filter-tab {
+        color: #777;
+        padding: 0.5rem 1rem;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+    
+    .filter-tab.active {
+        color: var(--bs-primary);
+        font-weight: 600;
+        border-bottom-color: var(--bs-primary);
+    }
+    
+    .song-card {
+        transition: transform 0.2s;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    
+    .song-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .song-img {
+        height: 180px;
+        object-fit: cover;
+        width: 100%;
+    }
+    
+    .artist-card {
+        padding: 1.5rem;
+        border-radius: 8px;
+        background: #f9f9f9;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        transition: all 0.2s;
+    }
+    
+    .artist-card:hover {
+        background: #f0f0f0;
+        transform: translateY(-3px);
+    }
+    
+    .artist-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .mood-filter {
+        margin-bottom: 2rem;
+    }
+    
+    .mood-badge {
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .mood-badge:hover {
+        opacity: 0.8;
+    }
+    
+    .text-truncate-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .song-details {
+        padding: 1rem;
+    }
+    
+    .song-title {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+    
+    .song-artist {
+        color: #777;
+        font-size: 0.9rem;
+    }
+    
+    .play-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--bs-primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        transition: all 0.2s;
+    }
+    
+    .play-btn:hover {
+        transform: scale(1.1);
+        background: var(--bs-primary-hover, var(--bs-primary));
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 3rem 0;
+    }
+    
+    .empty-icon {
+        font-size: 3rem;
+        color: #ccc;
+        margin-bottom: 1rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="search-hero">
+    <div class="container">
+        <h1 class="text-center mb-4">Find Your Perfect Sound</h1>
+        <form action="{{ url_for('search') }}" method="get" class="search-form">
+            <div class="input-group mb-3">
+                <input type="text" name="q" class="form-control search-input" placeholder="Search songs, artists, or playlists..." 
+                       value="{{ query }}" aria-label="Search">
+                <button class="btn btn-primary search-btn" type="submit">Search</button>
+            </div>
+            
+            <div class="mood-filter text-center">
+                <h6 class="text-white-50 mb-3">Filter by mood:</h6>
+                <div class="mood-badges">
+                    <a href="{{ url_for('search', q=query, mood='Calm') }}" 
+                       class="mood-badge badge {% if mood == 'Calm' %}bg-success{% else %}bg-secondary{% endif %}">
+                        Calm
+                    </a>
+                    <a href="{{ url_for('search', q=query, mood='Energetic') }}" 
+                       class="mood-badge badge {% if mood == 'Energetic' %}bg-success{% else %}bg-secondary{% endif %}">
+                        Energetic
+                    </a>
+                    <a href="{{ url_for('search', q=query, mood='Happy') }}" 
+                       class="mood-badge badge {% if mood == 'Happy' %}bg-success{% else %}bg-secondary{% endif %}">
+                        Happy
+                    </a>
+                    <a href="{{ url_for('search', q=query, mood='Sad') }}" 
+                       class="mood-badge badge {% if mood == 'Sad' %}bg-success{% else %}bg-secondary{% endif %}">
+                        Sad
+                    </a>
+                    <a href="{{ url_for('search', q=query, mood='Romantic') }}" 
+                       class="mood-badge badge {% if mood == 'Romantic' %}bg-success{% else %}bg-secondary{% endif %}">
+                        Romantic
+                    </a>
+                    {% if mood and mood not in ['Calm', 'Energetic', 'Happy', 'Sad', 'Romantic'] %}
+                        <a href="{{ url_for('search', q=query, mood=mood) }}" 
+                           class="mood-badge badge bg-success">{{ mood }}</a>
+                    {% endif %}
+                    {% if mood %}
+                        <a href="{{ url_for('search', q=query) }}" class="mood-badge badge bg-danger">
+                            Clear Filter
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% if query or mood %}
+                <div class="search-results-header mb-4">
+                    <h2>
+                        {% if results.songs|length > 0 %}
+                            Found {{ pagination.total }} result{{ 's' if pagination.total != 1 else '' }}
+                        {% else %}
+                            No results found
+                        {% endif %}
+                        {% if query %}for "{{ query }}"{% endif %}
+                        {% if mood %}in mood "{{ mood }}"{% endif %}
+                    </h2>
+                </div>
+            {% endif %}
+            
+            <!-- Filter Tabs -->
+            <div class="filter-tabs d-flex mb-4">
+                <div class="filter-tab active" data-target="songs">Songs</div>
+                <div class="filter-tab" data-target="artists">Artists</div>
+                <div class="filter-tab" data-target="playlists">Playlists</div>
+            </div>
+            
+            <!-- Songs Tab -->
+            <div class="tab-content" id="songs-tab">
+                {% if results.songs %}
+                    <div class="row">
+                        {% for song in results.songs %}
+                            <div class="col-md-3 col-sm-6">
+                                <div class="song-card">
+                                    <div class="position-relative">
+                                        <img src="{{ song.image_path|default('/static/img/default-song.jpg') }}" 
+                                             alt="{{ song.title }}" class="song-img">
+                                        <a href="{{ url_for('play_song', song_id=song._id) }}" class="play-btn">
+                                            <i class="fas fa-play"></i>
+                                        </a>
+                                    </div>
+                                    <div class="song-details">
+                                        <h5 class="song-title text-truncate">{{ song.title }}</h5>
+                                        <p class="song-artist text-truncate">{{ song.artist }}</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-2">
+                                            <span class="badge bg-info">{{ song.mood }}</span>
+                                            <div class="song-actions">
+                                                {% if user %}
+                                                    <button class="btn btn-sm {% if song._id in liked_song_ids %}btn-danger{% else %}btn-outline-danger{% endif %} like-button"
+                                                            data-song-id="{{ song._id }}">
+                                                        <i class="fas fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-primary add-to-playlist-btn"
+                                                            data-song-id="{{ song._id }}"
+                                                            data-bs-toggle="modal" 
+                                                            data-bs-target="#playlistModal">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    {% if pagination and pagination.total_pages > 1 %}
+                        <nav aria-label="Search results pages" class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                {% if pagination.has_prev %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ url_for('search', q=query, mood=mood, page=pagination.page-1) }}">
+                                            Previous
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">Previous</span>
+                                    </li>
+                                {% endif %}
+                                
+                                {% for p in range(1, pagination.total_pages + 1) %}
+                                    <li class="page-item {% if p == pagination.page %}active{% endif %}">
+                                        <a class="page-link" href="{{ url_for('search', q=query, mood=mood, page=p) }}">
+                                            {{ p }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                                
+                                {% if pagination.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ url_for('search', q=query, mood=mood, page=pagination.page+1) }}">
+                                            Next
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">Next</span>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    {% endif %}
+                {% elif query or mood %}
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h4>No songs found</h4>
+                        <p class="text-muted">Try a different search term or filter</p>
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>Search for your favorite music</h4>
+                        <p class="text-muted">Start typing in the search box above</p>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Artists Tab -->
+            <div class="tab-content d-none" id="artists-tab">
+                {% if results.artists %}
+                    <div class="row">
+                        {% for artist in results.artists %}
+                            <div class="col-md-3 col-sm-6">
+                                <div class="artist-card">
+                                    <img src="/static/img/default-artist.jpg" alt="{{ artist.name }}" class="artist-img">
+                                    <h5>{{ artist.name }}</h5>
+                                    <p class="text-muted">{{ artist.song_count }} song{{ 's' if artist.song_count != 1 else '' }}</p>
+                                    <a href="{{ url_for('search', q=artist.name) }}" class="btn btn-sm btn-outline-primary">
+                                        View All
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-user-music"></i>
+                        </div>
+                        <h4>No artists found</h4>
+                        <p class="text-muted">Try a different search term</p>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Playlists Tab -->
+            <div class="tab-content d-none" id="playlists-tab">
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-list-music"></i>
+                    </div>
+                    <h4>Playlist search coming soon</h4>
+                    <p class="text-muted">This feature is under development</p>
+                    
+                    {% if user %}
+                        <a href="{{ url_for('create_playlist') }}" class="btn btn-primary mt-3">
+                            Create New Playlist
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Playlist Modal -->
+{% if user %}
+<div class="modal fade" id="playlistModal" tabindex="-1" aria-labelledby="playlistModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="playlistModalLabel">Add to Playlist</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="playlistList">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <a href="{{ url_for('create_playlist') }}" class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-plus"></i> Create New Playlist
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Tab switching
+        $('.filter-tab').click(function() {
+            $('.filter-tab').removeClass('active');
+            $(this).addClass('active');
+            
+            const target = $(this).data('target');
+            $('.tab-content').addClass('d-none');
+            $(`#${target}-tab`).removeClass('d-none');
+        });
+        
+        // Like button functionality
+        $('.like-button').click(function() {
+            const songId = $(this).data('song-id');
+            const button = $(this);
+            
+            $.ajax({
+                url: `/api/songs/like/${songId}`,
+                method: 'POST',
+                success: function(response) {
+                    if (response.status === 'liked') {
+                        button.removeClass('btn-outline-danger').addClass('btn-danger');
+                    } else {
+                        button.removeClass('btn-danger').addClass('btn-outline-danger');
+                    }
+                },
+                error: function() {
+                    alert('Error updating like status');
+                }
+            });
+        });
+        
+        // Playlist modal handling
+        $('.add-to-playlist-btn').click(function() {
+            const songId = $(this).data('song-id');
+            $('#playlistModal').data('song-id', songId);
+            
+            // Load user playlists
+            $.ajax({
+                url: '/api/playlists',
+                method: 'GET',
+                success: function(response) {
+                    let html = '';
+                    if (response.playlists && response.playlists.length > 0) {
+                        html = '<ul class="list-group">';
+                        response.playlists.forEach(function(playlist) {
+                            html += `
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    ${playlist.name}
+                                    <button class="btn btn-sm btn-primary add-to-playlist" 
+                                            data-playlist-id="${playlist._id}">
+                                        Add
+                                    </button>
+                                </li>
+                            `;
+                        });
+                        html += '</ul>';
+                    } else {
+                        html = '<p class="text-center">You don\'t have any playlists yet.</p>';
+                    }
+                    
+                    $('#playlistList').html(html);
+                    
+                    // Add to playlist button click
+                    $('.add-to-playlist').click(function() {
+                        const playlistId = $(this).data('playlist-id');
+                        const songId = $('#playlistModal').data('song-id');
+                        
+                        $.ajax({
+                            url: `/add-to-playlist/${songId}/${playlistId}`,
+                            method: 'POST',
+                            success: function(response) {
+                                if (response.status === 'success') {
+                                    $('#playlistModal').modal('hide');
+                                    alert('Song added to playlist successfully!');
+                                } else {
+                                    alert('Error adding song to playlist');
+                                }
+                            },
+                            error: function() {
+                                alert('Error adding song to playlist');
+                            }
+                        });
+                    });
+                },
+                error: function() {
+                    $('#playlistList').html('<p class="text-center text-danger">Error loading playlists</p>');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %} 

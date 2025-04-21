@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Spotify DB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-family-main);
+        }
+        
+        body {
+            background-color: var(--background-base);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-base);
+            padding: var(--space-md);
+        }
+        
+        .signup-container {
+            background-color: var(--background-elevated-base);
+            border-radius: var(--border-radius-medium);
+            box-shadow: var(--shadow-medium);
+            width: 100%;
+            max-width: 480px;
+            padding: var(--space-xl);
+            animation: fadeIn 0.6s ease-out;
+            border: 1px solid var(--background-elevated-highlight);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .signup-header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .logo-link {
+            display: inline-block;
+            margin-bottom: var(--space-md);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-link:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo {
+            width: 120px;
+            height: auto;
+        }
+        
+        .signup-header h1 {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-bright);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .signup-header p {
+            color: var(--text-subdued);
+            font-size: var(--font-size-sm);
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-subdued);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            border: 1px solid var(--essential-subdued);
+            border-radius: var(--border-radius-small);
+            background-color: var(--background-base);
+            color: var(--text-base);
+            font-size: var(--font-size-md);
+            transition: var(--transition-standard);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--apple-red);
+            box-shadow: 0 0 0 3px rgba(255, 45, 85, 0.2);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: var(--space-md);
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            background-color: var(--apple-red);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-small);
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-bold);
+            cursor: pointer;
+            transition: var(--transition-standard);
+            margin-top: var(--space-md);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--apple-red-hover);
+            transform: translateY(-2px);
+        }
+        
+        .signup-footer {
+            margin-top: var(--space-lg);
+            text-align: center;
+            font-size: var(--font-size-sm);
+            color: var(--text-subdued);
+        }
+        
+        .signup-footer a {
+            color: var(--apple-red);
+            text-decoration: none;
+            transition: var(--transition-standard);
+        }
+        
+        .signup-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .alert {
+            padding: var(--space-sm);
+            margin-bottom: var(--space-md);
+            border-radius: var(--border-radius-small);
+            font-size: var(--font-size-sm);
+        }
+        
+        .alert-danger {
+            background-color: var(--alert-error-background);
+            color: var(--alert-error-text);
+            border: 1px solid var(--alert-error-border);
+        }
+        
+        .alert-success {
+            background-color: var(--alert-success-background);
+            color: var(--alert-success-text);
+            border: 1px solid var(--alert-success-border);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: var(--space-lg) 0;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--essential-subdued);
+        }
+        
+        .divider span {
+            padding: 0 var(--space-sm);
+            color: var(--text-subdued);
+            font-size: var(--font-size-sm);
+        }
+        
+        .social-signup {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+        
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-sm);
+            border: 1px solid var(--essential-subdued);
+            border-radius: var(--border-radius-small);
+            background-color: var(--background-elevated-base);
+            cursor: pointer;
+            transition: var(--transition-standard);
+        }
+        
+        .social-btn:hover {
+            border-color: var(--apple-red);
+            transform: translateY(-2px);
+        }
+        
+        .social-btn img {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .password-requirements {
+            font-size: var(--font-size-xs);
+            color: var(--text-subdued);
+            margin-top: var(--space-xs);
+        }
+        
+        .password-requirements ul {
+            list-style-type: none;
+            margin-top: var(--space-xs);
+            padding-left: var(--space-xs);
+        }
+        
+        .password-requirements li {
+            margin-bottom: var(--space-xxs);
+            display: flex;
+            align-items: center;
+        }
+        
+        .password-requirements li:before {
+            content: "•";
+            color: var(--essential-subdued);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-right: var(--space-xxs);
+        }
+        
+        .password-requirements li.valid:before {
+            content: "✓";
+            color: var(--apple-green);
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            margin-top: var(--space-sm);
+        }
+        
+        .form-check-input {
+            margin: 4px var(--space-xs) 0 0;
+            accent-color: var(--apple-red);
+            width: 16px;
+            height: 16px;
+        }
+        
+        .form-check-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-subdued);
+        }
+        
+        .form-check-label a {
+            color: var(--apple-red);
+            text-decoration: none;
+        }
+        
+        .form-check-label a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 576px) {
+            .signup-container {
+                max-width: 100%;
+                padding: var(--space-lg) var(--space-md);
+                border-radius: var(--border-radius-small);
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-header">
+            <a href="{{ url_for('home') }}" class="logo-link">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Spotify DB Logo" class="logo">
+            </a>
+            <h1>Sign Up</h1>
+            <p>Join Spotify DB today</p>
+        </div>
+        
+        {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+        {% endif %}
+        
+        {% if success %}
+        <div class="alert alert-success">
+            {{ success }}
+        </div>
+        {% endif %}
+        
+        <div class="social-signup">
+            <a href="/auth/google" class="social-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+            </a>
+            <a href="/auth/github" class="social-btn">
+                <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub">
+            </a>
+            <a href="/auth/facebook" class="social-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+            </a>
+        </div>
+        
+        <div class="divider">
+            <span>OR</span>
+        </div>
+        
+        <form action="/signup" method="post" id="signupForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Create a strong password" required>
+                <div class="password-requirements">
+                    <h5>Password must contain:</h5>
+                    <div class="requirement" id="length-req">
+                        <i>•</i> At least 8 characters
+                    </div>
+                    <div class="requirement" id="uppercase-req">
+                        <i>•</i> At least one uppercase letter
+                    </div>
+                    <div class="requirement" id="number-req">
+                        <i>•</i> At least one number
+                    </div>
+                    <div class="requirement" id="special-req">
+                        <i>•</i> At least one special character
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+            </div>
+            
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="agree" name="agree" required>
+                <label class="form-check-label" for="agree">
+                    I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>
+                </label>
+            </div>
+            
+            <button type="submit" class="btn-primary">Create Account</button>
+        </form>
+        
+        <div class="signup-footer">
+            Already have an account? <a href="/login">Login</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const signupForm = document.getElementById('signupForm');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm_password');
+            
+            // Password requirement elements
+            const lengthReq = document.getElementById('length-req');
+            const uppercaseReq = document.getElementById('uppercase-req');
+            const numberReq = document.getElementById('number-req');
+            const specialReq = document.getElementById('special-req');
+            
+            // Validate password as user types
+            passwordInput.addEventListener('input', function() {
+                const password = passwordInput.value;
+                
+                // Check length
+                if (password.length >= 8) {
+                    lengthReq.classList.add('fulfilled');
+                } else {
+                    lengthReq.classList.remove('fulfilled');
+                }
+                
+                // Check uppercase
+                if (/[A-Z]/.test(password)) {
+                    uppercaseReq.classList.add('fulfilled');
+                } else {
+                    uppercaseReq.classList.remove('fulfilled');
+                }
+                
+                // Check number
+                if (/[0-9]/.test(password)) {
+                    numberReq.classList.add('fulfilled');
+                } else {
+                    numberReq.classList.remove('fulfilled');
+                }
+                
+                // Check special character
+                if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                    specialReq.classList.add('fulfilled');
+                } else {
+                    specialReq.classList.remove('fulfilled');
+                }
+            });
+            
+            // Validate form on submit
+            signupForm.addEventListener('submit', function(e) {
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                
+                // Check if passwords match
+                if (password !== confirmPassword) {
+                    e.preventDefault();
+                    alert('Passwords do not match');
+                    return;
+                }
+                
+                // Check password requirements
+                if (password.length < 8) {
+                    e.preventDefault();
+                    alert('Password must be at least 8 characters');
+                    return;
+                }
+                
+                if (!/[A-Z]/.test(password)) {
+                    e.preventDefault();
+                    alert('Password must contain at least one uppercase letter');
+                    return;
+                }
+                
+                if (!/[0-9]/.test(password)) {
+                    e.preventDefault();
+                    alert('Password must contain at least one number');
+                    return;
+                }
+                
+                if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                    e.preventDefault();
+                    alert('Password must contain at least one special character');
+                    return;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

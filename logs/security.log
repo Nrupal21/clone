@@ -1,0 +1,40 @@
+2025-04-20 21:11:42,271 - security - WARNING - Password brute force detected - User: 926515 - IP: 192.168.1.70 - Severity: Critical
+2025-04-20 21:11:42,282 - security - WARNING - Account lockout triggered - User: 282008 - IP: 192.168.1.170 - Severity: Medium
+2025-04-20 21:11:42,292 - security - WARNING - Unusual data access pattern detected - User: 617830 - IP: 192.168.1.84 - Severity: Critical
+2025-04-20 21:11:42,303 - security - WARNING - Account lockout triggered - User: 675825 - IP: 192.168.1.102 - Severity: High
+2025-04-20 21:11:42,314 - security - WARNING - Suspicious login location - User: 230920 - IP: 192.168.1.25 - Severity: Critical
+2025-04-20 21:11:42,325 - security - WARNING - Session hijacking attempt - User: 729068 - IP: 192.168.1.70 - Severity: High
+2025-04-20 21:11:42,335 - security - WARNING - Session hijacking attempt - User: 776827 - IP: 192.168.1.84 - Severity: Low
+2025-04-20 21:11:42,346 - security - WARNING - Account lockout triggered - User: 282008 - IP: 192.168.1.21 - Severity: Low
+2025-04-20 21:11:42,357 - security - WARNING - Unusual data access pattern detected - User: 776827 - IP: 192.168.1.254 - Severity: Low
+2025-04-20 21:11:42,367 - security - WARNING - API token compromised - User: 877012 - IP: 192.168.1.154 - Severity: Critical
+2025-04-20 21:11:42,378 - security - WARNING - API token compromised - User: 675825 - IP: 192.168.1.98 - Severity: High
+2025-04-20 21:11:42,388 - security - WARNING - Password brute force detected - User: 877012 - IP: 192.168.1.46 - Severity: Low
+2025-04-20 21:11:42,399 - security - WARNING - Unusual data access pattern detected - User: 877012 - IP: 192.168.1.37 - Severity: Low
+2025-04-20 21:11:42,409 - security - WARNING - Multiple failed login attempts - User: 675825 - IP: 192.168.1.117 - Severity: Medium
+2025-04-20 21:11:42,420 - security - WARNING - Session hijacking attempt - User: 617830 - IP: 192.168.1.5 - Severity: Critical
+2025-04-20 21:11:42,431 - security - WARNING - Unusual data access pattern detected - User: 282008 - IP: 192.168.1.37 - Severity: Medium
+2025-04-20 21:11:42,442 - security - WARNING - API token compromised - User: 729068 - IP: 192.168.1.37 - Severity: High
+2025-04-20 21:11:42,452 - security - WARNING - Session hijacking attempt - User: 282008 - IP: 192.168.1.37 - Severity: Medium
+2025-04-20 21:11:42,463 - security - WARNING - Password brute force detected - User: 230920 - IP: 192.168.1.15 - Severity: Low
+2025-04-20 21:11:42,473 - security - WARNING - Session hijacking attempt - User: 776827 - IP: 192.168.1.227 - Severity: Critical
+2025-04-20 21:11:42,484 - security - WARNING - Unusual data access pattern detected - User: 617830 - IP: 192.168.1.15 - Severity: Medium
+2025-04-20 21:11:42,494 - security - WARNING - API token compromised - User: 675825 - IP: 192.168.1.102 - Severity: Low
+2025-04-20 21:11:42,505 - security - WARNING - Unusual data access pattern detected - User: 245763 - IP: 192.168.1.98 - Severity: Low
+2025-04-20 21:11:42,516 - security - WARNING - Session hijacking attempt - User: 675825 - IP: 192.168.1.37 - Severity: Critical
+2025-04-20 21:11:42,526 - security - WARNING - Unusual data access pattern detected - User: 926515 - IP: 192.168.1.154 - Severity: Medium
+2025-04-20 21:11:42,537 - security - WARNING - Account lockout triggered - User: 776827 - IP: 192.168.1.84 - Severity: Critical
+2025-04-20 21:11:42,547 - security - WARNING - Suspicious login location - User: 877012 - IP: 192.168.1.46 - Severity: High
+2025-04-20 21:11:42,558 - security - WARNING - Password brute force detected - User: 916663 - IP: 192.168.1.227 - Severity: Critical
+2025-04-20 21:11:42,569 - security - WARNING - Multiple failed login attempts - User: 245763 - IP: 192.168.1.84 - Severity: Low
+2025-04-20 21:11:42,579 - security - WARNING - Multiple failed login attempts - User: 282008 - IP: 192.168.1.186 - Severity: Medium
+2025-04-20 21:11:42,590 - security - WARNING - Suspicious login location - User: 230920 - IP: 192.168.1.154 - Severity: Low
+2025-04-20 21:11:42,600 - security - WARNING - Session hijacking attempt - User: 916663 - IP: 192.168.1.254 - Severity: Critical
+2025-04-20 21:11:42,611 - security - WARNING - Cross-site scripting attempt detected - User: 776827 - IP: 192.168.1.37 - Severity: Medium
+2025-04-20 21:11:42,621 - security - WARNING - Account lockout triggered - User: 675825 - IP: 192.168.1.170 - Severity: Low
+2025-04-20 21:11:42,632 - security - WARNING - Unusual data access pattern detected - User: 916663 - IP: 192.168.1.154 - Severity: Low
+2025-04-20 21:11:42,643 - security - WARNING - API token compromised - User: 776827 - IP: 192.168.1.46 - Severity: High
+2025-04-20 21:11:42,653 - security - WARNING - API token compromised - User: 776827 - IP: 192.168.1.254 - Severity: Critical
+2025-04-20 21:11:42,664 - security - WARNING - Unusual data access pattern detected - User: 245763 - IP: 192.168.1.15 - Severity: Medium
+2025-04-20 21:11:42,674 - security - WARNING - Multiple failed login attempts - User: 776827 - IP: 192.168.1.46 - Severity: High
+2025-04-20 21:11:42,685 - security - WARNING - Multiple failed login attempts - User: 617830 - IP: 192.168.1.21 - Severity: Critical

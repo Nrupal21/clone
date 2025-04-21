@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Spotify DB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-family-main);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-base);
+            padding: var(--space-md);
+        }
+        
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius-medium);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            padding: var(--space-xl);
+            animation: fadeIn 0.6s ease-out;
+            border: none;
+            backdrop-filter: blur(10px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .logo-link {
+            display: inline-block;
+            margin-bottom: var(--space-md);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-link:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo {
+            width: 120px;
+            height: auto;
+        }
+        
+        .login-header h1 {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--apple-red);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .login-header p {
+            color: var(--text-subdued);
+            font-size: var(--font-size-sm);
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-md);
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-subdued);
+            transition: all 0.3s ease;
+        }
+        
+        .forgot-password {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: var(--font-size-xs);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            border: 1px solid var(--essential-subdued);
+            border-radius: var(--border-radius-small);
+            background-color: var(--background-base);
+            color: var(--text-base);
+            font-size: var(--font-size-md);
+            transition: var(--transition-standard);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--apple-red);
+            box-shadow: 0 0 0 3px rgba(255, 45, 85, 0.2);
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 14px var(--space-md);
+            background: linear-gradient(135deg, var(--apple-red) 0%, #ff7b75 100%);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-small);
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-bold);
+            cursor: pointer;
+            transition: var(--transition-standard);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--apple-red-hover) 0%, #ff9892 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 59, 48, 0.4);
+        }
+        
+        .login-footer {
+            margin-top: var(--space-lg);
+            text-align: center;
+            font-size: var(--font-size-sm);
+            color: var(--text-subdued);
+        }
+        
+        .login-footer a {
+            color: var(--apple-red);
+            text-decoration: none;
+            transition: var(--transition-standard);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .login-footer a:hover {
+            text-decoration: underline;
+            color: var(--apple-red-hover);
+        }
+        
+        .alert {
+            padding: var(--space-sm);
+            margin-bottom: var(--space-md);
+            border-radius: var(--border-radius-small);
+            font-size: var(--font-size-sm);
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .alert-danger {
+            background-color: var(--alert-error-background);
+            color: var(--alert-error-text);
+            border-left: 4px solid var(--apple-red);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: var(--space-lg) 0;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--essential-subdued);
+        }
+        
+        .divider span {
+            padding: 0 var(--space-sm);
+            color: var(--text-subdued);
+            font-size: var(--font-size-sm);
+        }
+        
+        .social-login {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+        
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-sm);
+            border: 1px solid var(--essential-subdued);
+            border-radius: var(--border-radius-small);
+            background-color: var(--background-elevated-base);
+            cursor: pointer;
+            transition: var(--transition-standard);
+        }
+        
+        .social-btn:hover {
+            border-color: var(--apple-red);
+            transform: translateY(-2px);
+        }
+        
+        .social-btn img {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+        
+        .remember-me input {
+            margin-right: var(--space-xs);
+        }
+        
+        .remember-me label {
+            font-size: var(--font-size-sm);
+            color: var(--text-subdued);
+        }
+        
+        @media (max-width: 576px) {
+            .login-container {
+                max-width: 100%;
+                padding: var(--space-lg) var(--space-md);
+                border-radius: var(--border-radius-small);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <a href="{{ url_for('home') }}" class="logo-link">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Spotify DB Logo" class="logo">
+            </a>
+            <h1>Login</h1>
+            <p>Welcome back to Spotify DB</p>
+        </div>
+        
+        {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+        {% endif %}
+        
+        <div class="social-login">
+            <a href="/auth/google" class="social-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+            </a>
+            <a href="/auth/github" class="social-btn">
+                <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub">
+            </a>
+            <a href="/auth/facebook" class="social-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+            </a>
+        </div>
+        
+        <div class="divider">
+            <span>OR</span>
+        </div>
+        
+        <form action="/login" method="post" id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <a href="#" class="forgot-password">Forgot password?</a>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            
+            <div class="remember-me">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me</label>
+            </div>
+            
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
+        
+        <div class="login-footer">
+            <p>Don't have an account? <a href="{{ url_for('signup_handler') }}">Sign up</a></p>
+        </div>
+    </div>
+</body>
+</html>

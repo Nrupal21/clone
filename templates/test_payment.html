@@ -1,0 +1,88 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Razorpay Test Payment</title>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    </head>
+    <body>
+        <h1>Razorpay Test Payment</h1>
+        <button id="pay-button">Pay Now</button>
+        
+        <script>
+            document.getElementById('pay-button').addEventListener('click', function() {
+                // Create order
+                fetch('/create-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                        return;
+                    }
+                    
+                    // Configure Razorpay
+                    const options = {
+                        key: '{{ razorpay_key_id }}', 
+                        amount: data.amount,
+                        currency: data.currency,
+                        name: 'Test Company',
+                        description: 'Test Payment',
+                        order_id: data.id,
+                        handler: function(response) {
+                            // Process payment
+                            processPayment(response);
+                        },
+                        prefill: {
+                            name: 'Test User',
+                            email: 'test@example.com',
+                            contact: '9999999999'
+                        },
+                        theme: {
+                            color: '#3399cc'
+                        }
+                    };
+                    
+                    // Open Razorpay
+                    const rzp = new Razorpay(options);
+                    rzp.open();
+                })
+                .catch(error => {
+                    console.error('Error creating order:', error);
+                    alert('Error creating order');
+                });
+            });
+            
+            function processPayment(response) {
+                fetch('/process-payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_signature: response.razorpay_signature
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Payment successful!');
+                    } else {
+                        alert(data.error || 'Payment verification failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error processing payment:', error);
+                    alert('Error processing payment');
+                });
+            }
+        </script>
+    </body>
+    </html>
+    

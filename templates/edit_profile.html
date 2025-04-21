@@ -1,0 +1,302 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Profile - Spotify{% endblock %}
+
+{% block content %}
+<div class="edit-profile-container">
+    <div class="page-header">
+        <h1>Edit Profile</h1>
+        <a href="{{ url_for('user_profile') }}" class="back-button">
+            <span class="material-icons">arrow_back</span>
+            Back to profile
+        </a>
+    </div>
+    
+    <div class="edit-form-container">
+        <form id="editProfileForm" class="edit-profile-form" method="post" enctype="multipart/form-data">
+            <div class="avatar-section">
+                <div class="current-avatar">
+                    <div class="profile-avatar">
+                        <span class="material-icons">account_circle</span>
+                    </div>
+                </div>
+                <div class="avatar-upload">
+                    <label for="avatarUpload" class="upload-label">Change profile photo</label>
+                    <input type="file" id="avatarUpload" name="avatar" accept="image/*" class="avatar-input">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="displayName">Display name</label>
+                <input type="text" id="displayName" name="name" value="{{ current_user.name }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{ current_user.email }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" value="{{ current_user.phone }}">
+            </div>
+            
+            <div class="form-group">
+                <label for="bio">Bio</label>
+                <textarea id="bio" name="bio" rows="4">{{ current_user.bio }}</textarea>
+                <small class="help-text">Tell us a little bit about yourself.</small>
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" class="cancel-button" onclick="window.location.href='{{ url_for('user_profile') }}'">Cancel</button>
+                <button type="submit" class="save-button">Save profile</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_styles %}
+<style>
+.edit-profile-container {
+    padding: 32px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.page-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-subdued);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.back-button:hover {
+    color: var(--text-base);
+}
+
+.edit-form-container {
+    background: var(--background-elevated-base);
+    border-radius: 8px;
+    padding: 32px;
+}
+
+.avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.profile-avatar {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    background: var(--background-elevated-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,.3);
+}
+
+.profile-avatar .material-icons {
+    font-size: 64px;
+    color: var(--text-subdued);
+}
+
+.upload-label {
+    display: inline-block;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--text-subdued);
+    border-radius: 24px;
+    color: var(--text-base);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.upload-label:hover {
+    border-color: var(--text-base);
+    transform: scale(1.04);
+}
+
+.avatar-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-subdued);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background: var(--background-base);
+    border: 1px solid var(--background-tinted-base);
+    border-radius: 4px;
+    color: var(--text-base);
+    font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--essential-bright-accent);
+    outline: none;
+}
+
+.help-text {
+    display: block;
+    margin-top: 8px;
+    color: var(--text-subdued);
+    font-size: 14px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.cancel-button {
+    padding: 12px 24px;
+    background: transparent;
+    border: 1px solid var(--text-subdued);
+    border-radius: 24px;
+    color: var(--text-base);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancel-button:hover {
+    border-color: var(--text-base);
+}
+
+.save-button {
+    padding: 12px 32px;
+    background: var(--essential-bright-accent);
+    border: none;
+    border-radius: 24px;
+    color: #000;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.save-button:hover {
+    background: var(--essential-bright-accent-hover);
+    transform: scale(1.04);
+}
+
+@media (max-width: 768px) {
+    .edit-profile-container {
+        padding: 16px;
+    }
+    
+    .edit-form-container {
+        padding: 24px;
+    }
+    
+    .avatar-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .cancel-button, .save-button {
+        width: 100%;
+    }
+}
+</style>
+{% endblock %}
+
+{% block additional_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Preview avatar image before upload
+    const avatarInput = document.getElementById('avatarUpload');
+    if (avatarInput) {
+        avatarInput.addEventListener('change', function(e) {
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const avatar = document.querySelector('.profile-avatar');
+                    avatar.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '50%';
+                    avatar.appendChild(img);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    }
+    
+    // Handle form submission
+    const profileForm = document.getElementById('editProfileForm');
+    if (profileForm) {
+        profileForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Display loading or feedback
+            const saveButton = document.querySelector('.save-button');
+            const originalText = saveButton.textContent;
+            saveButton.textContent = 'Saving...';
+            saveButton.disabled = true;
+            
+            // Create form data
+            const formData = new FormData(this);
+            
+            // Here you would send the data to your backend
+            // For demonstration, we'll simulate a successful update
+            setTimeout(() => {
+                // Reset button state
+                saveButton.textContent = 'Saved!';
+                
+                // Redirect back to profile after a brief delay
+                setTimeout(() => {
+                    window.location.href = '{{ url_for("user_profile") }}';
+                }, 1000);
+            }, 1500);
+        });
+    }
+});
+</script>
+{% endblock %} 

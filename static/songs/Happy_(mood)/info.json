@@ -1,0 +1,40 @@
+{
+    "songs": [
+        {
+            "title": "Happy",
+            "artist": "ayush koli",
+            "filename": "fa521a02-60cf-46d6-b990-44b8fa94e4a2_Sus_Remedios_-_Casa_Rosa.mp3",
+            "image": "fa521a02-60cf-46d6-b990-44b8fa94e4a2_cover.jpg"
+        },
+        {
+            "title": "Pl",
+            "artist": "Ayush",
+            "filename": "2271682f-44d4-4db8-9b4a-eed31da78f5c_Amazing_Grace_-_Casa_Rosa.mp3",
+            "image": "cover_2271682f-44d4-4db8-9b4a-eed31da78f5c_fa521a02-60cf-46d6-b990-44b8fa94e4a2_cover.jpg"
+        },
+        {
+            "title": "Test Song",
+            "artist": "Test Artist",
+            "filename": "2271682f-44d4-4db8-9b4a-eed31da78f5c_Amazing_Grace_-_Casa_Rosa.mp3",
+            "image": "cover.jpg"
+        },
+        {
+            "title": "Happy Days",
+            "artist": "Sunshine Band",
+            "filename": "sample1.mp3",
+            "image": "album_placeholder.svg"
+        },
+        {
+            "title": "Smile Forever",
+            "artist": "Joy Division",
+            "filename": "sample2.mp3",
+            "image": "album_placeholder.svg"
+        },
+        {
+            "title": "ha",
+            "artist": "me",
+            "filename": "5e119ad5-4ca1-483a-acc1-687846fc2a39_Sus_Remedios_-_Casa_Rosa.mp3",
+            "image": "cover_5e119ad5-4ca1-483a-acc1-687846fc2a39_cover_2271682f-44d4-4db8-9b4a-eed31da78f5c_fa521a02-60cf-46d6-b990-44b8fa94e4a2_cover.jpg"
+        }
+    ]
+}

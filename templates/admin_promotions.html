@@ -1,0 +1,427 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Promotions{% endblock %}
+
+{% block content %}
+<div class="container-fluid admin-container">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 admin-sidebar">
+            <h3>Admin Panel</h3>
+            <nav id="admin-management-nav">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_users') }}">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_songs') }}">Songs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_subscriptions') }}">Subscriptions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_promotions') }}">Promotions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_logs') }}">Logs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_settings') }}">Settings</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-md-10 admin-content">
+            <div class="admin-header">
+                <h2>Manage Promotions</h2>
+                <div class="admin-actions">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#newPromotionModal">
+                        <i class="fas fa-plus"></i> Create New Promotion
+                    </button>
+                </div>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Promotions Tabs -->
+            <ul class="nav nav-tabs mb-4" id="promotionsTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="active-tab" data-toggle="tab" href="#active" role="tab">
+                        Active Promotions <span class="badge badge-primary">{{ active_promotions|length }}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="scheduled-tab" data-toggle="tab" href="#scheduled" role="tab">
+                        Scheduled <span class="badge badge-info">{{ scheduled_promotions|length }}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="expired-tab" data-toggle="tab" href="#expired" role="tab">
+                        Expired <span class="badge badge-secondary">{{ expired_promotions|length }}</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="promotionsTabContent">
+                <!-- Active Promotions -->
+                <div class="tab-pane fade show active" id="active" role="tabpanel">
+                    {% if active_promotions %}
+                        <div class="row">
+                            {% for promo in active_promotions %}
+                                <div class="col-md-4 mb-4">
+                                    <div class="card promotion-card">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h5 class="mb-0">{{ promo.title }}</h5>
+                                            <span class="badge badge-success">Active</span>
+                                        </div>
+                                        {% if promo.image_url %}
+                                            <img src="{{ promo.image_url }}" class="card-img-top promotion-img" alt="{{ promo.title }}">
+                                        {% endif %}
+                                        <div class="card-body">
+                                            <p>{{ promo.description[:100] + '...' if promo.description|length > 100 else promo.description }}</p>
+                                            <div class="promotion-details">
+                                                <p><strong>Type:</strong> {{ promo.type|title }}</p>
+                                                <p><strong>Code:</strong> {{ promo.code }}</p>
+                                                <p><strong>Discount:</strong> {{ promo.discount_value }}{{ '%' if promo.discount_type == 'percentage' else ' $' }}</p>
+                                                <p><strong>Expires:</strong> {{ promo.end_date.strftime('%Y-%m-%d %H:%M') }}</p>
+                                                <p><strong>Uses:</strong> {{ promo.usage_count }} / {{ promo.max_usage or 'Unlimited' }}</p>
+                                            </div>
+                                            <div class="btn-group w-100 mt-3">
+                                                <button class="btn btn-outline-primary" data-toggle="modal" data-target="#editPromotionModal" data-promo-id="{{ promo._id }}">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </button>
+                                                <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deletePromotionModal" data-promo-id="{{ promo._id }}" data-promo-title="{{ promo.title }}">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info">
+                            No active promotions found. <a href="#" data-toggle="modal" data-target="#newPromotionModal">Create a new promotion</a> to get started.
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Scheduled Promotions -->
+                <div class="tab-pane fade" id="scheduled" role="tabpanel">
+                    {% if scheduled_promotions %}
+                        <div class="row">
+                            {% for promo in scheduled_promotions %}
+                                <div class="col-md-4 mb-4">
+                                    <div class="card promotion-card">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h5 class="mb-0">{{ promo.title }}</h5>
+                                            <span class="badge badge-info">Scheduled</span>
+                                        </div>
+                                        {% if promo.image_url %}
+                                            <img src="{{ promo.image_url }}" class="card-img-top promotion-img" alt="{{ promo.title }}">
+                                        {% endif %}
+                                        <div class="card-body">
+                                            <p>{{ promo.description[:100] + '...' if promo.description|length > 100 else promo.description }}</p>
+                                            <div class="promotion-details">
+                                                <p><strong>Type:</strong> {{ promo.type|title }}</p>
+                                                <p><strong>Code:</strong> {{ promo.code }}</p>
+                                                <p><strong>Discount:</strong> {{ promo.discount_value }}{{ '%' if promo.discount_type == 'percentage' else ' $' }}</p>
+                                                <p><strong>Starts:</strong> {{ promo.start_date.strftime('%Y-%m-%d %H:%M') }}</p>
+                                                <p><strong>Expires:</strong> {{ promo.end_date.strftime('%Y-%m-%d %H:%M') }}</p>
+                                            </div>
+                                            <div class="btn-group w-100 mt-3">
+                                                <button class="btn btn-outline-primary" data-toggle="modal" data-target="#editPromotionModal" data-promo-id="{{ promo._id }}">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </button>
+                                                <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deletePromotionModal" data-promo-id="{{ promo._id }}" data-promo-title="{{ promo.title }}">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info">No scheduled promotions found.</div>
+                    {% endif %}
+                </div>
+
+                <!-- Expired Promotions -->
+                <div class="tab-pane fade" id="expired" role="tabpanel">
+                    {% if expired_promotions %}
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Type</th>
+                                        <th>Code</th>
+                                        <th>Discount</th>
+                                        <th>End Date</th>
+                                        <th>Usage</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for promo in expired_promotions %}
+                                        <tr>
+                                            <td>{{ promo.title }}</td>
+                                            <td>{{ promo.type|title }}</td>
+                                            <td><code>{{ promo.code }}</code></td>
+                                            <td>{{ promo.discount_value }}{{ '%' if promo.discount_type == 'percentage' else ' $' }}</td>
+                                            <td>{{ promo.end_date.strftime('%Y-%m-%d') }}</td>
+                                            <td>{{ promo.usage_count }} / {{ promo.max_usage or 'Unlimited' }}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#viewPromotionModal" data-promo-id="{{ promo._id }}">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#duplicatePromotionModal" data-promo-id="{{ promo._id }}">
+                                                        <i class="fas fa-copy"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deletePromotionModal" data-promo-id="{{ promo._id }}" data-promo-title="{{ promo.title }}">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info">No expired promotions found.</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New Promotion Modal -->
+<div class="modal fade" id="newPromotionModal" tabindex="-1" role="dialog" aria-labelledby="newPromotionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newPromotionModalLabel">Create New Promotion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ url_for('admin_create_promotion') }}" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="title">Promotion Title</label>
+                                <input type="text" class="form-control" id="title" name="title" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="type">Promotion Type</label>
+                                <select class="form-control" id="type" name="type" required>
+                                    <option value="discount">Discount</option>
+                                    <option value="free_trial">Free Trial</option>
+                                    <option value="referral">Referral Reward</option>
+                                    <option value="seasonal">Seasonal Offer</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="code">Promotion Code</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="code" name="code" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="generateCode">Generate</button>
+                                    </div>
+                                </div>
+                                <small class="form-text text-muted">This is the code users will enter at checkout</small>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Discount Type</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="discount_type" id="percentageDiscount" value="percentage" checked>
+                                    <label class="form-check-label" for="percentageDiscount">
+                                        Percentage Discount
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="discount_type" id="fixedDiscount" value="fixed">
+                                    <label class="form-check-label" for="fixedDiscount">
+                                        Fixed Amount Discount
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="discount_value">Discount Value</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="discount_value" name="discount_value" min="0" step="0.01" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="discount_symbol">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="start_date">Start Date</label>
+                                <input type="datetime-local" class="form-control" id="start_date" name="start_date" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="end_date">End Date</label>
+                                <input type="datetime-local" class="form-control" id="end_date" name="end_date" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="max_usage">Maximum Usage</label>
+                                <input type="number" class="form-control" id="max_usage" name="max_usage" min="0">
+                                <small class="form-text text-muted">Leave empty for unlimited uses</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="promotion_image">Promotion Image</label>
+                        <input type="file" class="form-control-file" id="promotion_image" name="promotion_image">
+                        <small class="form-text text-muted">Recommended size: 1200x600px (Optional)</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="target_audience">Target Audience</label>
+                        <select class="form-control" id="target_audience" name="target_audience">
+                            <option value="all">All Users</option>
+                            <option value="new">New Users Only</option>
+                            <option value="existing">Existing Users Only</option>
+                            <option value="premium">Premium Users Only</option>
+                            <option value="free">Free Users Only</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Promotion</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Promotion Modal -->
+<div class="modal fade" id="editPromotionModal" tabindex="-1" role="dialog" aria-labelledby="editPromotionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPromotionModalLabel">Edit Promotion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center p-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading promotion details...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Promotion Modal -->
+<div class="modal fade" id="deletePromotionModal" tabindex="-1" role="dialog" aria-labelledby="deletePromotionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletePromotionModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the promotion <strong id="deletePromoTitle"></strong>?</p>
+                <p class="text-danger">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form id="deletePromoForm" action="" method="POST">
+                    <button type="submit" class="btn btn-danger">Delete Promotion</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Generate random promotion code
+        $('#generateCode').click(function() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < 8; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            $('#code').val(result);
+        });
+        
+        // Toggle discount symbol based on discount type
+        $('input[name="discount_type"]').change(function() {
+            if ($(this).val() === 'percentage') {
+                $('#discount_symbol').text('%');
+            } else {
+                $('#discount_symbol').text('$');
+            }
+        });
+        
+        // Set delete promotion form action
+        $('#deletePromotionModal').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget);
+            const promoId = button.data('promo-id');
+            const promoTitle = button.data('promo-title');
+            
+            $('#deletePromoTitle').text(promoTitle);
+            $('#deletePromoForm').attr('action', `/admin/promotions/delete/${promoId}`);
+        });
+        
+        // Load promotion data for editing
+        $('#editPromotionModal').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget);
+            const promoId = button.data('promo-id');
+            
+            // Load promotion data via AJAX
+            $.get(`/admin/promotions/${promoId}/edit`, function(data) {
+                $('#editPromotionModal .modal-body').html(data);
+            });
+        });
+    });
+</script>
+{% endblock %} 

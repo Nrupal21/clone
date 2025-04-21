@@ -1,0 +1,18 @@
+{
+    "mood": "Focus",
+    "description": "Focus songs and tracks",
+    "songs": [
+        {
+            "title": "Deep Concentration",
+            "artist": "Mind Masters",
+            "filename": "sample7.mp3",
+            "image": "album_placeholder.svg"
+        },
+        {
+            "title": "Productivity Zone",
+            "artist": "Brain Waves",
+            "filename": "sample8.mp3",
+            "image": "album_placeholder.svg"
+        }
+    ]
+}
